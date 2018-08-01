@@ -62,10 +62,6 @@
 	margin: 10px 20px;
 }
 
-::-webkit-input-placeholder {
-   text-align: center;
-}
-
 .avatar img {
 	width: 50px;
 	border-radius: 50px;
@@ -227,7 +223,15 @@
 }
 
 .inputchat {
-	border: 1px solid rgba(0, 0, 0, .10);
+	border-top: 1px solid rgba(0, 0, 0, .10);
+	margin-top: -30px;
+	width: 100%;
+}
+
+.inputchat .valueChat input {
+	border: none;
+	text-align: left!important;
+	outline: none;
 }
 
 .index {
