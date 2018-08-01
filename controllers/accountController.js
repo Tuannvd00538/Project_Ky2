@@ -110,3 +110,14 @@ exports.loginRequired = function(req, res, next) {
         return res.status(401).json({message: 'Token hết hạn hoặc không tồn tại!'});
     }
 };
+
+exports.getSign = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/register.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+}

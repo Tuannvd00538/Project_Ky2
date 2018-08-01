@@ -7,4 +7,6 @@ module.exports = function(app){
     app.route('/create')
         .get(controller.checkExistsUsername)
         .post(controller.createAccount);
+    app.route('/sign')
+        .get(controller.getSign);
 }

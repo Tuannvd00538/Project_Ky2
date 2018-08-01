@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .row {
 	font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
 }
@@ -6,10 +10,7 @@
 }
 
 .img1 {
-	height: 120px;
-    min-width: 100%;
-    width: 120px;
-    margin-top: 7%
+    margin-top: 3%
 }
 .word1 {
 	color: rgba(0, 0, 0, 1);
@@ -26,9 +27,11 @@
     line-height: 1.2;
     margin-bottom: 24px;
 }
-.log-sig .container {
-	margin-bottom: 7%;
+
+.word2 a {
+    font-weight: 400;
 }
+
 .text1 {
 	width: 335px;
 	border: 1px solid rgba(0, 0, 0, .20);
@@ -44,7 +47,7 @@
     color: #0084ff;
     font-size: 24px;
     font-weight: normal;
-    margin: 12px;
+    margin: 5px;
     border: none;
     overflow: hidden;
 }
@@ -55,7 +58,7 @@
 	color: #a8a8a8;
 	margin-bottom: 16px;
 	font-size: 11px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 .text2 a {
 	color: #a8a8a8;
@@ -105,4 +108,13 @@
 }
 .checkbox label {
 	color: #929292;
+}
+
+.container label {
+    margin-left: -265px;
+}
+
+.inputGender {
+    padding-left: 100px;
+    margin-bottom: 10px;
 }
