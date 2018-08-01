@@ -16,7 +16,7 @@
 }
 
 .setting-icon, .newmsg-icon {
-	color: blue;
+	color: #007bff;
 	font-size: 19px;
 }
 
@@ -67,14 +67,10 @@
 }
 
 .avatar img {
-	width: 60px;
+	width: 50px;
 	border-radius: 50px;
-	margin-left: 20px;
+	margin-left: 0;
 	vertical-align: middle;
-}
-
-.avatar img,.details {
-	margin-top: 5px;
 }
 
 .infochat {
@@ -83,15 +79,20 @@
 	height: auto;
 }
 
+.details {
+	margin-left: -15px;
+    margin-top: -3px;
+}
+
 .chatname {
 	vertical-align: middle;
-	font-weight: 700;
 }
 
 .datemsg {
 	vertical-align: middle;
 	float: right;
 	color: rgba(153, 153, 153, 1);
+	margin-right: -35px;
 }
 
 .msg {
@@ -106,10 +107,13 @@
 
 .name-contact {
 	vertical-align: middle;
+	padding: 1px;
+	padding-left: 10px;
 }
 
 .name-contact:hover {
 	background-color: rgba(0, 0, 0, .05);
+	cursor: pointer;
 }
 
 .namechat {
@@ -139,7 +143,7 @@
 .buttoncall span{
 	margin: 0 10px;
 	font-size: 20px;
-	color: blue;
+	color: #007bff;
 }
 
 .buttoncall {
@@ -149,13 +153,14 @@
 
 .actionname {
 	vertical-align: middle;
+	margin-left: 10px;
 }
 
 .actionsetting {
 	color: rgba(153, 153, 153, 1);
 	font-size: 20px;
 	float: right;
-	margin: 35px 10px;
+	margin: 25px 10px;
 }
 
 .chatname-right {
@@ -173,7 +178,7 @@
 }
 
 .iconsearch {
-	color: blue;
+	color: #007bff;
 	margin-right: 5px;
 	font-size: 18px;
 }
