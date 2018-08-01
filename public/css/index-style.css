@@ -24,11 +24,6 @@
 	text-align: right;
 }
 
-/*.content-left {
-	width: 100%;
-	padding-right: -15px;
-}
-*/
 .setting-icon {
 	margin-left: 5px;
 }
@@ -238,16 +233,16 @@
 	float: right;
 	background-color: #0084ff;
 	color: #fff;
-	word-break: break-all;
 	max-width: 55%;
 }
 
 .textchat {
 	display: inline;
-	font-size: 18px;
+	font-size: 16px;
 	margin: 10px 20px;
 	border-radius: 20px;
 	max-width: 50%;
+	padding: 5px 10px;
 }
 
 .youchat {
