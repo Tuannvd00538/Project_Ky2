@@ -231,7 +231,8 @@
 }
 
 .index {
-	max-height: 400px;
+	height: 100%;
+	position: fixed;
 }
 
 ::-webkit-scrollbar { 
