@@ -238,21 +238,26 @@
 	float: right;
 	background-color: #0084ff;
 	color: #fff;
-	word-break: break-all;
 }
 
 .textchat {
-	white-space: nowrap;
 	display: inline;
 	font-size: 18px;
 	margin: 10px 20px; 10px;
 	border-radius: 20px;
+	max-width: 50%;
 }
 
-.mechat span,.youchat span {
-	padding: 10px;
-	white-space: nowrap;
+/*
+.textchat p {
+	word-wrap: normal;
 	overflow: hidden;
+	min-width: 0;
+	flex: 1 1 0%;
+}*/
+
+.mechat span,.youchat span {
+	word-wrap: normal;
 }
 
 .youchat {
@@ -264,5 +269,4 @@
 .linechat {
 	text-overflow: ellipsis; 
 	overflow: hidden; 
-	white-space: nowrap;
 }
