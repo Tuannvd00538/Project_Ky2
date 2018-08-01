@@ -7,6 +7,7 @@
 	border: 1px solid rgba(0, 0, 0, .10);
 	width: 100%;
 	height: 50px;
+	padding: 10px;
 }
 
 .nopadding,.index {
@@ -14,23 +15,26 @@
    margin: 0 !important;
 }
 
-.setting-icon,.newmsg-icon {
+.setting-icon, .newmsg-icon {
 	color: blue;
-	vertical-align: middle;
 	font-size: 19px;
 }
 
-.content-left {
+.newmsg-icon {
+	text-align: right;
+}
+
+/*.content-left {
 	width: 100%;
 	padding-right: -15px;
 }
-
+*/
 .setting-icon {
 	margin-left: 5px;
 }
 
 .banner .nameapp {
-	margin: 0 110px;
+	text-align: center;
 	vertical-align: middle;
 }
 
