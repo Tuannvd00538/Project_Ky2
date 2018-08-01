@@ -238,16 +238,13 @@
 	float: right;
 	background-color: #0084ff;
 	color: #fff;
-<<<<<<< HEAD
-=======
 	word-break: break-all;
 	max-width: 55%;
->>>>>>> 40982b7a8119b3e7e0205c2a0a099d6b532d3d44
 }
 
 .textchat {
 	display: inline;
-	font-size: 18px;
+	font-size: 15px;
 	margin: 10px 20px;
 	border-radius: 20px;
 	max-width: 50%;
@@ -264,9 +261,7 @@
 
 .mechat span,.youchat span {
 	word-wrap: normal;
-=======
 	font-size: 16px;
->>>>>>> 40982b7a8119b3e7e0205c2a0a099d6b532d3d44
 }
 
 .youchat {
