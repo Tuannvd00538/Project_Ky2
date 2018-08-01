@@ -285,10 +285,14 @@
 	color: #666;
 }
 
+.divFile i:hover {
+	cursor: pointer;
+}
+
 .like {
 	float: right;
-	color: blue!important;
-	font-size: 20px;
+	color: red !important;
+	font-size: 30px;
 	margin-right: 10px;
 }
 
