@@ -127,13 +127,13 @@
 }
 
 .mainchat {
-	border-right: 1px solid rgba(0, 0, 0, .10);
+	
 	height: 84vh;
 }
 
 .action {
-	border-right: 1px solid rgba(0, 0, 0, .10);
-	height: 500px;
+	border-left: 1px solid rgba(0, 0, 0, .10);
+	height: 600px;
 }
 
 .buttoncall span{
@@ -169,9 +169,6 @@
 	height: auto;
 }
 
-.action-right {
-	border-right: 1px solid rgba(0, 0, 0, .10);
-}
 
 .iconsearch {
 	color: #007bff;
@@ -216,7 +213,6 @@
   	bottom: 0;
   	left: 0;
   	padding: 1rem;
-	border-top: 1px solid rgba(0, 0, 0, .10);
 	border-left: none;
 	border-right: none;
 	border-bottom: none;
