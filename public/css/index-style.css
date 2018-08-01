@@ -214,7 +214,7 @@
 
 .inputchat input {
 	width: 100%;
-	height: 70px;
+	height: 40px;
 	position: sticky;
   	right: 0;
   	bottom: 0;
@@ -224,6 +224,10 @@
 	border-left: none;
 	border-right: none;
 	border-bottom: none;
+}
+
+.inputchat {
+	border: 1px solid rgba(0, 0, 0, .10);
 }
 
 .index {
