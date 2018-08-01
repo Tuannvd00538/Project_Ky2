@@ -278,3 +278,20 @@
 	margin-top: 10px;
 	margin-left: 10px;
 }
+
+.divFile {
+	margin-left: 15px;
+	font-size: 20px;
+}
+
+.divFile i {
+	margin: 0 5px;
+	color: #666;
+}
+
+.like {
+	float: right;
+	color: blue!important;
+	font-size: 20px;
+	margin-right: 10px;
+}
