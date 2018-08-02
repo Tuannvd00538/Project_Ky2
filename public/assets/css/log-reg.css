@@ -131,3 +131,18 @@ body {
 input {
     outline: none;
 }
+.text3 {
+	color: #a8a8a8;
+	margin-bottom: 16px;
+	font-size: 11px;
+	margin-top: 5%;
+}
+.text3 a {
+	color: #a8a8a8;
+}
+.text3 span {
+	margin: 0 14px;
+}
+.form-group label {
+    margin-left: -23%;
+}
