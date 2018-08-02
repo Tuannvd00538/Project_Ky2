@@ -58,7 +58,7 @@ body {
 	color: #a8a8a8;
 	margin-bottom: 16px;
 	font-size: 11px;
-	margin-top: 10px;
+	margin-top: 15%;
 }
 .text2 a {
 	color: #a8a8a8;
@@ -110,7 +110,7 @@ body {
 	color: #929292;
 }
 
-.container label {
+.log label {
     margin-left: -265px;
 }
 
