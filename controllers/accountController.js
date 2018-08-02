@@ -18,7 +18,7 @@ exports.getLogin = async function(req, res) {
 
 exports.createAccount = async function(req, res) {
     var avatar = "";
-    if (req.body.gender == 0) {
+    if (req.body.gender == 2) {
         avatar = "/assets/img/girl.jpg";
     } else {
         avatar = "/assets/img/man.png";
