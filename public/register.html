@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/log-reg.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Register - iSilent</title>
 </head>
-
 <body>
 	<div class="row">
 		<center class="log-sig">
@@ -21,38 +20,50 @@
 			<div class="word2">Đăng ký hoặc
 				<a href="/login">đăng nhập</a> bằng Facebook để bắt đầu.</div>
 			<div class="container">
-				<form>
+				<form class="form-horizontal">
 					<div class="form-group">
-						<input type="text" class="form-control text1" placeholder="Username" name="username" />
-						<input type="password" class="form-control text1" name="password" placeholder="Password" />
-						<input type="email" class="form-control text1" name="email" placeholder="Email" />
-						<input type="text" class="form-control text1" name="fullname" placeholder="Fullname" />
+						<div class="form-group has-feedback" id="username">
+							<input type="text" class="form-control text1" placeholder="Username" name="username" />
+							<span class="glyphicon form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback" id="password">
+							<input type="password" class="form-control text1" name="password" placeholder="Password" />
+							<span class="glyphicon form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback" id="email">
+							<input type="email" class="form-control text1" name="email" placeholder="Email" />
+							<span class="glyphicon form-control-feedback"></span>
+						</div>
+						<div class="form-group has-feedback" id="fullname">
+							<input type="text" class="form-control text1" name="fullname" placeholder="Fullname" />
+							<span class="glyphicon form-control-feedback"></span>
+						</div>
 						<label for="birthday">Ngày sinh</label>
-						<input type="date" class="form-control text1" name="birthday" />
+						<div class="form-group has-feedback" id="birthday">
+							<input type="date" class="form-control text1" name="birthday" />
+							<span class="glyphicon form-control-feedback"></span>
+						</div>
 						<label for="gender">Giới tính</label>
 						<div class="inputGender">
 							<label class="radio-inline">
 								<input type="radio" name="gender" value="1" checked/>Nam
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="gender" value="2"/>Nữ
+								<input type="radio" name="gender" value="2" />Nữ
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="gender" value="0"/>Khác
+								<input type="radio" name="gender" value="0" />Khác
 							</label>
 						</div>
 						<button type="submit" class="sub">Đăng Ký</button>
 					</div>
-
-
 				</form>
 			</div>
 			<div class="text2">
 				<span>@ example 2018</span>
 			</div>
 		</center>
-
 	</div>
+	<script src="assets/js/log-reg.js" type="text/javascript"></script>
 </body>
-
 </html>

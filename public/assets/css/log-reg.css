@@ -118,3 +118,16 @@ body {
     padding-left: 100px;
     margin-bottom: 10px;
 }
+
+.form-horizontal .has-feedback .form-control-feedback {
+    right: 435px;
+    top: 4px;
+}
+
+.form-horizontal .form-group {
+    margin-bottom: 0;
+}
+
+input {
+    outline: none;
+}
