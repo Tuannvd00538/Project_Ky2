@@ -26,7 +26,9 @@
     "firebase-functions": "^2.0.2",
     "jsonwebtoken": "^8.3.0",
     "microtime": "^2.1.8",
+    "njwt": "^0.4.0",
     "nodemon": "^1.18.3",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "uuid": "^3.3.2"
   }
 }

@@ -3,7 +3,8 @@ var request = require('request');
 var microtime = require('microtime');
 var crypto = require('crypto-js');
 var db = admin.database();
-var jwt = require('jsonwebtoken');
+var uuid = require('uuid');
+var nJwt = require('njwt');
 
 exports.getLogin = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
@@ -69,15 +70,23 @@ exports.login = async function(req, res) {
                     var password = crypto.AES.decrypt(value.password, 'iSilent').toString(crypto.enc.Utf8);
                     if (value.status == 1) {
                         if (req.body.password == password) {
+                            var claims = {
+                                "username": value.username,
+                                "password": value.password,
+                                "id": value.id
+                            }
+                            var jwt = nJwt.create(claims,"secret","HS256");
+                            var token = jwt.compact();
                             resolve({
                                 id: value.id,
-                                token: jwt.sign({ username: value.username, password: value.password, id: value.id }, 'RESTFULAPIs', { expiresIn: 1440 }),
+                                token: token,
                                 username: value.username,
                                 avatar: value.avatar,
                                 fullname: value.fullname,
                                 gender: value.gender,
                                 birthday: value.birthday,
-                                email: value.email
+                                email: value.email,
+                                chatlist: value.chatlist
                             });   
                         } else {
                             resolve({
@@ -104,11 +113,14 @@ exports.login = async function(req, res) {
 }
 
 exports.loginRequired = function(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        return res.status(401).json({message: 'Token hết hạn hoặc không tồn tại!'});
-    }
+    var token = req.headers.authorization;
+    nJwt.verify(token,"secret",function(err,verifiedJwt){
+        if(err){
+            res.status(401).json({message: 'Token hết hạn hoặc không tồn tại!'});
+        }else{
+            next();
+        }
+    });
 };
 
 exports.getSign = async function(req, res) {
@@ -120,4 +132,22 @@ exports.getSign = async function(req, res) {
     if (rs) {
         res.send(rs);
     }
+}
+
+exports.getMessage = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+		db.ref("messages/" + req.params.mode + "/" + req.params.id).on("value", function(snapshot) {
+            resolve(snapshot.val());
+		});
+    });
+    res.send(rs);
+}
+
+exports.getAvatar = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+		db.ref("accounts/" + req.params.id).on("value", function(snapshot) {
+            resolve(snapshot.val());
+		});
+    });
+    res.send(rs.avatar);
 }
