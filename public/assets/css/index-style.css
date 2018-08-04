@@ -306,3 +306,60 @@ body {
 .active {
 	background-color: rgba(0, 0, 0, .05);
 }
+/*
+DROPDOWN*/
+
+.banner-icon ul.dropdown-menu {
+    border-radius:4px;
+    box-shadow:none;
+    margin-top:10px;
+    width:200px;
+    margin-left: -3px;
+}
+.banner-icon ul.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    left: 2px;
+    z-index: 10;
+}
+.banner-icon ul.dropdown-menu:after {
+    content: "";
+    border-bottom: 12px solid #ccc;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    left: 0px;
+    z-index: 9;
+}
+
+.action ul.dropdown-menu {
+	border-radius:4px;
+    box-shadow:none;
+	margin-top: 65px;
+}
+
+.action ul.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 4px;
+    z-index: 10;
+}
+.action ul.dropdown-menu:after {
+    content: "";
+    border-bottom: 12px solid #ccc;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    right: 2px;
+    z-index: 9;
+}
