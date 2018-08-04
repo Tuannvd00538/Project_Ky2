@@ -3,6 +3,17 @@ $(document).ready(function() {
     if (user == null || user == undefined) {
         window.location = '/login';
     }
+    var token = user.token;
+
+    function parseJwt(token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base64));
+    };
+    if (parseJwt(token).exp < (Date.now() / 1000)) {
+        localStorage.clear();
+        window.location = '/login';
+    }
 
     function generateBlockYouChat(avatar, message) {
         var output = "";
@@ -84,8 +95,7 @@ $(document).ready(function() {
                 headers: {
                     "Authorization": user.token
                 },
-                success: function(resultData) {
-                }
+                success: function(resultData) {}
             });
             $(this).val("");
         }

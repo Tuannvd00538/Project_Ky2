@@ -72,7 +72,6 @@ exports.login = async function(req, res) {
                         if (req.body.password == password) {
                             var claims = {
                                 "username": value.username,
-                                "password": value.password,
                                 "id": value.id
                             }
                             var jwt = nJwt.create(claims,"secret","HS256");
