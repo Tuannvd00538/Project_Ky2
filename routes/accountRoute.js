@@ -9,8 +9,10 @@ module.exports = function(app){
         .post(controller.createAccount);
     app.route('/sign')
         .get(controller.getSign);
-    app.route('/message/:mode/:id')
-        .get(controller.loginRequired, controller.getMessage);
+    app.route('/sendmsg')
+        .post(controller.loginRequired, controller.saveMessage);
     app.route('/avatar/:id')
         .get(controller.getAvatar);
+    app.route('/info/:id')
+        .get(controller.getInfo);
 }

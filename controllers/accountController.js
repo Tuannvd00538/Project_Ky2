@@ -134,11 +134,13 @@ exports.getSign = async function(req, res) {
     }
 }
 
-exports.getMessage = async function(req, res) {
+exports.saveMessage = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("messages/" + req.params.mode + "/" + req.params.id).on("value", function(snapshot) {
-            resolve(snapshot.val());
-		});
+		db.ref("messages/single/" + req.body.idChat + "/" + microtime.now()).set({
+            id: req.body.id,
+            msg: req.body.msg
+        });
+        resolve(true);
     });
     res.send(rs);
 }
@@ -150,4 +152,21 @@ exports.getAvatar = async function(req, res) {
 		});
     });
     res.send(rs.avatar);
+}
+
+exports.getInfo = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+		db.ref("accounts/" + req.params.id).on("value", function(snapshot) {
+            resolve(snapshot.val());
+		});
+    });
+    let data = {
+        avatar: rs.avatar,
+        username: rs.username,
+        fullname: rs.fullname,
+        gender: rs.gender,
+        email: rs.email,
+        birthday: rs.birthday
+    }
+    res.send(data);
 }
