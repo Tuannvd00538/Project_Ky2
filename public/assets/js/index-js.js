@@ -65,6 +65,16 @@ $(document).ready(function() {
                                 $('.chatname').text(data.fullname)
                                 $('.actionname').text(data.fullname);
                                 $('.rsAvt').attr('src', data.avatar);
+                                if (Notification.permission != 'default') {
+                                    notify = new Notification('ChatHub ❤', {
+                                        body: data.fullname + ': ' + message.msg,
+                                        icon: 'https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/2PivRVKESq2.png',
+                                        tag: 'http://localhost:8080/'
+                                    });
+                                    notify.onclick = function() {
+                                        window.location.href = this.tag;
+                                    }
+                                }
                             }
                         });
                         you[message.id] = true;
@@ -79,7 +89,7 @@ $(document).ready(function() {
     }
     getChat();
     $('input[name=message]').keyup(function(e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
             var data = {
                 id: user.id,
                 msg: $(this).val(),
@@ -100,4 +110,9 @@ $(document).ready(function() {
     $('.chatbox').animate({
         scrollTop: $('.chatbox').get(0).scrollHeight
     }, 0);
+    Notification.requestPermission(function(e) {
+        if (e !== 'denied') {
+            console.log('Notification', 'Accept');
+        }
+    });
 });
