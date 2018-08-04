@@ -60,7 +60,7 @@ $(document).ready(function() {
                         $.ajax({
                             url: "/info/" + message.id,
                             headers: {
-                                "Authorization": user.token
+                                "Authorization": token
                             },
                             type: "GET",
                             success: function(data) {
@@ -93,7 +93,7 @@ $(document).ready(function() {
                 url: "/sendmsg",
                 data: data,
                 headers: {
-                    "Authorization": user.token
+                    "Authorization": token
                 },
                 success: function(resultData) {}
             });
