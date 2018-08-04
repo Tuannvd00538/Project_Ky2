@@ -35,9 +35,6 @@ $(document).ready(function() {
         output += '</div>';
         return output;
     };
-    $('.chatbox').animate({
-        scrollTop: $('.chatbox').get(0).scrollHeight
-    }, 0);
     var chatlist = user.chatlist;
     for (var id in chatlist) {
         console.log('id' + id + ' has value ' + chatlist[id]);
@@ -100,4 +97,7 @@ $(document).ready(function() {
             $(this).val("");
         }
     });
+    $('.chatbox').animate({
+        scrollTop: $('.chatbox').get(0).scrollHeight
+    }, 0);
 });
