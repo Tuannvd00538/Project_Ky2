@@ -42,6 +42,7 @@ $(document).ready(function() {
             $.get("/avatar/" + message.id, function(avt) {
                 if (message.id == user.id) {
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
+                    $('.msg').text("You: " + message.msg);
                 } else {
                     $('#resultsChat').append(generateBlockYouChat(avt, message.msg));
                     if (!you.hasOwnProperty(message.id)) {

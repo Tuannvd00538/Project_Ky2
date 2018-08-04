@@ -21,18 +21,6 @@ app.use(express.static('./public'));
 var accountRoute = require('./routes/accountRoute');
 accountRoute(app);
 
-
-
-// app.get('/create', async (req, res) => {
-// 	db.ref("messages/group").on("value", function(snapshot) {
-// 		res.send(snapshot.val());
-// 	}, function (errorObject) {
-// 		console.log("The read failed: " + errorObject.code);
-// 	});
-	
-// 	res.send(crypto.AES.decrypt(rs.password, 'iSilent').toString(crypto.enc.Utf8));
-// });
-
 app.listen(8080, function () {
 	console.log('Hello World!');
 });
