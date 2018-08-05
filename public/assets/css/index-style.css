@@ -334,6 +334,9 @@ input:focus {
 
 /*
 DROPDOWN*/
+.banner-icon .dropdown-item {
+	font-size: 14px;
+}
 
 .banner-icon ul.dropdown-menu {
     border-radius:4px;
