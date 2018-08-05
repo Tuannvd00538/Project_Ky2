@@ -332,6 +332,37 @@ input:focus {
     outline:none !important;
 }
 
+.hello {
+	font-weight: 400;
+	font-size: 40px;
+	text-align: center;
+}
+
+.welcome {
+	margin-top: 90px;
+	text-align: center;
+}
+
+.started div {
+	margin-top: 25px;
+}
+
+.started .title {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.started a {
+	border-radius: 20px;
+	min-width: 130px;
+}
+
+.foott {
+	position: fixed;
+	font-size: 14px;
+	bottom: 0;
+	margin-left: 110px;
+}
 /*
 DROPDOWN*/
 .banner-icon .dropdown-item {
