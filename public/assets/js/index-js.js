@@ -65,16 +65,17 @@ $(document).ready(function() {
                                 $('.chatname').text(data.fullname)
                                 $('.actionname').text(data.fullname);
                                 $('.rsAvt').attr('src', data.avatar);
-                                if (Notification.permission != 'default') {
-                                    notify = new Notification('ChatHub ❤', {
-                                        body: data.fullname + ': ' + message.msg,
-                                        icon: 'https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/2PivRVKESq2.png',
-                                        tag: 'http://localhost:8080/'
-                                    });
-                                    notify.onclick = function() {
-                                        window.location.href = this.tag;
-                                    }
-                                }
+                                // thông báo đẩy
+                                // if (Notification.permission != 'default') {
+                                //     notify = new Notification('ChatHub ❤', {
+                                //         body: data.fullname + ': ' + message.msg,
+                                //         icon: 'https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/2PivRVKESq2.png',
+                                //         tag: 'http://localhost:8080/'
+                                //     });
+                                //     notify.onclick = function() {
+                                //         window.location.href = this.tag;
+                                //     }
+                                // }
                             }
                         });
                         you[message.id] = true;
@@ -115,17 +116,16 @@ $(document).ready(function() {
             console.log('Notification', 'Accept');
         }
     });
-});
 
-function logout() {
-    localStorage.clear();
-    window.location = '/login';
-}
 
-$(document).ready(function() {
     $(".newmsg-icon").click(function(event) {
         $(".content-right").attr("style","display:none;")
         $(".content-right-newmsg").attr("style","display:block;")
         $("#newmsg").attr("style","display:block;")
     });
 });
+
+function logout() {
+    localStorage.clear();
+    window.location = '/login';
+}
