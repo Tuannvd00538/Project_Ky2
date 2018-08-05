@@ -126,6 +126,13 @@ $(document).ready(function() {
     $(".newmsg-icon").click(function(event) {
         $(".content-right").attr("style","display:none;")
         $(".content-right-newmsg").attr("style","display:block;")
+        $(".welcome").attr("style","display:none;")
         $("#newmsg").attr("style","display:block;")
+    });
+
+    $("#results").click(function(event) {
+        $(".content-right").attr("style","display:block;")
+        $(".welcome").attr("style","display:none;")
+        $("#newmsg").attr("style","display:none;")
     });
 });
