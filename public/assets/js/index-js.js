@@ -40,6 +40,8 @@ $(document).ready(function() {
         console.log('id' + id + ' has value ' + chatlist[id]);
     }
 
+    $('.helloname').text(user.fullname);
+
     function getChat() {
         var id = $('.active').attr('data-id');
         var mode = $('.active').attr('data-mode');
