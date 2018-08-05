@@ -121,3 +121,11 @@ function logout() {
     localStorage.clear();
     window.location = '/login';
 }
+
+$(document).ready(function() {
+    $(".newmsg-icon").click(function(event) {
+        $(".content-right").attr("style","display:none;")
+        $(".content-right-newmsg").attr("style","display:block;")
+        $("#newmsg").attr("style","display:block;")
+    });
+});
