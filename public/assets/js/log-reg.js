@@ -109,23 +109,27 @@ $(document).ready(function() {
             "password": password
         }
         if (username.length > 4 && password.length > 4) {
+            $('.sub').attr('style', 'display:none;');
+            $('.spinner').attr('style', 'display:inline-block;');
+            $('.errorLogin').text('');
             $.ajax({
                 url: '/login',
                 type: "POST",
                 data: login,
                 success: function(response) {
                     if (response.code == undefined) {
-                        alert('Đăng nhập thành công!');
                         localStorage.setItem('user', JSON.stringify(response));
                         setTimeout(function() {
                             window.location = '/';
                         }, 2000);
                     } else {
-                        alert('Tài khoản hoặc mật khẩu không chính xác!');
+                        $('.spinner').attr('style', 'display:none;');
+                        $('.sub').attr('style', 'display:block;');
+                        $('.errorLogin').text('Tài khoản hoặc mật khẩu không chính xác!');
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    swal("Lỗi", jqXHR.responseJSON.message, "error");
+                    console.log('Error', jqXHR.responseJSON.message);
                 }
             });
         };

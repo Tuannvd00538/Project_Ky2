@@ -116,3 +116,8 @@ $(document).ready(function() {
         }
     });
 });
+
+function logout() {
+    localStorage.clear();
+    window.location = '/login';
+}

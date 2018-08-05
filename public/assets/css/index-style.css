@@ -316,6 +316,9 @@ DROPDOWN*/
     width:200px;
     margin-left: -3px;
 }
+.banner-icon ul.dropdown-menu hr {
+	margin: 0!important;
+}
 .banner-icon ul.dropdown-menu:before {
     content: "";
     border-bottom: 10px solid #fff;
