@@ -38,25 +38,7 @@ var chatlist = user.chatlist;
 for (var id in chatlist) {
     console.log('id' + id + ' has value ' + chatlist[id]);
 }
-$('input[name=message]').keyup(function(e) {
-    if (e.keyCode == 13 && $(this).val().length != 0) {
-        var data = {
-            id: user.id,
-            msg: $(this).val(),
-            idChat: $('.active').attr('data-id')
-        }
-        $.ajax({
-            type: 'POST',
-            url: "/sendmsg",
-            data: data,
-            headers: {
-                "Authorization": token
-            },
-            success: function(resultData) {}
-        });
-        $(this).val("");
-    }
-});
+
 Notification.requestPermission(function(e) {
     if (e !== 'denied') {
         console.log('Notification', 'Accept');
@@ -114,6 +96,7 @@ function getMessage(id, mode) {
             scrollTop: $('.chatbox').get(0).scrollHeight
         }, 0);
     });
+    $('input[name=message]').attr('data', id);
 }
 $(document).ready(function() {
     $('.helloname').text(user.fullname);
@@ -135,5 +118,25 @@ $(document).ready(function() {
         $(".content-right-newmsg").attr("style", "display:none;")
         $("#newmsg").attr("style", "display:none;")
         $(".welcome").attr("style", "display:block;")
+    });
+
+    $('input[name=message]').keyup(function(e) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            var data = {
+                id: user.id,
+                msg: $(this).val(),
+                idChat: $(this).attr('data')
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/sendmsg",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {}
+            });
+            $(this).val("");
+        }
     });
 });
