@@ -363,6 +363,10 @@ input:focus {
 	min-width: 130px;
 }
 
+.startedtext {
+	min-height: 120px;
+}
+
 .foott {
 	position: fixed;
 	font-size: 14px;
