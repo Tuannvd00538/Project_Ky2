@@ -38,7 +38,6 @@ var chatlist = user.chatlist;
 for (var id in chatlist) {
     console.log('id' + id + ' has value ' + chatlist[id]);
 }
-$('.helloname').text(user.fullname);
 $('input[name=message]').keyup(function(e) {
     if (e.keyCode == 13 && $(this).val().length != 0) {
         var data = {
@@ -109,6 +108,7 @@ function getMessage(id, mode) {
                 }
                 $('.msg').text(message.msg);
             }
+            $('.loading').attr('style', 'display:none;');
         });
         $('.chatbox').animate({
             scrollTop: $('.chatbox').get(0).scrollHeight
@@ -116,6 +116,7 @@ function getMessage(id, mode) {
     });
 }
 $(document).ready(function() {
+    $('.helloname').text(user.fullname);
     $(".newmsg-icon").click(function(event) {
         $(".content-right").attr("style", "display:none;")
         $(".content-right-newmsg").attr("style", "display:block;")
