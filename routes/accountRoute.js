@@ -15,4 +15,6 @@ module.exports = function(app){
         .get(controller.getAvatar);
     app.route('/info/:id')
         .get(controller.getInfo);
+    app.route('/:mode/:id')
+        .get(controller.getMessage);
 }

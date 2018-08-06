@@ -137,7 +137,8 @@ exports.saveMessage = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
 		db.ref("messages/single/" + req.body.idChat + "/" + microtime.now()).set({
             id: req.body.id,
-            msg: req.body.msg
+            msg: req.body.msg,
+            createdAt: admin.database.ServerValue.TIMESTAMP
         });
         resolve(true);
     });
@@ -169,3 +170,20 @@ exports.getInfo = async function(req, res) {
     }
     res.send(data);
 }
+
+exports.getMessage = async function (req, res) {
+    // let rs = await new Promise((resolve, reject) => {
+	// 	db.ref("messages/" + req.params.mode + "/" + req.params.id).on("value", function(snapshot) {
+    //         resolve(snapshot.val());
+	// 	});
+    // });
+    // res.send(rs);
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/message.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+};
