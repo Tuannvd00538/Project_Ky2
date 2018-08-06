@@ -39,7 +39,6 @@ $(document).ready(function() {
     for (var id in chatlist) {
         console.log('id' + id + ' has value ' + chatlist[id]);
     }
-
     $('.helloname').text(user.fullname);
 
     function getChat() {
@@ -118,18 +117,20 @@ $(document).ready(function() {
             console.log('Notification', 'Accept');
         }
     });
-
-
     $(".newmsg-icon").click(function(event) {
-        $(".content-right").attr("style","display:none;")
-        $(".content-right-newmsg").attr("style","display:block;")
-        $(".welcome").attr("style","display:none;")
-        $("#newmsg").attr("style","display:block;")
+        $(".content-right").attr("style", "display:none;")
+        $(".content-right-newmsg").attr("style", "display:block;")
+        $(".welcome").attr("style", "display:none;")
+        $("#newmsg").attr("style", "display:block;")
     });
-
     $("#results").click(function(event) {
-        $(".content-right").attr("style","display:block;")
-        $(".welcome").attr("style","display:none;")
-        $("#newmsg").attr("style","display:none;")
+        $(".content-right").attr("style", "display:block;")
+        $(".welcome").attr("style", "display:none;")
+        $("#newmsg").attr("style", "display:none;")
     });
 });
+
+function logout() {
+    localStorage.clear();
+    window.location = '/login';
+}
