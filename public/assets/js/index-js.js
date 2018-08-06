@@ -109,6 +109,7 @@ function getMessage(id, mode) {
                 }
                 $('.msg').text(message.msg);
             }
+            $('.loading').attr('style', 'display:none;');
         });
         $('.chatbox').animate({
             scrollTop: $('.chatbox').get(0).scrollHeight
