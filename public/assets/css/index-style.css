@@ -95,6 +95,12 @@ body {
 	margin-right: -35px;
 }
 
+.closenewmsg {
+	float: right;
+	color: rgba(185, 185, 185, 1);
+	margin-right: -35px;
+}
+
 .msg {
 	white-space: nowrap;
 	text-overflow: ellipsis;
