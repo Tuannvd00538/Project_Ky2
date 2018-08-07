@@ -6,7 +6,7 @@ var db = admin.database();
 var uuid = require('uuid');
 var nJwt = require('njwt');
 
-exports.getLogin = async function(req, res) {
+exports.getLogin = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/login.html', (error, response, body) => {
             resolve(body);
@@ -17,7 +17,7 @@ exports.getLogin = async function(req, res) {
     }
 }
 
-exports.createAccount = async function(req, res) {
+exports.createAccount = async function (req, res) {
     var avatar = "";
     if (req.body.gender == 2) {
         avatar = "/assets/img/girl.jpg";
@@ -27,42 +27,42 @@ exports.createAccount = async function(req, res) {
     var id = microtime.now();
     db.ref("accounts/" + id).set({
         id: id,
-		username: (req.body.username).toLowerCase(),
-		password: crypto.AES.encrypt(req.body.password, 'iSilent').toString(),
-		email: req.body.email,
-		fullname: req.body.fullname,
+        username: (req.body.username).toLowerCase(),
+        password: crypto.AES.encrypt(req.body.password, 'iSilent').toString(),
+        email: req.body.email,
+        fullname: req.body.fullname,
         gender: req.body.gender,
         birthday: req.body.birthday,
-		createdAt: new Date().toLocaleDateString(),
-		avatar: avatar,
-		status: 1
+        createdAt: new Date().toLocaleDateString(),
+        avatar: avatar,
+        status: 1
     });
     let rs = await new Promise((resolve, reject) => {
-		db.ref("accounts/" + id).on("value", function(snapshot, prevChildKey) {
+        db.ref("accounts/" + id).on("value", function (snapshot, prevChildKey) {
             resolve(snapshot.val());
-		});
+        });
     });
     if (rs) {
         res.send(rs);
     }
 }
 
-exports.checkExistsUsername = async function(req, res) {
+exports.checkExistsUsername = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("accounts").orderByChild("username").equalTo((req.query.q).toLowerCase()).on("value", function(snapshot) {
+        db.ref("accounts").orderByChild("username").equalTo((req.query.q).toLowerCase()).on("value", function (snapshot) {
             if (snapshot.val() != null || snapshot.val() != undefined) {
                 resolve(false);
             } else {
                 resolve(true);
             }
-		});
+        });
     });
     res.send(rs);
 }
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("accounts").orderByChild("username").equalTo((req.body.username).toLowerCase()).on("value", function(snapshot) {
+        db.ref("accounts").orderByChild("username").equalTo((req.body.username).toLowerCase()).on("value", function (snapshot) {
             if (snapshot.val() != null || snapshot.val() != undefined) {
                 var obj = snapshot.val();
                 for (var key in obj) {
@@ -74,7 +74,7 @@ exports.login = async function(req, res) {
                                 "username": value.username,
                                 "id": value.id
                             }
-                            var jwt = nJwt.create(claims,"secret","HS256");
+                            var jwt = nJwt.create(claims, "secret", "HS256");
                             var token = jwt.compact();
                             resolve({
                                 id: value.id,
@@ -86,7 +86,7 @@ exports.login = async function(req, res) {
                                 birthday: value.birthday,
                                 email: value.email,
                                 chatlist: value.chatlist
-                            });   
+                            });
                         } else {
                             resolve({
                                 code: 401,
@@ -106,23 +106,23 @@ exports.login = async function(req, res) {
                     error: 'Tên đăng nhập hoặc mật khẩu không chính xác!'
                 });
             }
-		});
+        });
     });
     res.json(rs);
 }
 
-exports.loginRequired = function(req, res, next) {
+exports.loginRequired = function (req, res, next) {
     var token = req.headers.authorization;
-    nJwt.verify(token,"secret",function(err,verifiedJwt){
-        if(err){
-            res.status(401).json({message: 'Token hết hạn hoặc không tồn tại!'});
-        }else{
+    nJwt.verify(token, "secret", function (err, verifiedJwt) {
+        if (err) {
+            res.status(401).json({ message: 'Token hết hạn hoặc không tồn tại!' });
+        } else {
             next();
         }
     });
 };
 
-exports.getSign = async function(req, res) {
+exports.getSign = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/register.html', (error, response, body) => {
             resolve(body);
@@ -133,9 +133,9 @@ exports.getSign = async function(req, res) {
     }
 }
 
-exports.saveMessage = async function(req, res) {
+exports.saveMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("messages/single/" + req.body.idChat + "/messages/" + microtime.now()).set({
+        db.ref("messages/single/" + req.body.idChat + "/messages/" + microtime.now()).set({
             id: req.body.id,
             msg: req.body.msg,
             createdAt: Date.now()
@@ -145,20 +145,20 @@ exports.saveMessage = async function(req, res) {
     res.send(rs);
 }
 
-exports.getAvatar = async function(req, res) {
+exports.getAvatar = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("accounts/" + req.params.id).on("value", function(snapshot) {
+        db.ref("accounts/" + req.params.id).on("value", function (snapshot) {
             resolve(snapshot.val());
-		});
+        });
     });
     res.send(rs.avatar);
 }
 
-exports.getInfo = async function(req, res) {
+exports.getInfo = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("accounts/" + req.params.id).on("value", function(snapshot) {
+        db.ref("accounts/" + req.params.id).on("value", function (snapshot) {
             resolve(snapshot.val());
-		});
+        });
     });
     let data = {
         avatar: rs.avatar,
@@ -172,12 +172,6 @@ exports.getInfo = async function(req, res) {
 }
 
 exports.getMessage = async function (req, res) {
-    // let rs = await new Promise((resolve, reject) => {
-	// 	db.ref("messages/" + req.params.mode + "/" + req.params.id).on("value", function(snapshot) {
-    //         resolve(snapshot.val());
-	// 	});
-    // });
-    // res.send(rs);
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/message.html', (error, response, body) => {
             resolve(body);
@@ -188,15 +182,39 @@ exports.getMessage = async function (req, res) {
     }
 };
 
-exports.listMessage = async function(req, res) {
+exports.listMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function(info) {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (info) {
             if (req.params.mode == 'single') {
-                resolve(info.val());
+                if (req.query.me == undefined) {
+                    resolve('Đừng phá nữa my fen :))');
+                } else if (info.val().key != req.query.me) {
+                    db.ref("accounts/" + info.val().key).on("value", function (account) {
+                        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/messages").limitToLast(1).on("value", function (lastMsg) {
+                            let data = {
+                                avatar: account.val().avatar,
+                                fullname: account.val().fullname,
+                                chat: lastMsg.val()
+                            }
+                            resolve(data);
+                        });
+                    });
+                } else if (info.val().client != req.query.me) {
+                    db.ref("accounts/" + info.val().client).on("value", function (account) {
+                        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/messages").limitToLast(1).on("value", function (lastMsg) {
+                            let data = {
+                                avatar: account.val().avatar,
+                                fullname: account.val().fullname,
+                                chat: lastMsg.val()
+                            }
+                            resolve(data);
+                        });
+                    });
+                }
             } else if (req.params.mode == 'group') {
                 resolve('group!');
             }
-		});
+        });
     });
     res.send(rs);
 }

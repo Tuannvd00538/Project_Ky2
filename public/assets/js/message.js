@@ -1,15 +1,4 @@
 $(document).ready(function() {
-    function timeConverter(UNIX_timestamp) {
-        var a = new Date(UNIX_timestamp);
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        var year = a.getFullYear();
-        var month = months[a.getMonth()];
-        var date = a.getDate();
-        var hour = a.getHours();
-        var min = a.getMinutes();
-        var time = hour + ':' + min;
-        return time;
-    }
     $('input[name=message]').keyup(function(e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
             var data = {
@@ -34,7 +23,6 @@ $(document).ready(function() {
         var message = snapshot.val();
         var you = {};
         $.get("/avatar/" + message.id, function(avt) {
-        	$('.datemsg').text(timeConverter(message.createdAt));
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
                 $('.msg').text("You: " + message.msg);
@@ -73,4 +61,6 @@ $(document).ready(function() {
         });
     });
     $('input[name=message]').attr('data', id);
+
+    console.log($('a[href*="' + window.location.pathname + '"]'));
 });
