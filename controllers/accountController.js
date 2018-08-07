@@ -135,10 +135,10 @@ exports.getSign = async function(req, res) {
 
 exports.saveMessage = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
-		db.ref("messages/single/" + req.body.idChat + "/" + microtime.now()).set({
+		db.ref("messages/single/" + req.body.idChat + "/messages/" + microtime.now()).set({
             id: req.body.id,
             msg: req.body.msg,
-            createdAt: admin.database.ServerValue.TIMESTAMP
+            createdAt: Date.now()
         });
         resolve(true);
     });
@@ -187,3 +187,16 @@ exports.getMessage = async function (req, res) {
         res.send(rs);
     }
 };
+
+exports.listMessage = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+		db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function(info) {
+            if (req.params.mode == 'single') {
+                resolve(info.val());
+            } else if (req.params.mode == 'group') {
+                resolve('group!');
+            }
+		});
+    });
+    res.send(rs);
+}

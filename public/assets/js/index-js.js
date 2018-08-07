@@ -36,7 +36,7 @@ function generateBlockMeChat(message) {
 };
 var chatlist = user.chatlist;
 for (var id in chatlist) {
-    console.log('id' + id + ' has value ' + chatlist[id]);
+    console.log('id ' + id + ' has value ' + chatlist[id]);
 }
 
 Notification.requestPermission(function(e) {

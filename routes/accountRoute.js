@@ -17,4 +17,6 @@ module.exports = function(app){
         .get(controller.getInfo);
     app.route('/:mode/:id')
         .get(controller.getMessage);
+    app.route('/list/:mode/:id')
+        .get(controller.listMessage);
 }

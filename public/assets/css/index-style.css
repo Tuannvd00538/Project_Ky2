@@ -7,6 +7,10 @@ body {
 	overflow-y: hidden;
 }
 
+a, a:hover {
+	text-decoration: none!important;
+}
+
 .banner {
 	border: 1px solid rgba(0, 0, 0, .10);
 	width: 100%;
