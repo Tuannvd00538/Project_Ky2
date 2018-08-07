@@ -2,3 +2,6 @@
 .vscode
 node_modules
 iSilent.json
+/JavaApplication/ChatHub/nbproject/private/
+/JavaApplication/ChatHub/build/
+/JavaApplication/ChatHub/dist/
