@@ -45,8 +45,8 @@
                   </JFXTextField>
                   <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #fff; -fx-border-color: #eee;" text="Setting">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="hihi" />
-                      <MenuItem mnemonicParsing="false" text="hihi" />
+                      <MenuItem mnemonicParsing="false" text="Đăng Xuất" />
+                      <MenuItem mnemonicParsing="false" text="Xoá" />
                     </items>
                   </MenuButton>
                </children>
@@ -54,6 +54,5 @@
             <JFXListView fx:id="ListContacts" prefHeight="414.0" prefWidth="323.0" style="-fx-border-color: #eee;" />
          </children>
       </VBox>
-      <VBox fx:id="boxbox" layoutX="314.0" layoutY="30.0" prefHeight="135.0" prefWidth="478.0" />
    </children>
 </AnchorPane>
