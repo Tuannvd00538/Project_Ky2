@@ -19,4 +19,6 @@ module.exports = function(app){
         .get(controller.getMessage);
     app.route('/list/:mode/:id')
         .get(controller.loginRequired, controller.listMessage);
+    app.route('/search/user/:id')
+        .get(controller.searchUser);
 }

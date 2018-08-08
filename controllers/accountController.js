@@ -218,3 +218,12 @@ exports.listMessage = async function (req, res) {
     });
     res.send(rs);
 }
+
+exports.searchUser = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts").orderByChild("id").equalTo(parseInt(req.params.id)).on("value", function (snapshot) {
+            resolve(snapshot.val());
+        });
+    });
+    res.send(rs);
+}
