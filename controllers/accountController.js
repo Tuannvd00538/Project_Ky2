@@ -135,7 +135,7 @@ exports.getSign = async function (req, res) {
 
 exports.saveMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-        db.ref("messages/single/" + req.body.idChat + "/messages/" + microtime.now()).set({
+        db.ref("messages" + req.body.idChat + "/messages/" + microtime.now()).set({
             id: req.body.id,
             msg: req.body.msg,
             createdAt: Date.now()
@@ -219,6 +219,17 @@ exports.listMessage = async function (req, res) {
     res.send(rs);
 }
 
+exports.createMessage = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/new.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+}
+
 exports.searchUser = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
         db.ref("accounts").orderByChild("id").equalTo(parseInt(req.params.id)).on("value", function (snapshot) {
@@ -242,6 +253,32 @@ exports.searchUser = async function(req, res) {
             }
         }
     } else {
-        res.send('Không có kết quả tìm kiếm!');
+        res.json({
+            code: 404,
+            message: 'Không có kết quả tìm kiếm!'
+        });
     }
+}
+
+exports.sendMsg = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        var id = microtime.now();
+        db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
+            client: req.body.idClient,
+            key: req.body.idKey
+        });
+        db.ref("messages/" + req.body.mode + "/" + id + "/messages/" + microtime.now()).set({
+            id: req.body.idKey,
+            msg: req.body.msg,
+            createdAt: Date.now()
+        });
+        db.ref("accounts/" + req.body.idKey + "/chatlist").update({
+            [id]: req.body.mode
+        });
+        db.ref("accounts/" + req.body.idClient + "/chatlist").update({
+            [id]: req.body.mode
+        });
+        resolve(id);
+    });
+    res.send('/' + req.body.mode + '/' + rs);
 }

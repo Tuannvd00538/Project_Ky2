@@ -68,31 +68,7 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '</a>';
     return output;
 }
-for (var id in chatlist) {
-    $.ajax({
-        url: "/list/" + chatlist[id] + "/" + id + "?me=" + user.id,
-        headers: {
-            "Authorization": token
-        },
-        type: "GET",
-        success: function(data) {
-            var mode = chatlist[id];
-            var avt = data.avatar;
-            var name = data.fullname;
-            var list = data.chat;
-            var time = msg = "";
-            for (let id in list) {
-                time = timeConverter(list[id].createdAt);
-                if (list[id].id == user.id) {
-                    msg = "You: " + list[id].msg;
-                } else {
-                    msg = list[id].msg;
-                }
-            }
-            $('#results').append(generateBlockListChat(mode, id, avt, name, time, msg));
-        }
-    });
-}
+
 Notification.requestPermission(function(e) {
     if (e !== 'denied') {
         console.log('Notification', 'Accept');
@@ -103,21 +79,94 @@ function logout() {
     localStorage.clear();
     window.location = '/login';
 }
+function generateBlockAddChat(id, avatar, name) {
+    var output = "";
+        output += '<a href="javascript:createMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
+            output += '<div class="media-left">';
+                output += '<img class="media-object" src="' + avatar + '"/>';
+            output += '</div>';
+            output += '<div class="media-body">';
+                output += '<h4 class="media-heading">' + name + '</h4>';
+            output += '</div>';
+        output += '</a>';
+    return output;
+}
+function createMsg(id, avatar, name) {
+    $('.avtNew').attr('src', avatar);
+    $('.nameNew').text(name);
+    $('.rsNameNew').text('Tin nhắn mới đến ' + name);
+    $('.rsAddChat').attr('style', 'display:none;');
+    $('.mainNew').attr('style', 'display:block;');
+    $('input[name=addChat]').val(name);
+    $('input[name=messageNew]').attr('data', id);
+}
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
 $(document).ready(function() {
     $('.helloname').text(user.fullname);
-    $(".newmsg-icon").click(function(event) {
-        $(".content-right").attr("style", "display:none;")
-        $(".welcome").attr("style", "display:none;")
-        $(".content-right-newmsg").attr("style", "display:block;")
-        $("#newmsg").attr("style", "display:block;")
-    });
     $(".closenewmsg").click(function() {
-        // $(".welcome").attr("style", "display:none;")
-        $(".content-right-newmsg").attr("style", "display:none;")
-        $("#newmsg").attr("style", "display:none;")
-        $(".welcome").attr("style", "display:block;")
+        window.history.back();
     });
     $('input[name=addChat]').keyup(function (e) {
-        
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            if (isNumeric($(this).val())) {
+                if ($(this).val() != user.id) {
+                    $('.rsAddChat').attr('style', 'display:block;');
+                    $('.rsAddChat').html('<div class="spinnerAdd"></div>');
+                    $.ajax({
+                        url: "/search/user/" + $(this).val(),
+                        headers: {
+                            "Authorization": token
+                        },
+                        type: "GET",
+                        success: function(data) {
+                            if (data.code == undefined) {
+                                $('.rsAddChat').html(generateBlockAddChat(data.id, data.avatar, data.fullname));
+                            } else {
+                                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
+                            }
+                        }
+                    });
+                } else {
+                    $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
+                }   
+            } else {
+                alert('Vui lòng nhập id là số!');
+            }
+        }
+        if ($(this).val().length == 0) {
+            $('.rsAddChat').attr('style', 'display:none;');
+        }
     });
+    if (chatlist != null || chatlist != undefined) {
+        for (var id in chatlist) {
+            $.ajax({
+                url: "/list/" + chatlist[id] + "/" + id + "?me=" + user.id,
+                async: false,
+                headers: {
+                    "Authorization": token
+                },
+                type: "GET",
+                success: function(data) {
+                    var mode = chatlist[id];
+                    var avt = data.avatar;
+                    var name = data.fullname;
+                    var list = data.chat;
+                    var time = msg = "";
+                    for (let id in list) {
+                        time = timeConverter(list[id].createdAt);
+                        if (list[id].id == user.id) {
+                            msg = "You: " + list[id].msg;
+                        } else {
+                            msg = list[id].msg;
+                        }
+                    }
+                    $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                }
+            });
+        }
+    } else {
+        alert('dkm Tuk code cai phan add chat di!');
+    }
 });

@@ -7,6 +7,8 @@ module.exports = function(app){
     app.route('/create')
         .get(controller.checkExistsUsername)
         .post(controller.createAccount);
+    app.route('/new')
+        .get(controller.createMessage);
     app.route('/sign')
         .get(controller.getSign);
     app.route('/sendmsg')
@@ -21,4 +23,6 @@ module.exports = function(app){
         .get(controller.loginRequired, controller.listMessage);
     app.route('/search/user/:id')
         .get(controller.loginRequired, controller.searchUser);
+    app.route('/createMsg')
+        .post(controller.loginRequired, controller.sendMsg);
 }

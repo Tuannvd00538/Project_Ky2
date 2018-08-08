@@ -1,4 +1,15 @@
 $(document).ready(function() {
+	$.ajax({
+        url: "/list" + window.location.pathname + "?me=" + user.id,
+        headers: {
+            "Authorization": token
+        },
+        type: "GET",
+        success: function(data) {
+            $('.actionname').text(data.fullname);
+           	$('.rsAvt').attr('src', data.avatar);
+        }
+    });
     $('input[name=message]').keyup(function(e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
             var data = {
@@ -25,7 +36,6 @@ $(document).ready(function() {
         $.get("/avatar/" + message.id, function(avt) {
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
-                $('.msg').text("You: " + message.msg);
             } else {
                 $('#resultsChat').append(generateBlockYouChat(avt, message.msg));
                 if (!you.hasOwnProperty(message.id)) {
@@ -37,7 +47,6 @@ $(document).ready(function() {
                         type: "GET",
                         success: function(data) {
                             $('.username span').text(data.fullname);
-                            $('.chatname').text(data.fullname)
                             $('.actionname').text(data.fullname);
                             $('.rsAvt').attr('src', data.avatar);
                             // thông báo đẩy
@@ -55,10 +64,31 @@ $(document).ready(function() {
                     });
                     you[message.id] = true;
                 }
-                $('.msg').text(message.msg);
             }
             $('.loading').attr('style', 'display:none;');
         });
     });
-    $('input[name=message]').attr('data', id);
+    $('input[name=message]').attr('data', window.location.pathname);
+    $('input[name=messageNew]').keyup(function(e) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            var data = {
+                idKey: user.id,
+                idClient: $(this).attr('data'),
+                msg: $(this).val(),
+                mode: 'single'
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/createMsg",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                	window.location.href = resultData;
+                }
+            });
+            $(this).val("");
+        }
+    });
 });
