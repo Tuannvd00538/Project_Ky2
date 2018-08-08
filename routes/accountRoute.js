@@ -20,5 +20,5 @@ module.exports = function(app){
     app.route('/list/:mode/:id')
         .get(controller.loginRequired, controller.listMessage);
     app.route('/search/user/:id')
-        .get(controller.searchUser);
+        .get(controller.loginRequired, controller.searchUser);
 }

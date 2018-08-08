@@ -61,6 +61,4 @@ $(document).ready(function() {
         });
     });
     $('input[name=message]').attr('data', id);
-
-    console.log($('a[href*="' + window.location.pathname + '"]'));
 });

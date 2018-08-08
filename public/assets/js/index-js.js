@@ -117,4 +117,7 @@ $(document).ready(function() {
         $("#newmsg").attr("style", "display:none;")
         $(".welcome").attr("style", "display:block;")
     });
+    $('input[name=addChat]').keyup(function (e) {
+        
+    });
 });

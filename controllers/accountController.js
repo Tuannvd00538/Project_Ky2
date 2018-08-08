@@ -225,5 +225,23 @@ exports.searchUser = async function(req, res) {
             resolve(snapshot.val());
         });
     });
-    res.send(rs);
+    if (rs != null) {
+        for (var key in rs) {
+            if (rs.hasOwnProperty(key)) {
+                let data = {
+                    avatar: rs[key].avatar,
+                    birthday: rs[key].birthday,
+                    createdAt: rs[key].createdAt,
+                    email: rs[key].email,
+                    fullname: rs[key].fullname,
+                    gender: rs[key].gender,
+                    id: rs[key].id,
+                    username: rs[key].username
+                }
+                res.send(data);
+            }
+        }
+    } else {
+        res.send('Không có kết quả tìm kiếm!');
+    }
 }
