@@ -230,6 +230,17 @@ exports.createMessage = async function(req, res) {
     }
 }
 
+exports.createGrMessage = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/group.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+}
+
 exports.searchUser = async function(req, res) {
     let rs = await new Promise((resolve, reject) => {
         db.ref("accounts").orderByChild("id").equalTo(parseInt(req.params.id)).on("value", function (snapshot) {

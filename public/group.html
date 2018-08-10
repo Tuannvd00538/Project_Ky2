@@ -14,6 +14,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js" type="text/javascript"></script>
+	<script src="/assets/js/message.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="main">
@@ -30,50 +31,65 @@
 							    <a class="dropdown-item" href="javascript:logout()">Đăng xuất</a>
 							</ul>
 						<div class="col-md-6  nameapp"><a href="/">ChatHub</a></div>
-						<div class="col-md-3  newmsg-icon"><a href="/new"><i class="far fa-edit"></i></a></div>
+						<div class="col-md-3  newmsg-icon"><a href="javascript:void(0)"><i class="far fa-edit"></i></a></div>
 					</div>
 				</div>
 				<div class="menu-contact">
 					<div class="search-msg">
 						<input autocomplete="off" class="_58al" placeholder="Tìm kiếm trên ChatHub" spellcheck="false" type="text" value="">
 					</div>
+					<div id="newmsg">
+						<div class="name-contact">
+							<div class="row infochat">
+								<div class="col-md-3">
+									<div class="avatar"> 
+										<img class="avtNew" src="/assets/img/group.png">
+									</div>
+								</div>
+								<div class="col-md-9 details">
+									<span class="rsNameNew">Tin Nhắn Nhóm Mới</span>
+									<span class="closenewmsg btn" title="Huỷ tin nhắn mới"><i class="far fa-window-close"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div id="results">
 						
 					</div>
 				</div>
 			</div> 
-			<div class="welcome col-md-9">
-				<div class="hello">Xin Chào , <h1 class="helloname"></h1>
-				</div>
-				<div class="started row nopadding">
-					<div class="col-md-4">
-						<img src="/assets/img/1.png">
-						<div class="startedtext">
-							<p class="title">Kết Nối Bạn bè</p>
-							<p>Nhắn tin với mọi người khắp mọi nơi trên thế giới.</p>
-						</div>
-						<a class="btn btn-info newmsg-icon" href="/new">Tìm bạn bè</a>
+			<div class="col-md-9 content-right-newmsg nopadding">
+				<div class="newchat row nopadding">
+					<div class="col-md-1 nopadding">
+						<span>Đến: </span>
 					</div>
-					<div class="col-md-4">
-						<img src="/assets/img/2.png">
-						<div class="startedtext">
-							<p class="title">Chat Nhóm Với Bạn Bè</p>
-							<p>ChatHub mang lại trải nghiệm tuyệt vời cho chat nhóm. Nhắn tin, gọi điện cho mọi người thật dễ dàng.</p>
-						</div>
-						<a class="btn btn-info" href="/group">Bắt đầu nhóm</a>
-					</div>
-					<div class="col-md-4">
-						<img src="/assets/img/3.png">
-						<div class="startedtext">
-							<p class="title">Sử Dụng ChatHub Ở Khắp Nơi</p>
-							<p>Kết nối với mọi người ở mọi lúc mọi nơi với ChatHub đa nền tảng. Hỗ trợ trên Web, IOS, Android, Desktop.</p>
-						</div>
-						<a class="btn btn-info" href="javascript:void(0)">Tải ChatHub</a>
+					<div class="col-md-11 nopadding">
+						<input type="text" name="addChatGr" placeholder="Nhập ID của mọi người..."/>
 					</div>
 				</div>
-				<div class="foott">
-					<p>Không phải bạn? <a href="javascript:logout()">Đăng xuất</a></p>
-					<i class="fas fa-phone-slash"></i> ChatHub is not a replacement for your telephone and can't be used for emergency calling from this country/region
+				<div class="rsAddChat">
+					
+				</div>
+				<div class="row nopadding">
+					<div class="col-md-12 mainchat nopadding">
+						<div class="chatbox">
+							<div class="chatcontent" id="resultsChat">
+								
+							</div>	
+						</div>
+						<div class="inputchat">
+							<div class="valueChat">
+								<input type="text" name="messageNew" placeholder="Nhập tin nhắn ...." autofocus/>
+							</div>
+							<div class="divFile">
+								<i class="far fa-images"></i>
+								<i class="far fa-smile"></i>
+								<i class="fas fa-microphone"></i>
+								<i class="fas fa-camera"></i>
+								<i class="far fa-sad-tear like"></i>
+							</div>
+						</div>						
+					</div>
 				</div>
 			</div>
 		</div>

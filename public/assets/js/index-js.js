@@ -91,6 +91,20 @@ function generateBlockAddChat(id, avatar, name) {
         output += '</a>';
     return output;
 }
+
+function generateBlockGrChat(id, avatar, name) {
+    var output = "";
+        output += '<a href="javascript:createGrMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
+            output += '<div class="media-left">';
+                output += '<img class="media-object" src="' + avatar + '"/>';
+            output += '</div>';
+            output += '<div class="media-body">';
+                output += '<h4 class="media-heading">' + name + '</h4>';
+            output += '</div>';
+        output += '</a>';
+    return output;
+}
+
 function createMsg(id, avatar, name) {
     $('.avtNew').attr('src', avatar);
     $('.nameNew').text(name);
@@ -98,6 +112,14 @@ function createMsg(id, avatar, name) {
     $('.rsAddChat').attr('style', 'display:none;');
     $('.mainNew').attr('style', 'display:block;');
     $('input[name=addChat]').val(name);
+    $('input[name=messageNew]').attr('data', id);
+}
+
+function createGrMsg(id, avatar, name) {
+    $('.nameNew').text(name);
+    $('.rsNameNew').text('Cuộc trò chuyện nhóm của ' + user.fullname);
+    $('.rsAddChat').attr('style', 'display:none;');
+    $('input[name=addChatGr]').val($('input[name=addChatGr]').val().replace(id, name + ', '));
     $('input[name=messageNew]').attr('data', id);
 }
 function isNumeric(n) {
@@ -129,11 +151,41 @@ $(document).ready(function() {
                         }
                     });
                 } else {
+                    $('.rsAddChat').attr('style', 'display:block;');
                     $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
                 }   
             } else {
-                alert('Vui lòng nhập id là số!');
+                alert('Vui lòng nhập id hợp lệ!');
             }
+        }
+        if ($(this).val().length == 0) {
+            $('.rsAddChat').attr('style', 'display:none;');
+        }
+    });
+    $('input[name=addChatGr]').keyup(function (e) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            var id = $(this).val().match(/\d/g);
+            if (id.join("") != null && id.join("") != user.id) {
+                $('.rsAddChat').attr('style', 'display:block;');
+                $('.rsAddChat').html('<div class="spinnerAdd"></div>');
+                $.ajax({
+                    url: "/search/user/" + id.join(""),
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        if (data.code == undefined) {
+                            $('.rsAddChat').html(generateBlockGrChat(data.id, data.avatar, data.fullname));
+                        } else {
+                            $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
+                        }
+                    }
+                });
+            } else {
+                $('.rsAddChat').attr('style', 'display:block;');
+                $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
+            } 
         }
         if ($(this).val().length == 0) {
             $('.rsAddChat').attr('style', 'display:none;');

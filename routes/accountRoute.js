@@ -9,6 +9,8 @@ module.exports = function(app){
         .post(controller.createAccount);
     app.route('/new')
         .get(controller.createMessage);
+    app.route('/group')
+        .get(controller.createGrMessage);
     app.route('/sign')
         .get(controller.getSign);
     app.route('/sendmsg')
