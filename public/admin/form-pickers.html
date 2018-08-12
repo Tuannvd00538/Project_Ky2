@@ -11,6 +11,12 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+        <!-- Plugins css -->
+        <link href="../plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+        <link href="../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+        <link href="../plugins/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+        <link href="../plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
@@ -33,9 +39,9 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <a href="index.html" class="logo">
-                        <span>
-                            <img src="assets/images/logo.png" alt="" height="16">
-                        </span>
+                                        <span>
+                                            <img src="assets/images/logo.png" alt="" height="16">
+                                        </span>
                         <i>
                             <img src="assets/images/logo_sm.png" alt="" height="28">
                         </i>
@@ -48,7 +54,7 @@
                         <li class="dropdown notification-list hide-phone">
                             <a class="nav-link dropdown-toggle waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="false" aria-expanded="false">
-                               <i class="mdi mdi-earth"></i> English  <i class="mdi mdi-chevron-down"></i>
+                                <i class="mdi mdi-earth"></i> English  <i class="mdi mdi-chevron-down"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
 
@@ -419,11 +425,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title float-left">Dashboard</h4>
+                                    <h4 class="page-title float-left">Form Pickers</h4>
 
                                     <ol class="breadcrumb float-right">
                                         <li class="breadcrumb-item"><a href="#">Abstack</a></li>
-                                        <li class="breadcrumb-item active">Dashboard</li>
+                                        <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                                        <li class="breadcrumb-item active">Form Pickers</li>
                                     </ol>
 
                                     <div class="clearfix"></div>
@@ -434,311 +441,170 @@
 
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-box float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Orders</h6>
-                                    <h4 class="mb-3" data-plugin="counterup">1,587</h4>
-                                    <span class="badge badge-primary"> +11% </span> <span class="text-muted ml-2 vertical-middle">From previous period</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-layers float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Revenue</h6>
-                                    <h4 class="mb-3">$<span data-plugin="counterup">46,782</span></h4>
-                                    <span class="badge badge-primary"> -29% </span> <span class="text-muted ml-2 vertical-middle">From previous period</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-tag float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Average Price</h6>
-                                    <h4 class="mb-3">$<span data-plugin="counterup">15.9</span></h4>
-                                    <span class="badge badge-primary"> 0% </span> <span class="text-muted ml-2 vertical-middle">From previous period</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-briefcase float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Product Sold</h6>
-                                    <h4 class="mb-3" data-plugin="counterup">1,890</h4>
-                                    <span class="badge badge-primary"> +89% </span> <span class="text-muted ml-2 vertical-middle">Last year</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-xl-7">
+                            <div class="col-lg-6">
                                 <div class="card-box">
-                                    <h4 class="header-title">Transactions History</h4>
+                                    <h4 class="header-title m-t-0">Timepicker</h4>
+                                    <p class="text-muted font-14 m-b-25">
+                                        Easily select a time for a text input using your mouse or keyboards arrow keys.
+                                    </p>
 
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Conversion Rate</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">1.78%</span> <small></small></h6>
+                                    <div class="form-group">
+                                        <label>Default Time Picker</label>
+                                        <div class="input-group">
+                                            <input id="timepicker" type="text" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Average Order Value</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">25.87</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Total Wallet Balance</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">87,4517</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
+                                        </div><!-- input-group -->
                                     </div>
 
-                                    <canvas id="transactions-chart" height="350" class="mt-4"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-xl-5">
-                                <div class="card-box">
-                                    <h4 class="header-title">Sales History</h4>
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Conversion Rate</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">3.94%</span> <small></small></h6>
+                                    <div class="form-group">
+                                        <label>24 Hour Mode Time Picker</label>
+                                        <div class="input-group">
+                                            <input id="timepicker2" type="text" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Average Sales</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> <span class="text-dark">16.25</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Total Sales</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">124,858.67</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
+                                        </div><!-- input-group -->
                                     </div>
 
-                                    <canvas id="sales-history" height="350" class="mt-4"></canvas>
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        <label>Specify a step for the minute field</label>
+                                        <div class="input-group">
+                                            <input id="timepicker3" type="text" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                                            </div>
+                                        </div><!-- input-group -->
+                                    </div>
+
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
+
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0">Colorpicker</h4>
+                                    <p class="text-muted font-14 m-b-25">
+                                        Add color picker to field or to any other element.
+                                    </p>
+
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <label>Default</label>
+                                            <input type="text" class="colorpicker-default form-control" value="#8fff00">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>RGBA</label>
+                                            <input type="text" class="colorpicker-rgba form-control" value="rgb(0,194,255,0.78)" data-color-format="rgba">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>As Component</label>
+                                            <div data-color-format="rgb" data-color="rgb(255, 146, 180)" class="colorpicker-default input-group">
+                                                <input type="text" readonly="readonly" value="" class="form-control">
+                                                <span class="input-group-append add-on">
+                                                    <button class="btn btn-white" type="button">
+                                                        <i style="background-color: rgb(124, 66, 84);margin-top: 2px;"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> <!-- end card-box -->
+                            </div> <!-- end col -->
                         </div>
                         <!-- end row -->
 
+
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card-box">
-                                    <h4 class="header-title mb-4">Messages</h4>
 
-                                    <div class="inbox-widget slimscroll" style="max-height: 370px;">
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-1.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Chadengle</p>
-                                                <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                <p class="inbox-item-date">13:40 PM</p>
+                            <div class="col-lg-6">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0">Date Range Picker</h4>
+                                    <p class="text-muted font-14 m-b-25">
+                                        A JavaScript component for choosing date ranges.
+                                        Designed to work with the Bootstrap CSS framework.
+                                    </p>
+
+                                    <form>
+                                        <div class="form-group m-b-20">
+                                            <label>With all options</label>
+                                            <input type="text" id="reportrange" class="form-control"/>
+                                        </div>
+                                        <div class="form-group m-b-20">
+                                            <label>Date Range Pick</label>
+                                            <div>
+                                                <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015"/>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-2.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Tomaslau</p>
-                                                <p class="inbox-item-text">I've finished it! See you so...</p>
-                                                <p class="inbox-item-date">13:34 PM</p>
+                                        </div>
+                                        <div class="form-group m-b-20">
+                                            <label>Date Range With Time</label>
+                                            <div>
+                                                <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM"/>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-3.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Stillnotdavid</p>
-                                                <p class="inbox-item-text">This theme is awesome!</p>
-                                                <p class="inbox-item-date">13:17 PM</p>
+                                        </div>
+                                        <div class="form-group m-b-0">
+                                            <label>Limit Selectable Dates</label>
+                                            <div>
+                                                <input class="form-control input-limit-datepicker" type="text" name="daterange" value="06/01/2015 - 06/07/2015"/>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-4.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Kurafire</p>
-                                                <p class="inbox-item-text">Nice to meet you</p>
-                                                <p class="inbox-item-date">12:20 PM</p>
+                                        </div>
+                                    </form>
+                                </div> <!-- end card-box -->
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-lg-6">
+
+                                <div class="card-box">
+                                    <h4 class="header-title">Clock Picker</h4>
+                                    <p class="text-muted font-14">
+                                        A clock-style timepicker for Bootstrap (or jQuery).
+                                    </p>
+                                    <div class="form-group">
+                                        <label>Default Clock Picker</label>
+                                        <div class="input-group clockpicker">
+                                            <input type="text" class="form-control" value="09:30">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-5.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Shahedk</p>
-                                                <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                <p class="inbox-item-date">10:15 AM</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-6.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Adhamdannaway</p>
-                                                <p class="inbox-item-text">This theme is awesome!</p>
-                                                <p class="inbox-item-date">9:56 AM</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-8.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Arashasghari</p>
-                                                <p class="inbox-item-text">Hey! there I'm available...</p>
-                                                <p class="inbox-item-date">10:15 AM</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="assets/images/users/avatar-9.jpg" class="rounded-circle bx-shadow-lg" alt=""></div>
-                                                <p class="inbox-item-author">Joshaustin</p>
-                                                <p class="inbox-item-text">I've finished it! See you so...</p>
-                                                <p class="inbox-item-date">9:56 AM</p>
-                                            </div>
-                                        </a>
+                                        </div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card-box">
-                                    <h4 class="header-title mb-4">Latest Comments</h4>
-
-                                    <div class="comment-list slimscroll" style="max-height: 370px;">
-                                        <a href="#">
-                                            <div class="comment-box-item">
-                                                <div class="badge badge-pill badge-success">Ubold - Admin</div>
-                                                <p class="commnet-item-date">1 month ago</p>
-                                                <h6 class="commnet-item-msg">Do you have any plans to add a vertical menu?</h6>
-                                                <p class="commnet-item-user">Ubold User</p>
+                                    <div class="form-group">
+                                        <label>Auto close</label>
+                                        <div class="input-group clockpicker m-b-20" data-placement="top" data-align="top" data-autoclose="true">
+                                            <input type="text" class="form-control" value="13:14">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
                                             </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="comment-box-item">
-                                                <div class="badge badge-pill badge-warning">Adminox - Admin</div>
-                                                <p class="commnet-item-date">1 month ago</p>
-                                                <h6 class="commnet-item-msg">Hello, what is your plan to upgrade Bootstrap 4 versions? Beta or wait for stable?</h6>
-                                                <p class="commnet-item-user">Ubold User</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="comment-box-item">
-                                                <div class="badge badge-pill badge-primary">Staro - Landing</div>
-                                                <p class="commnet-item-date">1 month ago</p>
-                                                <h6 class="commnet-item-msg">Hi coderthemes – do you have PSD for this admin UI? I could really use it.</h6>
-                                                <p class="commnet-item-user">Ubold User</p>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="comment-box-item">
-                                                <div class="badge badge-pill badge-dark">Ubold - Admin</div>
-                                                <p class="commnet-item-date">1 month ago</p>
-                                                <h6 class="commnet-item-msg">Do you have any plans to add a vertical menu?</h6>
-                                                <p class="commnet-item-user">Ubold User</p>
-                                            </div>
-                                        </a>
+                                        </div>
                                     </div>
 
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        <label>Now time</label>
+                                        <div class="input-group m-b-20">
+                                            <input class="form-control" id="single-input" type="text" value="" placeholder="Now">
+                                            <span class="input-group-append">
+                                                <button type="button" id="check-minutes" class="btn waves-effect waves-light btn-primary">Check the minutes</button>
+                                            </span>
+                                        </div>
+                                    </div>
 
-                            <div class="col-lg-4">
-                                <div class="card-box">
-                                    <h4 class="header-title mb-4">Last Transactions</h4>
+                                    <div class="form-group">
+                                        <label>Place at left, align the arrow to top </label>
+                                        <div class="input-group clockpicker" data-placement="top" data-align="top">
+                                            <input type="text" class="form-control" value="13:14">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- card-box -->
 
-                                    <ul class="list-unstyled transaction-list slimscroll mb-0" style="max-height: 370px;">
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">Advertising</span>
-                                            <span class="pull-right text-success tran-price">+$230</span>
-                                            <span class="pull-right text-muted">07/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-up text-danger"></i>
-                                            <span class="tran-text">Support licence</span>
-                                            <span class="pull-right text-danger tran-price">-$965</span>
-                                            <span class="pull-right text-muted">07/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">Extended licence</span>
-                                            <span class="pull-right text-success tran-price">+$830</span>
-                                            <span class="pull-right text-muted">07/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">Advertising</span>
-                                            <span class="pull-right text-success tran-price">+$230</span>
-                                            <span class="pull-right text-muted">05/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-up text-danger"></i>
-                                            <span class="tran-text">New plugins added</span>
-                                            <span class="pull-right text-danger tran-price">-$452</span>
-                                            <span class="pull-right text-muted">05/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">Google Inc.</span>
-                                            <span class="pull-right text-success tran-price">+$230</span>
-                                            <span class="pull-right text-muted">04/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-up text-danger"></i>
-                                            <span class="tran-text">Facebook Ad</span>
-                                            <span class="pull-right text-danger tran-price">-$364</span>
-                                            <span class="pull-right text-muted">03/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">New sale</span>
-                                            <span class="pull-right text-success tran-price">+$230</span>
-                                            <span class="pull-right text-muted">03/09/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-down text-success"></i>
-                                            <span class="tran-text">Advertising</span>
-                                            <span class="pull-right text-success tran-price">+$230</span>
-                                            <span class="pull-right text-muted">29/08/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-
-                                        <li>
-                                            <i class="dripicons-arrow-up text-danger"></i>
-                                            <span class="tran-text">Support licence</span>
-                                            <span class="pull-right text-danger tran-price">-$854</span>
-                                            <span class="pull-right text-muted">27/08/2017</span>
-                                            <span class="clearfix"></span>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
+                            </div> <!-- end col -->
 
                         </div>
-
+                        <!-- end row -->
 
                     </div> <!-- container -->
 
@@ -768,14 +634,17 @@
         <script src="assets/js/metisMenu.min.js"></script>
         <script src="assets/js/waves.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="../plugins/waypoints/lib/jquery.waypoints.min.js"></script>
-        <script src="../plugins/counterup/jquery.counterup.min.js"></script>
 
-        <!-- Chart JS -->
-        <script src="../plugins/chart.js/chart.bundle.js"></script>
+        <!-- plugin js -->
+        <script src="../plugins/moment/moment.js"></script>
+        <script src="../plugins/bootstrap-timepicker/bootstrap-timepicker.js"></script>
+        <script src="../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+        <script src="../plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+        <script src="../plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-        <!-- init dashboard -->
-        <script src="assets/pages/jquery.dashboard.init.js"></script>
+        <!-- Init js -->
+        <script src="assets/pages/jquery.form-pickers.init.js"></script>
+
 
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
