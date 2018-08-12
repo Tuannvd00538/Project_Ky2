@@ -488,3 +488,8 @@ a.media {
 a.media:hover {
     background-color: rgba(0, 0, 0, .05);
 }
+.linechat .chatImg {
+	width: 100%;
+    height: auto;
+    margin: 5px 0;
+}
