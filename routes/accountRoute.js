@@ -29,4 +29,6 @@ module.exports = function(app){
         .post(controller.loginRequired, controller.sendMsg);
     app.route('/about')
         .get(controller.about);
+    app.route('/download')
+        .get(controller.download);
 }
