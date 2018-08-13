@@ -493,3 +493,14 @@ a.media:hover {
     height: auto;
     margin: 5px 0;
 }
+.tieu-de {
+    width: 100%;
+    margin-top: 2%;
+}
+.a {
+    text-align: center;
+    margin-top: 20%;
+}
+.cae {
+    padding: 3%;
+}
