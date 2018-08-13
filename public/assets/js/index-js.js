@@ -162,6 +162,12 @@ $(document).ready(function() {
             $('.rsAddChat').attr('style', 'display:none;');
         }
     });
+    $('input[name=addChatGr]').tagsInput({
+       'height':'100%',
+       'width':'100%',
+       'interactive':true,
+       'defaultText':'Nhập ID của mọi người...'
+    });
     $('input[name=addChatGr]').keyup(function (e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
             var id = $(this).val().match(/\d/g);
