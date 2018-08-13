@@ -297,3 +297,14 @@ exports.sendMsg = async function(req, res) {
     });
     res.send('/' + req.body.mode + '/' + rs);
 }
+
+exports.about = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/about.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+};

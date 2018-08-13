@@ -27,4 +27,6 @@ module.exports = function(app){
         .get(controller.loginRequired, controller.searchUser);
     app.route('/createMsg')
         .post(controller.loginRequired, controller.sendMsg);
+    app.route('/about')
+        .get(controller.about);
 }
