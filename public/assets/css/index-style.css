@@ -279,10 +279,10 @@ a, a:hover {
     height: 100%;
     border: none;
 }
-.newchat span {
+.newchat span.titlenew {
     float: right;
     margin-right: 10px;
-    margin-top: 12px;
+    margin-top: 15px;
     color: rgba(117, 117, 117, 1);
 }
 input:focus {
