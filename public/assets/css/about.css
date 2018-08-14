@@ -19,12 +19,13 @@
 }
 .tieu-de div h1 {
 	padding-left: 175px;
-	margin-top: -35px;
+	margin-top: -30px;
+    font-weight: bold;
+    font-size: 32px;
 }
 .tieu-de div h1 img {
 	margin-left: -235px;
 	position: absolute;
-	margin-top: 5px;
 }
 .tieu-de div p {
 	margin-top: 20px;
