@@ -126,6 +126,8 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 $(document).ready(function() {
+    $('.inputName div input').attr('value',user.fullname);
+    $('.myAvatar img').attr('src',user.avatar);
     $('.helloname').text(user.fullname);
     $(".closenewmsg").click(function() {
         window.history.back();
@@ -221,4 +223,20 @@ $(document).ready(function() {
     } else {
         alert('dkm Tuk code cai phan add chat di!');
     }
+
+    // MODAL
+    $(".setting").click(function () {
+        $("#settingModal").modal('show');
+    });
+    $('.rename').click(function () {
+        $('.changemyPass').attr('style','display:none');
+        $('.changemyName').attr('style','display:block');
+    });
+    $('.repass').click(function () {
+        $('.changemyName').attr('style','display:none');
+        $('.changemyPass').attr('style','display:block');
+    });
+    $('.btn-change').click(function () {
+        alert('dit me may');
+    });
 });

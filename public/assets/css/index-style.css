@@ -504,3 +504,57 @@ a.media:hover {
 .cae {
     padding: 3%;
 }
+
+/*modal css*/
+
+.myAvatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.myAvatar {
+    text-align: center;
+    position: relative;
+}
+
+.myAvatar .btn-change {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.changemyName div input,.changemyPass div input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 100%;
+}
+
+.changemyName p,.changemyPass p {
+    margin-top: 7px;
+}
+
+.inputName {
+    margin-top: 10px;
+}
+
+.myName button {
+    float: right;
+/*    margin-right: 25px;*/
+}
+
+.buttonChange button {
+    width: 49%;
+    margin-top: 20px;
+}
+
+.changemyPass {
+    margin-top: 10px;
+}
