@@ -32,17 +32,14 @@ var accountRoute = require('./routes/accountRoute');
 accountRoute(app);
 
 app.get('/test', (req, res) => {
-  return res.sendFile(__dirname + '/index.html');
+  return res.sendFile(__dirname + '/callvideo.html');
 });
 
 app.post("/pusher/auth", (req, res) => {
   const socketId = req.body.socket_id;
   const channel = req.body.channel_name;
   var presenceData = {
-    user_id:
-      Math.random()
-        .toString(36)
-        .slice(2) + Date.now()
+    user_id: Date.now()
   };
   const auth = pusher.authenticate(socketId, channel, presenceData);
   res.send(auth);
