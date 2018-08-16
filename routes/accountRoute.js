@@ -33,4 +33,6 @@ module.exports = function(app){
         .get(controller.download);
     app.route('/setting')
         .get(controller.setting);
+    app.route('/help')
+        .get(controller.help);
 }

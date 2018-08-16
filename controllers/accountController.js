@@ -330,3 +330,14 @@ exports.setting = async function (req, res) {
         res.send(rs);
     }
 };
+
+exports.help = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/help.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+};
