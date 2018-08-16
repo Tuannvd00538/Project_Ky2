@@ -319,3 +319,14 @@ exports.download = async function (req, res) {
         res.send(rs);
     }
 };
+
+exports.setting = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        request('http://localhost:8080/setting.html', (error, response, body) => {
+            resolve(body);
+        });
+    });
+    if (rs) {
+        res.send(rs);
+    }
+};

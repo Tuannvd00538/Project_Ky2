@@ -558,3 +558,7 @@ a.media:hover {
 .changemyPass {
     margin-top: 10px;
 }
+
+.noChat {
+    display: none;
+}

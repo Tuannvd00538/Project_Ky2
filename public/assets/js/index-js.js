@@ -221,22 +221,6 @@ $(document).ready(function() {
             });
         }
     } else {
-        alert('dkm Tuk code cai phan add chat di!');
+        $('.noChat').attr('style', 'display:block;');
     }
-
-    // MODAL
-    $(".setting").click(function () {
-        $("#settingModal").modal('show');
-    });
-    $('.rename').click(function () {
-        $('.changemyPass').attr('style','display:none');
-        $('.changemyName').attr('style','display:block');
-    });
-    $('.repass').click(function () {
-        $('.changemyName').attr('style','display:none');
-        $('.changemyPass').attr('style','display:block');
-    });
-    $('.btn-change').click(function () {
-        alert('dit me may');
-    });
 });
