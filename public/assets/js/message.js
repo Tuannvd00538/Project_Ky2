@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$.ajax({
+    $.ajax({
         url: "/list" + window.location.pathname + "?me=" + user.id,
         headers: {
             "Authorization": token
@@ -7,7 +7,7 @@ $(document).ready(function() {
         type: "GET",
         success: function(data) {
             $('.actionname').text(data.fullname);
-           	$('.rsAvt').attr('src', data.avatar);
+            $('.rsAvt').attr('src', data.avatar);
         }
     });
     $('input[name=message]').keyup(function(e) {
@@ -85,10 +85,17 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
-                	window.location.href = resultData;
+                    window.location.href = resultData;
                 }
             });
             $(this).val("");
+        }
+    });
+    $('input[name=messageNewGr]').keyup(function(e) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            $.map($(".tagsinput span span"), function(e, i) {
+                console.log($(e).text().trim());
+            });
         }
     });
 });
