@@ -231,4 +231,7 @@ $(document).ready(function() {
     $('#btnRepass').click(function () {
         $('#repassModal').modal('show');
     });
+    $('.avtMe i').click(function () {
+        alert('Van la dit me may');
+    });
 });
