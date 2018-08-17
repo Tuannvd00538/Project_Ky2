@@ -49,8 +49,125 @@
 					</div>
 				</div>
 			</div> 
-			<div class="welcome col-md-9">
-				Main Setting
+			<div class="col-md-9 nopadding setting">
+				<div class="namechat row nopadding">
+					<div class="helloname col-md-12"></div>
+				</div>
+				<div class="main-setting">
+					<div class="title-setting">
+						Cài đặt tài khoản
+					</div>
+					<div class="setting-main">
+						<div class="avtMe">
+							<img src="">
+							<i class="fas fa-camera"></i>
+						</div>
+						<div class="infoMe">
+							<ul>
+								<li>
+									<div class="row">
+										<div class="col-md-3">
+											Tên :
+										</div>
+										<div class="col-md-6 helloname nopadding">
+											
+										</div>
+										<div class="col-md-3 nopadding">
+											<a id="btnRename" href="javascript:void(0)">Chỉnh sửa</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row ">
+										<div class="col-md-3">
+											Tên Người Dùng :
+										</div>
+										<div class="col-md-6 hellouser nopadding">
+											
+										</div>
+										<div class="col-md-3 nopadding">
+											<i class="fas fa-ban"></i>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row ">
+										<div class="col-md-3">
+											Liên Hệ :
+										</div>
+										<div class="col-md-6 hellomail nopadding">
+											
+										</div>
+										<div class="col-md-3 nopadding">
+											<i class="fas fa-ban"></i>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="row ">
+										<div class="col-md-9">
+											Đổi Mật Khẩu :
+											<span>Bạn nên sử dụng mật khẩu mạnh mà mình chưa sử dụng ở đâu khác</span>
+										</div>
+										<div class="col-md-3 nopadding">
+											<a id="btnRepass" href="javascript:void(0)">Chỉnh Sửa</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="renameModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Đổi Tên</h4>
+							</div>
+							<div class="modal-body">
+								<form>
+									<label>Nhập Tên Mới: </label>
+									<input class="form-control" type="text" name="rename" placeholder="">
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-success">Hoàn Tất</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div id="repassModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Đổi Mật Khẩu</h4>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="form-group">
+										<label>Mật Khẩu Cũ: </label>
+										<input class="form-control" type="password" name="oldpass" placeholder="Nhập mật khẩu cũ">
+									</div>
+									<div class="form-group">
+										<label>Mật Khẩu Mới: </label>
+										<input class="form-control" type="password" name="newpass" placeholder="Nhập mật khẩu mới">
+									</div>
+									<div class="form-group">
+										<label>Xác Nhận Mật Khẩu Mới: </label>
+										<input class="form-control" type="password" name="confirmnewpass" placeholder="Nhập lại mật khẩu mới">
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-success">Hoàn Tất</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

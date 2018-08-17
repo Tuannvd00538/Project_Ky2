@@ -126,9 +126,11 @@ function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 $(document).ready(function() {
-    $('.inputName div input').attr('value',user.fullname);
-    $('.myAvatar img').attr('src',user.avatar);
+    $('#renameModal input').attr('placeholder',user.fullname);
+    $('.avtMe img').attr('src',user.avatar);
     $('.helloname').text(user.fullname);
+    $('.hellouser').text(user.username);
+    $('.hellomail').text(user.email);
     $(".closenewmsg").click(function() {
         window.history.back();
     });
@@ -194,4 +196,13 @@ $(document).ready(function() {
     } else {
         $('.noChat').attr('style', 'display:block;');
     }
+    $('#btnRename').click(function () {
+        $('#renameModal').modal('show');
+    });
+    $('#btnRepass').click(function () {
+        $('#repassModal').modal('show');
+    });
+    $('.avtMe i').click(function () {
+        alert('Van la dit me may');
+    });
 });

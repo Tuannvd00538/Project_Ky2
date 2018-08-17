@@ -562,3 +562,84 @@ a.media:hover {
 .noChat {
     display: none;
 }
+
+.title-setting {
+    font-weight: 500;
+}
+
+.main-setting {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.setting .namechat .helloname {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.avtMe img {
+    width: 120px;
+    border-radius: 100px;
+}
+
+.avtMe {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+}
+
+.avtMe i {
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.infoMe {
+    margin-top: 35px;
+    margin-left: -40px;
+}
+
+.infoMe ul li {
+    list-style-type: none;
+    height: 40px;
+    border-bottom: 1px solid #e9ebee;
+    margin-top: 10px;
+}
+
+.infoMe ul li div {
+    font-weight: 500;
+}
+
+.infoMe ul li div i {
+    color: #90949c;
+    margin-right: 20px;
+    float: right;
+}
+
+.infoMe ul li div a {
+    font-weight: normal;
+    font-size: 14px;
+    float: right;
+}
+
+.infoMe ul li div span {
+    color: #90949c;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.infoMe .hellouser,.infoMe .hellomail {
+    color: #90949c;
+}
+
+.infoMe .helloname {
+    color: #717171;
+}
