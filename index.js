@@ -28,8 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('./public'));
 // app.use(bodyParser.json());
 
-var accountRoute = require('./routes/accountRoute');
-accountRoute(app);
+var ChatHubRoute = require('./routes/ChatHubRoute');
+ChatHubRoute(app);
 
 app.get('/test', (req, res) => {
   return res.sendFile(__dirname + '/callvideo.html');

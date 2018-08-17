@@ -1,4 +1,4 @@
-var controller = require('../controllers/accountController');
+var controller = require('../controllers/ChatHubController');
 
 module.exports = function(app){
     app.route('/login')
