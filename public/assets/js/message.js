@@ -93,9 +93,11 @@ $(document).ready(function() {
     });
     $('input[name=messageNewGr]').keyup(function(e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
+            var listChat = [];
             $.map($(".tagsinput span span"), function(e, i) {
-                console.log($(e).text().trim());
+                listChat.push($(e).text().trim());
             });
+            console.log(listChat);
         }
     });
 });

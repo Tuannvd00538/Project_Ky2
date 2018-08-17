@@ -90,31 +90,56 @@
 				}
 
 				if (value !='' && skipTag != true) {
-                    $('<span>').addClass('tag').append(
-                        $('<span>').text(value)
-                    ).insertBefore('#' + id + '_addTag');
+					if (isNumeric(value)) {
+		                if (value != user.id) {
+		                    $('.rsAddChat').attr('style', 'display:block;');
+		                    $('.rsAddChat').html('<div class="spinnerAdd"></div>');
+		                    $.ajax({
+		                        url: "/search/user/" + value,
+		                        headers: {
+		                            "Authorization": token
+		                        },
+		                        type: "GET",
+		                        success: function(data) {
+		                            if (data.code == undefined) {
+		                                $('.rsAddChat').html(generateBlockAddChat(data.id, data.avatar, data.fullname));
+		                            } else {
+		                                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
+		                            }
+		                        }
+		                    });
+		                } else {
+		                    $('.rsAddChat').attr('style', 'display:block;');
+		                    $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
+		                }   
+		            } else {
+		                alert('Vui lòng nhập id hợp lệ!');
+		            }
+     //                $('<span>').addClass('tag').append(
+     //                    $('<span data-id="' + value + '">').text(value)
+     //                ).insertBefore('#' + id + '_addTag');
 
-					tagslist.push(value);
+					// tagslist.push(value);
 
-					$('#'+id+'_tag').val('');
-					if (options.focus) {
-						$('#'+id+'_tag').focus();
-					} else {
-						$('#'+id+'_tag').blur();
-					}
+					// $('#'+id+'_tag').val('');
+					// if (options.focus) {
+					// 	$('#'+id+'_tag').focus();
+					// } else {
+					// 	$('#'+id+'_tag').blur();
+					// }
 
-					$.fn.tagsInput.updateTagsField(this,tagslist);
+					// $.fn.tagsInput.updateTagsField(this,tagslist);
 
-					if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
-						var f = tags_callbacks[id]['onAddTag'];
-						f.call(this, value);
-					}
-					if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
-					{
-						var i = tagslist.length;
-						var f = tags_callbacks[id]['onChange'];
-						f.call(this, $(this), tagslist[i-1]);
-					}
+					// if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
+					// 	var f = tags_callbacks[id]['onAddTag'];
+					// 	f.call(this, value);
+					// }
+					// if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
+					// {
+					// 	var i = tagslist.length;
+					// 	var f = tags_callbacks[id]['onChange'];
+					// 	f.call(this, $(this), tagslist[i-1]);
+					// }
 				}
 
 			});

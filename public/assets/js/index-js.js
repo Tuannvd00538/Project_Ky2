@@ -120,7 +120,7 @@ function createGrMsg(id, avatar, name) {
     $('.rsNameNew').text('Cuộc trò chuyện nhóm của ' + user.fullname);
     $('.rsAddChat').attr('style', 'display:none;');
     $('input[name=addChatGr]').val($('input[name=addChatGr]').val().replace(id, name + ', '));
-    $('input[name=messageNew]').attr('data', id);
+    $('input[name=messageNewGr]').attr('data', id);
 }
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -159,35 +159,6 @@ $(document).ready(function() {
             } else {
                 alert('Vui lòng nhập id hợp lệ!');
             }
-        }
-        if ($(this).val().length == 0) {
-            $('.rsAddChat').attr('style', 'display:none;');
-        }
-    });
-    $('input[name=addChatGr]').keyup(function (e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var id = $(this).val().match(/\d/g);
-            if (id.join("") != null && id.join("") != user.id) {
-                $('.rsAddChat').attr('style', 'display:block;');
-                $('.rsAddChat').html('<div class="spinnerAdd"></div>');
-                $.ajax({
-                    url: "/search/user/" + id.join(""),
-                    headers: {
-                        "Authorization": token
-                    },
-                    type: "GET",
-                    success: function(data) {
-                        if (data.code == undefined) {
-                            $('.rsAddChat').html(generateBlockGrChat(data.id, data.avatar, data.fullname));
-                        } else {
-                            $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
-                        }
-                    }
-                });
-            } else {
-                $('.rsAddChat').attr('style', 'display:block;');
-                $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
-            } 
         }
         if ($(this).val().length == 0) {
             $('.rsAddChat').attr('style', 'display:none;');
