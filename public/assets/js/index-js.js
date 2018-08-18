@@ -125,6 +125,22 @@ function createGrMsg(id, avatar, name) {
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+function readImage(inputElement) {
+    var deferred = $.Deferred();
+
+    var files = inputElement.get(0).files;
+    if (files && files[0]) {
+        var fr= new FileReader();
+        fr.onload = function(e) {
+            deferred.resolve(e.target.result);
+        };
+        fr.readAsDataURL( files[0] );
+    } else {
+        deferred.resolve(undefined);
+    }
+
+    return deferred.promise();
+}
 $(document).ready(function() {
     $('#renameModal input').attr('placeholder',user.fullname);
     $('.avtMe img').attr('src',user.avatar);
@@ -203,6 +219,27 @@ $(document).ready(function() {
         $('#repassModal').modal('show');
     });
     $('.avtMe i').click(function () {
-        alert('Van la dit me may');
+        $('#fileSelect').click();
+    });
+    $("#fileSelect").change(function (e){
+        readImage($(this)).done(function(base64Data){
+            var data = base64Data.replace(/^data:image\/(png|jpg);base64,/, "");
+            $.ajax({ 
+                url: 'https://api.imgur.com/3/image',
+                headers: {
+                    'Authorization': 'Client-ID fbad3844977358c'
+                },
+                type: 'POST',
+                data: {
+                    'image': data
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
     });
 });
