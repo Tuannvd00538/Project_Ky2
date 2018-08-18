@@ -46,5 +46,5 @@ app.post("/pusher/auth", (req, res) => {
 });
 
 app.listen(8080, function () {
-  console.log('Hello World!');
+  console.log('ChatHub © 2018 Power by ChatHub Corp');
 });
