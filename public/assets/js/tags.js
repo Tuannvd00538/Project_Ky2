@@ -113,7 +113,9 @@
 		                    $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
 		                }   
 		            } else {
-		                alert('Vui lòng nhập id hợp lệ!');
+		                $('.rsAddChat').attr('style', 'display:block;');
+		                $('.rsAddChat').html('<div class="spinnerAdd"></div>');
+		                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
 		            }
      //                $('<span>').addClass('tag').append(
      //                    $('<span data-id="' + value + '">').text(value)
