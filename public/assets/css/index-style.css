@@ -638,6 +638,7 @@ a.media:hover {
 
 .infoMe .hellouser,.infoMe .hellomail {
     color: #90949c;
+    cursor: no-drop;
 }
 
 .infoMe .helloname {
