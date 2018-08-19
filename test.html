@@ -4,26 +4,7 @@
 	<title>Test</title>
 </head>
 <body>
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		var bitlyData = {};
-		bitlyData['login'] = 'o_4ni2ui9vhe';
-		bitlyData['apiKey'] = 'R_cfc4417274a74049aab31a85a9524240';
-		bitlyData['longUrl'] = 'https://www.youtube.com/watch?v=sXV8G1o0CRs';
-		bitlyData['format'] = "json";
-		$.ajax({
-			url: 'https://api-ssl.bitly.com/v3/shorten?',
-			data: bitlyData,
-			success: function (data){
-				console.log(data.data.url);
-			},
-			error: function(e) {
-				alert("err: "+ e)
-			}
-		}); 
-	</script>
+	<div id="adsSiinBlogCampaign"></div>
+	<script type="text/javascript" src="https://rawgit.com/Tuannvd00538/SiinGroup/master/ads.js"></script>
 </body>
 </html>
