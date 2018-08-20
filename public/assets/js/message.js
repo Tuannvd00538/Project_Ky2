@@ -44,7 +44,6 @@ $(document).ready(function() {
                     $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
                 }
                 else {
-                    $('#resultsChat').append(generateBlockMeChat(message.msg));
                     $('#results p.' + (window.location.pathname).replace('/single/', '')).text('You: ' + message.msg);
                     $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
                     $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
