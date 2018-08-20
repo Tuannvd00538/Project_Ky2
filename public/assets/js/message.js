@@ -123,13 +123,13 @@ $(document).ready(function() {
             scrollTop: $('.chatbox').get(0).scrollHeight},0);
         }
     });
-    $('input[name=messageNewGr]').keyup(function(e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var listChat = [];
-            $.map($(".tagsinput span span"), function(e, i) {
-                listChat.push($(e).text().trim());
-            });
-            console.log(listChat);
-        }
-    });
+    // $('input[name=messageNewGr]').keyup(function(e) {
+    //     if (e.keyCode == 13 && $(this).val().length != 0) {
+    //         var listChat = [];
+    //         $.map($(".tagsinput span span"), function(e, i) {
+    //             listChat.push($(e).attr('data'));
+    //         });
+    //         console.log(listChat);
+    //     }
+    // });
 });

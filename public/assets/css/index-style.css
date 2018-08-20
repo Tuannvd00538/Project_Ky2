@@ -281,8 +281,8 @@ a, a:hover {
 }
 .newchat span.titlenew {
     float: right;
-    margin-right: 10px;
-    margin-top: 15px;
+    margin-right: 30px;
+    margin-top: 13px;
     color: rgba(117, 117, 117, 1);
 }
 input:focus {
