@@ -34,9 +34,22 @@ $(document).ready(function() {
         var message = snapshot.val();
         var you = {};
         $.get("/avatar/" + message.id, function(avt) {
+            $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
-                $('#results p.' + (window.location.pathname).replace('/single/', '')).text('You: ' + message.msg);
+                if((message.msg).indexOf('<img') == 0) {
+                    message.msg = 'Bạn đã gửi một ảnh !';
+                    $('#results p.' + (window.location.pathname).replace('/single/', '')).html(message.msg);
+                    $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
+                    $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
+                }
+                else {
+                    $('#results p.' + (window.location.pathname).replace('/single/', '')).html('You: ' + message.msg);
+                    $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
+                    $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
+                }
+                
+
             } else {
                 $('#resultsChat').append(generateBlockYouChat(avt, message.msg));
                 if (!you.hasOwnProperty(message.id)) {
@@ -47,11 +60,23 @@ $(document).ready(function() {
                         },
                         type: "GET",
                         success: function(data) {
-                            $('#results p.' + (window.location.pathname).replace('/single/', '')).text(message.msg);
-                            $('a[href*=' + window.location.pathname + '] name-contact').addClass('active');
-                            $('.username span').text(data.fullname);
-                            $('.actionname').text(data.fullname);
-                            $('.rsAvt').attr('src', data.avatar);
+                            if((message.msg).indexOf('<img') == -1) { 
+                                $('#results p.' + (window.location.pathname).replace('/single/', '')).html(message.msg);
+                                $('.username span').text(data.fullname);
+                                $('.actionname').text(data.fullname);
+                                $('.rsAvt').attr('src', data.avatar);
+                                $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:bold;');
+                                $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:black;font-weight:500;');
+                            }
+                            else{
+                                message.msg = $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').text() + ' đã gửi một ảnh !';
+                                $('#results p.' + (window.location.pathname).replace('/single/', '')).html(message.msg);
+                                $('.username span').text(data.fullname);
+                                $('.actionname').text(data.fullname);
+                                $('.rsAvt').attr('src', data.avatar);
+                                $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:bold;');
+                                $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:black;font-weight:500;');
+                            }
                             // thông báo đẩy
                             // if (Notification.permission != 'default') {
                             //     notify = new Notification('ChatHub ❤', {

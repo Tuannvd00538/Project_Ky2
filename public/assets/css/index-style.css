@@ -257,9 +257,9 @@ a, a:hover {
 }
 .like {
     float: right;
-    color: red !important;
+    color: blue !important;
     font-size: 30px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 .chatcontent {
     padding-bottom: 30px;
@@ -643,4 +643,8 @@ a.media:hover {
 
 .infoMe .helloname {
     color: #717171;
+}
+
+.likeImg {
+    width: 30px;
 }

@@ -298,4 +298,23 @@ $(document).ready(function() {
         $('.chatbox').animate({
         scrollTop: $('.chatbox').get(0).scrollHeight},0);
     });
+    $('.like').click(function () {
+        var msg = {
+            id: user.id,
+            msg: '<i class="far fa-thumbs-up"></i>',
+            idChat: $('.valueChat input[name=message]').attr('data')
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/sendmsg",
+            data: msg,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {}
+        });
+        $(this).val("");
+        $('.chatbox').animate({
+        scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    });
 });
