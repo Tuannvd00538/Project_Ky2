@@ -30,3 +30,88 @@
 .tieu-de div p {
 	margin-top: 20px;
 }
+
+
+.platform {
+    background-color: #cccccc;
+}
+.download {
+    margin-top: 5%;
+}
+.noi-dung {
+    margin-left: 18%;
+    max-width: 1000px;
+    margin-top: -1%;
+    text-align: center;
+}
+
+.download {
+    background-color: #fff;
+}
+.bt {
+    margin : 10px;
+    margin-left: 11%;
+}
+.pt {
+    margin-top: -50px;
+    margin-bottom: 6%;
+}
+.foo {
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 2px;
+    margin-top: 2%;
+}
+.tieu-de-dl {
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 4%;
+    margin-top: -20px;
+} 
+.tieu-de-dl div h1 {
+    padding-left: 175px;
+    margin-top: -30px;
+    font-weight: bold;
+    font-size: 32px;
+}
+.tieu-de-dl div h1 img {
+    margin-left: -235px;
+    position: absolute;
+}
+.tieu-de-dl div p {
+    margin-top: 20px;
+}
+.noi-dung .download .row .col-md-6 h2 {
+    margin-top: 30px;
+}
+.noi-dung .download .row .col-md-6 ul {
+    text-align: left;
+    color: #67737f;
+}
+.chu {
+    color: #008FF3;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.he-lp {
+    max-width: 1000px;
+    margin-left: 20%;
+    margin-top: 2%;
+    margin-bottom: 10%;
+}
+.drop-down .dropdown-menu p {
+    text-align: left;
+    margin-left: 45px;
+    padding: 5px;
+}
+.sidenav div a {
+    color: #867979;
+}
+.drop-down a {
+    margin-top: 10px;
+}
+.chb a {
+    color: #867979;
+}
