@@ -102,7 +102,32 @@
 		                        type: "GET",
 		                        success: function(data) {
 		                            if (data.code == undefined) {
-		                                $('.rsAddChat').html(generateBlockAddChat(data.id, data.avatar, data.fullname));
+		                            	 $('<span>').addClass('tag').append(
+					                        $('<span data="' + data.id + '">').text(data.fullname)
+					                    ).insertBefore('#' + id + '_addTag');
+
+										tagslist.push(data.fullname);
+
+										$('#'+id+'_tag').val('');
+										if (options.focus) {
+											$('#'+id+'_tag').focus();
+										} else {
+											$('#'+id+'_tag').blur();
+										}
+
+										$.fn.tagsInput.updateTagsField(this,tagslist);
+
+										if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
+											var f = tags_callbacks[id]['onAddTag'];
+											f.call(this, data.fullname);
+										}
+										if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
+										{
+											var i = tagslist.length;
+											var f = tags_callbacks[id]['onChange'];
+											f.call(this, $(this), tagslist[i-1]);
+										}
+		                                // $('.rsAddChat').html(generateBlockAddChat(data.id, data.avatar, data.fullname));
 		                            } else {
 		                                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
 		                            }
@@ -117,31 +142,6 @@
 		                $('.rsAddChat').html('<div class="spinnerAdd"></div>');
 		                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
 		            }
-     //                $('<span>').addClass('tag').append(
-     //                    $('<span data-id="' + value + '">').text(value)
-     //                ).insertBefore('#' + id + '_addTag');
-
-					// tagslist.push(value);
-
-					// $('#'+id+'_tag').val('');
-					// if (options.focus) {
-					// 	$('#'+id+'_tag').focus();
-					// } else {
-					// 	$('#'+id+'_tag').blur();
-					// }
-
-					// $.fn.tagsInput.updateTagsField(this,tagslist);
-
-					// if (options.callback && tags_callbacks[id] && tags_callbacks[id]['onAddTag']) {
-					// 	var f = tags_callbacks[id]['onAddTag'];
-					// 	f.call(this, value);
-					// }
-					// if(tags_callbacks[id] && tags_callbacks[id]['onChange'])
-					// {
-					// 	var i = tagslist.length;
-					// 	var f = tags_callbacks[id]['onChange'];
-					// 	f.call(this, $(this), tagslist[i-1]);
-					// }
 				}
 
 			});

@@ -298,6 +298,30 @@ exports.sendMsg = async function(req, res) {
     res.send('/' + req.body.mode + '/' + rs);
 }
 
+exports.sendMsgGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        var id = microtime.now();
+        db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
+            avatar: req.body.avatar,
+            listUser: req.body.listUser,
+            name: req.body.name
+        });
+        db.ref("messages/" + req.body.mode + "/" + id + "/messages/" + microtime.now()).set({
+            id: req.body.idKey,
+            msg: req.body.msg,
+            createdAt: Date.now()
+        });
+        db.ref("accounts/" + req.body.idKey + "/chatlist").update({
+            [id]: req.body.mode
+        });
+        db.ref("accounts/" + req.body.idClient + "/chatlist").update({
+            [id]: req.body.mode
+        });
+        resolve(id);
+    });
+    res.send('/' + req.body.mode + '/' + rs);
+}
+
 exports.about = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/about.html', (error, response, body) => {

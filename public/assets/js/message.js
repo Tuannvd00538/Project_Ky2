@@ -127,16 +127,30 @@ $(document).ready(function() {
         if (e.keyCode == 13 && $(this).val().length != 0) {
             var listChat = [];
             $.map($(".tagsinput span span"), function(e, i) {
-                listChat.push($(e).text().trim());
+                listChat.push($(e).attr('data'));
             });
+            var cc = JSON.stringify(listChat);
+            console.log(cc);
             var data = {
                 idKey: user.id,
-                listUser: listChat,
+                listUser: JSON.stringify(listChat),
+                name: 'Cuộc trò chuyện của ' + user.fullname,
+                idClient: $(this).attr('data'),
                 msg: $(this).val(),
-                mode: 'group',
-                name: 'Tên cuộc trò chuyện'
-                avt: 'để ảnh default'
+                avatar: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
+                mode: 'group'
             }
+            $.ajax({
+                type: 'POST',
+                url: "/createMsgGr",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    // window.location.href = resultData;
+                }
+            });
         }
     });
 });
