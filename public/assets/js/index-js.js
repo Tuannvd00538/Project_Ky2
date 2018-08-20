@@ -68,7 +68,6 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '</a>';
     return output;
 }
-
 Notification.requestPermission(function(e) {
     if (e !== 'denied') {
         console.log('Notification', 'Accept');
@@ -79,29 +78,30 @@ function logout() {
     localStorage.clear();
     window.location = '/login';
 }
+
 function generateBlockAddChat(id, avatar, name) {
     var output = "";
-        output += '<a href="javascript:createMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
-            output += '<div class="media-left">';
-                output += '<img class="media-object" src="' + avatar + '"/>';
-            output += '</div>';
-            output += '<div class="media-body">';
-                output += '<h4 class="media-heading">' + name + '</h4>';
-            output += '</div>';
-        output += '</a>';
+    output += '<a href="javascript:createMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
+    output += '<div class="media-left">';
+    output += '<img class="media-object" src="' + avatar + '"/>';
+    output += '</div>';
+    output += '<div class="media-body">';
+    output += '<h4 class="media-heading">' + name + '</h4>';
+    output += '</div>';
+    output += '</a>';
     return output;
 }
 
 function generateBlockGrChat(id, avatar, name) {
     var output = "";
-        output += '<a href="javascript:createGrMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
-            output += '<div class="media-left">';
-                output += '<img class="media-object" src="' + avatar + '"/>';
-            output += '</div>';
-            output += '<div class="media-body">';
-                output += '<h4 class="media-heading">' + name + '</h4>';
-            output += '</div>';
-        output += '</a>';
+    output += '<a href="javascript:createGrMsg(\'' + id + '\', \'' + avatar + '\', \'' + name + '\')" class="media">';
+    output += '<div class="media-left">';
+    output += '<img class="media-object" src="' + avatar + '"/>';
+    output += '</div>';
+    output += '<div class="media-body">';
+    output += '<h4 class="media-heading">' + name + '</h4>';
+    output += '</div>';
+    output += '</a>';
     return output;
 }
 
@@ -122,35 +122,72 @@ function createGrMsg(id, avatar, name) {
     $('input[name=addChatGr]').val($('input[name=addChatGr]').val().replace(id, name + ', '));
     $('input[name=messageNewGr]').attr('data', id);
 }
+
 function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
 function readImage(inputElement) {
     var deferred = $.Deferred();
-
     var files = inputElement.get(0).files;
     if (files && files[0]) {
-        var fr= new FileReader();
+        var fr = new FileReader();
         fr.onload = function(e) {
             deferred.resolve(e.target.result);
         };
-        fr.readAsDataURL( files[0] );
+        fr.readAsDataURL(files[0]);
     } else {
         deferred.resolve(undefined);
     }
-
     return deferred.promise();
 }
+
+function uploadImg($files) {
+    var res = "";
+    if ($files.length) {
+        
+        if ($files[0].size > $(this).data("max-size") * 1024) {
+            console.log("Please select a smaller file");
+            res = false;
+        }
+
+        console.log("Uploading file to Imgur..");
+
+        var apiUrl = 'https://api.imgur.com/3/image';
+        var apiKey = 'fbad3844977358c';
+        var settings = {
+            async: false,
+            crossDomain: true,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            url: apiUrl,
+            headers: {
+                Authorization: 'Client-ID ' + apiKey,
+                Accept: 'application/json'
+            },
+            mimeType: 'multipart/form-data'
+        };
+        var formData = new FormData();
+        formData.append("image", $files[0]);
+        settings.data = formData;
+        
+        $.ajax(settings).done(function(response) {
+            res = JSON.parse(response).data.link;
+        });
+    }
+    return res;
+}
 $(document).ready(function() {
-    $('#renameModal input').attr('placeholder',user.fullname);
-    $('.avtMe img').attr('src',user.avatar);
+    $('#renameModal input').attr('placeholder', user.fullname);
+    $('.avtMe img').attr('src', user.avatar);
     $('.helloname').text(user.fullname);
     $('.hellouser').text(user.username);
     $('.hellomail').text(user.email);
     $(".closenewmsg").click(function() {
         window.history.back();
     });
-    $('input[name=addChat]').keyup(function (e) {
+    $('input[name=addChat]').keyup(function(e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
             if (isNumeric($(this).val())) {
                 if ($(this).val() != user.id) {
@@ -173,7 +210,7 @@ $(document).ready(function() {
                 } else {
                     $('.rsAddChat').attr('style', 'display:block;');
                     $('.rsAddChat').html('<p class="nullSearch">Bạn không thể chat với chính mình!</p>');
-                }   
+                }
             } else {
                 alert('Vui lòng nhập id hợp lệ!');
             }
@@ -212,38 +249,38 @@ $(document).ready(function() {
     } else {
         $('.noChat').attr('style', 'display:block;');
     }
+<<<<<<< HEAD
     $('#ditmemay').click(function () {
         $('.chatbox').animate({
         scrollTop: $('.chatbox').get(0).scrollHeight});
     });
     $('#btnRename').click(function () {
+=======
+    $('#btnRename').click(function() {
+>>>>>>> 9c31d2fe216a759408bb52f4f028438c328fadb4
         $('#renameModal').modal('show');
     });
-    $('#btnRepass').click(function () {
+    $('#btnRepass').click(function() {
         $('#repassModal').modal('show');
     });
-    $('.avtMe i').click(function () {
+    $('.avtMe i').click(function() {
         $('#fileSelect').click();
     });
-    $("#fileSelect").change(function (e){
-        readImage($(this)).done(function(base64Data){
-            var data = base64Data.replace(/^data:image\/(png|jpg);base64,/, "");
-            $.ajax({ 
-                url: 'https://api.imgur.com/3/image',
-                headers: {
-                    'Authorization': 'Client-ID fbad3844977358c'
-                },
-                type: 'POST',
-                data: {
-                    'image': data
-                },
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
+    $("#fileSelect").change(function(e) {
+        var $files = $(this).get(0).files;
+        var data = {
+            url: uploadImg($files)
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/avatar/" + user.id,
+            data: data,
+            headers: {
+                "Authorization": token
+            },
+            success: function(response) {
+                console.log(response);
+            }
         });
     });
 });

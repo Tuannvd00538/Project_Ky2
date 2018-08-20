@@ -16,7 +16,8 @@ module.exports = function(app){
     app.route('/sendmsg')
         .post(controller.loginRequired, controller.saveMessage);
     app.route('/avatar/:id')
-        .get(controller.getAvatar);
+        .get(controller.getAvatar)
+        .post(controller.loginRequired, controller.saveAvt);
     app.route('/info/:id')
         .get(controller.getInfo);
     app.route('/:mode/:id')
