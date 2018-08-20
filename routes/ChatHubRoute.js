@@ -28,6 +28,8 @@ module.exports = function(app){
         .get(controller.loginRequired, controller.searchUser);
     app.route('/createMsg')
         .post(controller.loginRequired, controller.sendMsg);
+    app.route('/createMsgGr')
+        .post(controller.loginRequired, controller.sendMsgGr);
     app.route('/about')
         .get(controller.about);
     app.route('/download')

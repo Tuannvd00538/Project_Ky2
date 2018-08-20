@@ -129,7 +129,8 @@ $(document).ready(function() {
             $.map($(".tagsinput span span"), function(e, i) {
                 listChat.push($(e).attr('data'));
             });
-            console.log(listChat);
+            var cc = JSON.stringify(listChat);
+            console.log(cc);
             var data = {
                 idKey: user.id,
                 listUser: JSON.stringify(listChat),
@@ -147,7 +148,7 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
-                    window.location.href = resultData;
+                    // window.location.href = resultData;
                 }
             });
         }
