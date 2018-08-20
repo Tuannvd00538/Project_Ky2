@@ -275,4 +275,27 @@ $(document).ready(function() {
             }
         });
     });
+    $('.divFile i.fa-images').click(function() {
+        $('#chatImg').click();
+    });
+    $("#chatImg").change(function(e) {
+        var $files = $(this).get(0).files;
+        var msg = {
+            id: user.id,
+            msg: '<img class="chatImg" src="' + uploadImg($files) + '"/>',
+            idChat: $('.valueChat input[name=message]').attr('data')
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/sendmsg",
+            data: msg,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {}
+        });
+        $(this).val("");
+        $('.chatbox').animate({
+        scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    });
 });
