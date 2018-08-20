@@ -249,15 +249,7 @@ $(document).ready(function() {
     } else {
         $('.noChat').attr('style', 'display:block;');
     }
-<<<<<<< HEAD
-    $('#ditmemay').click(function () {
-        $('.chatbox').animate({
-        scrollTop: $('.chatbox').get(0).scrollHeight});
-    });
-    $('#btnRename').click(function () {
-=======
     $('#btnRename').click(function() {
->>>>>>> 9c31d2fe216a759408bb52f4f028438c328fadb4
         $('#renameModal').modal('show');
     });
     $('#btnRepass').click(function() {
