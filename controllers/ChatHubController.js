@@ -379,7 +379,6 @@ exports.sendMsgGr = async function(req, res) {
         var id = microtime.now();
         db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
             avatar: req.body.avt,
-            listUser: req.body.listUser,
             name: req.body.name
         });
         db.ref("messages/" + req.body.mode + "/" + id + "/messages/" + microtime.now()).set({
@@ -387,14 +386,19 @@ exports.sendMsgGr = async function(req, res) {
             msg: req.body.msg,
             createdAt: Date.now()
         });
-        console.log(req.body.listUser);
-        // db.ref("accounts/" + req.body.idKey + "/chatlist").update({
-        //     [id]: req.body.mode
-        // });
-        // db.ref("accounts/" + req.body.idClient + "/chatlist").update({
-        //     [id]: req.body.mode
-        // });
-        // resolve(id);
+        var lus = JSON.parse(req.body.listUser);
+        for (const i in lus) {
+            db.ref("messages/" + req.body.mode + "/" + id + "/info/listUser").update({
+                [lus[i]]: req.body.mode
+            });
+            db.ref("accounts/" + lus[i] + "/chatlist").update({
+                [id]: req.body.mode
+            });
+        }
+        db.ref("accounts/" + req.body.idKey + "/chatlist").update({
+            [id]: req.body.mode
+        });
+        resolve(id);
     });
     res.send('/' + req.body.mode + '/' + rs);
 }

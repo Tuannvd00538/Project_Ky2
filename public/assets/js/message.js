@@ -129,11 +129,9 @@ $(document).ready(function() {
             $.map($(".tagsinput span span"), function(e, i) {
                 listChat.push($(e).attr('data'));
             });
-            var cc = JSON.stringify(listChat);
-            console.log(cc);
             var data = {
                 idKey: user.id,
-                listUser: JSON.stringify(listChat),
+                listUser: listChat,
                 name: 'Cuộc trò chuyện của ' + user.fullname,
                 idClient: $(this).attr('data'),
                 msg: $(this).val(),
