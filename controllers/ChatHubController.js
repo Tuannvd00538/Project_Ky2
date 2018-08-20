@@ -341,3 +341,11 @@ exports.help = async function (req, res) {
         res.send(rs);
     }
 };
+
+exports.saveAvt = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("/accounts/" + req.params.id + "/avatar").set(req.body.url);
+        resolve('Update avatar success!');
+    });
+    res.send(req.body.url);
+}
