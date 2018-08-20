@@ -61,7 +61,7 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '<div class="col-md-9 details">';
     output += '<span class="chatname">' + name + '</span>';
     output += '<span class="datemsg">' + time + '</span>';
-    output += '<p class="msg">' + msg + '</p>';
+    output += '<p class="msg ' + id + '">' + msg + '</p>';
     output += '</div>';
     output += '</div>';
     output += '</div>';

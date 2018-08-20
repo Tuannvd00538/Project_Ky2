@@ -36,6 +36,7 @@ $(document).ready(function() {
         $.get("/avatar/" + message.id, function(avt) {
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
+                $('#results p.' + (window.location.pathname).replace('/single/', '')).text('You: ' + message.msg);
             } else {
                 $('#resultsChat').append(generateBlockYouChat(avt, message.msg));
                 if (!you.hasOwnProperty(message.id)) {
@@ -46,6 +47,8 @@ $(document).ready(function() {
                         },
                         type: "GET",
                         success: function(data) {
+                            $('#results p.' + (window.location.pathname).replace('/single/', '')).text(message.msg);
+                            $('a[href*=' + window.location.pathname + '] name-contact').addClass('active');
                             $('.username span').text(data.fullname);
                             $('.actionname').text(data.fullname);
                             $('.rsAvt').attr('src', data.avatar);
