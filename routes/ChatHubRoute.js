@@ -36,4 +36,6 @@ module.exports = function(app){
         .get(controller.setting);
     app.route('/help')
         .get(controller.help);
+    app.route('/createMsgGr')
+        .post(controller.loginRequired, controller.sendMsgGr);
 }

@@ -129,7 +129,14 @@ $(document).ready(function() {
             $.map($(".tagsinput span span"), function(e, i) {
                 listChat.push($(e).text().trim());
             });
-            console.log(listChat);
+            var data = {
+                idKey: user.id,
+                listUser: listChat,
+                msg: $(this).val(),
+                mode: 'group',
+                name: 'Tên cuộc trò chuyện'
+                avt: 'để ảnh default'
+            }
         }
     });
 });
