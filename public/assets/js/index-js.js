@@ -212,6 +212,10 @@ $(document).ready(function() {
     } else {
         $('.noChat').attr('style', 'display:block;');
     }
+    $('#ditmemay').click(function () {
+        $('.chatbox').animate({
+        scrollTop: $('.chatbox').get(0).scrollHeight});
+    });
     $('#btnRename').click(function () {
         $('#renameModal').modal('show');
     });

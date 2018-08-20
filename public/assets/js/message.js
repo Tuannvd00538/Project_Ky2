@@ -66,6 +66,8 @@ $(document).ready(function() {
                 }
             }
             $('.loading').attr('style', 'display:none;');
+            $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
         });
     });
     $('input[name=message]').attr('data', window.location.pathname);
@@ -89,6 +91,8 @@ $(document).ready(function() {
                 }
             });
             $(this).val("");
+            $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
         }
     });
     $('input[name=messageNewGr]').keyup(function(e) {
