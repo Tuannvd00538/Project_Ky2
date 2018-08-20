@@ -131,11 +131,11 @@ $(document).ready(function() {
             });
             var data = {
                 idKey: user.id,
-                listUser: listChat,
+                listUser: JSON.stringify(listChat),
                 name: 'Cuộc trò chuyện của ' + user.fullname,
                 idClient: $(this).attr('data'),
                 msg: $(this).val(),
-                avatar: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
+                avt: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
                 mode: 'group'
             }
             $.ajax({
@@ -146,7 +146,7 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
-                    // window.location.href = resultData;
+                    window.location.href = resultData;
                 }
             });
         }
