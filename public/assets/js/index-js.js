@@ -59,28 +59,7 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '</div>';
     output += '</div>';
     output += '<div class="col-md-9 details">';
-    output += '<span class="chatname">' + name + '</span>';
-    output += '<span class="datemsg">' + time + '</span>';
-    output += '<p class="msg ' + id + '">' + msg + '</p>';
-    output += '</div>';
-    output += '</div>';
-    output += '</div>';
-    output += '</a>';
-    return output;
-}
-
-function generateBlockListChatGr(mode, id, avt, name, time, msg) {
-    var output = "";
-    output += '<a href="/' + mode + '/' + id + '">';
-    output += '<div class="name-contact">';
-    output += '<div class="row infochat">';
-    output += '<div class="col-md-3">';
-    output += '<div class="avatar"> ';
-    output += '<img src="' + avt + '"/>';
-    output += '</div>';
-    output += '</div>';
-    output += '<div class="col-md-9 details">';
-    output += '<span class="chatname">' + name + '</span>';
+    output += '<p class="chatname">' + name + '</p>';
     output += '<span class="datemsg">' + time + '</span>';
     output += '<p class="msg ' + id + '">' + msg + '</p>';
     output += '</div>';
@@ -278,7 +257,13 @@ $(document).ready(function() {
                             msg = list[id].msg;
                         }
                     }
-                    $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    if((msg).indexOf('<img') == 0) { 
+                        msg = data.fullname + ' đã gửi một ảnh';
+                        $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    }
+                    else {
+                        $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    }
                 }
             });
         }

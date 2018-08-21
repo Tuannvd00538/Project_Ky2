@@ -44,7 +44,6 @@ $(document).ready(function() {
         var you = {};
         $.get("/avatar/" + message.id, function(avt) {
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
-            console.log(message.msg);
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
                 if((message.msg).indexOf('<img') == 0) {
@@ -57,9 +56,7 @@ $(document).ready(function() {
                     $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html('You: ' + message.msg);
                     $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
                     $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
-                }
-                
-
+                }                
             } else {
                 $('#resultsChat').append(generateBlockYouChat(avt, message.msg));
                 if (!you.hasOwnProperty(message.id)) {
