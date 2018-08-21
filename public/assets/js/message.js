@@ -69,6 +69,7 @@ $(document).ready(function() {
                             "Authorization": token
                         },
                         type: "GET",
+                        async: false,
                         success: function(data) {
                             if((message.msg).indexOf('<img') == -1) { 
                                 $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
