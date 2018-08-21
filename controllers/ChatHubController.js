@@ -188,8 +188,8 @@ exports.getMessage = async function (req, res) {
 
 exports.listMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (info) {
-            if (req.params.mode == 'single') {
+        if (req.params.mode == 'single') {
+            db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (info) {
                 if (req.query.me == undefined) {
                     resolve('Đừng phá nữa my fen :))');
                 } else if (info.val().key != req.query.me) {
@@ -215,15 +215,29 @@ exports.listMessage = async function (req, res) {
                         });
                     });
                 }
-            } else if (req.params.mode == 'group') {
-                resolve('group!');
-            }
-        });
+
+            });
+        } else if (req.params.mode == 'group') {
+            db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (info) {
+                if (req.query.me == undefined) {
+                    resolve('Đừng phá nữa my fen :))');
+                } else {
+                    db.ref("messages/" + req.params.mode + "/" + req.params.id + "/messages").limitToLast(1).on("value", function (lastMsg) {
+                        let data = {
+                            avatar: info.val().avatar,
+                            name: info.val().name,
+                            chat: lastMsg.val()
+                        }
+                        resolve(data);
+                    });
+                }
+            });
+        }
     });
     res.send(rs);
 }
 
-exports.createMessage = async function(req, res) {
+exports.createMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/new.html', (error, response, body) => {
             resolve(body);
@@ -234,7 +248,7 @@ exports.createMessage = async function(req, res) {
     }
 }
 
-exports.createGrMessage = async function(req, res) {
+exports.createGrMessage = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/group.html', (error, response, body) => {
             resolve(body);
@@ -245,7 +259,7 @@ exports.createGrMessage = async function(req, res) {
     }
 }
 
-exports.searchUser = async function(req, res) {
+exports.searchUser = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         db.ref("accounts").orderByChild("id").equalTo(parseInt(req.params.id)).on("value", function (snapshot) {
             resolve(snapshot.val());
@@ -275,7 +289,7 @@ exports.searchUser = async function(req, res) {
     }
 }
 
-exports.sendMsg = async function(req, res) {
+exports.sendMsg = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         var id = microtime.now();
         db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
@@ -298,7 +312,7 @@ exports.sendMsg = async function(req, res) {
     res.send('/' + req.body.mode + '/' + rs);
 }
 
-exports.sendMsgGr = async function(req, res) {
+exports.sendMsgGr = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         var id = microtime.now();
         db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
@@ -374,12 +388,13 @@ exports.saveAvt = async function (req, res) {
     res.send(req.body.url);
 }
 
-exports.sendMsgGr = async function(req, res) {
+exports.sendMsgGr = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         var id = microtime.now();
         db.ref("messages/" + req.body.mode + "/" + id + "/info").set({
             avatar: req.body.avt,
-            name: req.body.name
+            name: req.body.name,
+            key: req.body.idKey
         });
         db.ref("messages/" + req.body.mode + "/" + id + "/messages/" + microtime.now()).set({
             id: req.body.idKey,
