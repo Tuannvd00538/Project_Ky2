@@ -40,4 +40,8 @@ module.exports = function(app){
         .get(controller.help);
     app.route('/createMsgGr')
         .post(controller.loginRequired, controller.sendMsgGr);
+    app.route('/rename')
+        .post(controller.loginRequired, controller.rename);
+    app.route('/update/:username/:id')
+        .get(controller.loginRequired, controller.updateAccount);
 }

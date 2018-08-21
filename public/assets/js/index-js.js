@@ -75,8 +75,12 @@ Notification.requestPermission(function(e) {
 });
 
 function logout() {
-    localStorage.clear();
-    window.location = '/login';
+    swal("Bạn chắc chắn muốn đăng xuất ?").then((value) => {
+        if (value != null) {
+            localStorage.clear();
+            window.location = '/login';
+        }
+    });
 }
 
 function generateBlockAddChat(id, avatar, name) {
@@ -179,6 +183,16 @@ function uploadImg($files) {
     return res;
 }
 $(document).ready(function() {
+    $.ajax({
+        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+        headers: {
+            "Authorization": token
+        },
+        type: "GET",
+        success: function(data) {
+            localStorage.setItem('user', JSON.stringify(data));
+        }
+    });
     $('#renameModal input').attr('placeholder', user.fullname);
     $('.avtMe img').attr('src', user.avatar);
     $('.helloname').text(user.fullname);
@@ -271,7 +285,18 @@ $(document).ready(function() {
                 "Authorization": token
             },
             success: function(response) {
-                console.log(response);
+                swal("Success!", "Đổi avatar thành công!", "success");
+                $('.avtMe img').attr('src', response);
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
             }
         });
     });
