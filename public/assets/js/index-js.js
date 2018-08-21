@@ -278,7 +278,6 @@ $(document).ready(function() {
                             msg = list[id].msg;
                         }
                     }
-                    console.log(list);
                     $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
                 }
             });
