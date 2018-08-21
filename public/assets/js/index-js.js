@@ -68,6 +68,28 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '</a>';
     return output;
 }
+
+function generateBlockListChatGr(mode, id, avt, name, time, msg) {
+    var output = "";
+    output += '<a href="/' + mode + '/' + id + '">';
+    output += '<div class="name-contact">';
+    output += '<div class="row infochat">';
+    output += '<div class="col-md-3">';
+    output += '<div class="avatar"> ';
+    output += '<img src="' + avt + '"/>';
+    output += '</div>';
+    output += '</div>';
+    output += '<div class="col-md-9 details">';
+    output += '<span class="chatname">' + name + '</span>';
+    output += '<span class="datemsg">' + time + '</span>';
+    output += '<p class="msg ' + id + '">' + msg + '</p>';
+    output += '</div>';
+    output += '</div>';
+    output += '</div>';
+    output += '</a>';
+    return output;
+}
+
 Notification.requestPermission(function(e) {
     if (e !== 'denied') {
         console.log('Notification', 'Accept');
@@ -242,6 +264,7 @@ $(document).ready(function() {
                             msg = list[id].msg;
                         }
                     }
+                    console.log(list);
                     $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
                 }
             });
