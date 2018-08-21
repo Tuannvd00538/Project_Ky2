@@ -225,7 +225,7 @@ exports.listMessage = async function (req, res) {
                     db.ref("messages/" + req.params.mode + "/" + req.params.id + "/messages").limitToLast(1).on("value", function (lastMsg) {
                         let data = {
                             avatar: info.val().avatar,
-                            name: info.val().name,
+                            fullname: info.val().name,
                             chat: lastMsg.val()
                         }
                         resolve(data);

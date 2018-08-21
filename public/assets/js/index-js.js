@@ -229,6 +229,7 @@ $(document).ready(function() {
                 },
                 type: "GET",
                 success: function(data) {
+                    console.log(data);
                     var mode = chatlist[id];
                     var avt = data.avatar;
                     var name = data.fullname;
