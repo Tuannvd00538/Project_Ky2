@@ -26,10 +26,10 @@ function timeConverter(UNIX_timestamp) {
     return time;
 }
 
-function generateBlockYouChat(avatar, message) {
+function generateBlockYouChat(avatar, message, name) {
     var output = "";
     output += '<div class="linechat">';
-    output += '<div><img src="' + avatar + '"></div>';
+    output += '<div><img title="' + name + '" src="' + avatar + '"></div>';
     output += '<div class="textchat youchat">';
     output += '<span>' + message + '</span>';
     output += '</div>';
