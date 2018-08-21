@@ -14,6 +14,9 @@ $(document).ready(function() {
         },
         type: "GET",
         success: function(data) {
+            // console.log(user);
+            console.log(data.id);
+            $('.username').text(data.fullname);
             $('.actionname').text(data.fullname);
             $('.rsAvt').attr('src', data.avatar);
         }
@@ -72,8 +75,6 @@ $(document).ready(function() {
                             if((message.msg).indexOf('<img') == -1) { 
                                 $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
                                 $('.username span').text(data.fullname);
-                                $('.actionname').text(data.fullname);
-                                $('.rsAvt').attr('src', data.avatar);
                                 $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:bold;');
                                 $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:black;font-weight:500;');
                             }
@@ -81,8 +82,6 @@ $(document).ready(function() {
                                 message.msg = $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').text() + ' đã gửi một ảnh !';
                                 $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
                                 $('.username span').text(data.fullname);
-                                $('.actionname').text(data.fullname);
-                                $('.rsAvt').attr('src', data.avatar);
                                 $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:bold;');
                                 $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:black;font-weight:500;');
                             }
