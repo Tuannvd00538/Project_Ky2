@@ -1,3 +1,11 @@
+var user = JSON.parse(localStorage.getItem('user'));
+var token = user.token;
+
+function parseJwt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+};
 $(document).ready(function() {
     $.ajax({
         url: "/list" + window.location.pathname + "?me=" + user.id,
@@ -114,6 +122,16 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
+                    $.ajax({
+                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                        headers: {
+                            "Authorization": token
+                        },
+                        type: "GET",
+                        success: function(data) {
+                            localStorage.setItem('user', JSON.stringify(data));
+                        }
+                    });
                     window.location.href = resultData;
                 }
             });
@@ -145,6 +163,16 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
+                    $.ajax({
+                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                        headers: {
+                            "Authorization": token
+                        },
+                        type: "GET",
+                        success: function(data) {
+                            localStorage.setItem('user', JSON.stringify(data));
+                        }
+                    });
                     window.location.href = resultData;
                 }
             });

@@ -417,3 +417,44 @@ exports.sendMsgGr = async function (req, res) {
     });
     res.send('/' + req.body.mode + '/' + rs);
 }
+
+exports.rename = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("/accounts/" + req.params.id + "/fullname").set(req.body.name);
+        resolve('Update name success!');
+    });
+    res.send(rs);
+}
+
+exports.updateAccount = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts").orderByChild("username").equalTo(req.params.username).on("value", function (snapshot) {
+            if (snapshot.val() != null || snapshot.val() != undefined) {
+                var obj = snapshot.val();
+                for (var key in obj) {
+                    var value = obj[key];
+                    if (value.status == 1) {
+                        var claims = {
+                            "username": value.username,
+                            "id": value.id
+                        }
+                        var jwt = nJwt.create(claims, "secret", "HS256");
+                        var token = jwt.compact();
+                        resolve({
+                            id: value.id,
+                            token: token,
+                            username: value.username,
+                            avatar: value.avatar,
+                            fullname: value.fullname,
+                            gender: value.gender,
+                            birthday: value.birthday,
+                            email: value.email,
+                            chatlist: value.chatlist
+                        });
+                    }
+                }
+            }
+        });
+    });
+    res.send(rs);
+}
