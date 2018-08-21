@@ -143,11 +143,12 @@ a, a:hover {
 .actionname {
     vertical-align: middle;
     /*margin-left: 10px;*/
-    white-space: nowrap;
+ /*   white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     min-width: 0;
-    flex: 1 1 0%;
+    flex: 1 1 0%;*/
+    font-weight: 500;
 }
 .actionsetting {
     color: rgba(153, 153, 153, 1);
