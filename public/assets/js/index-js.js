@@ -257,9 +257,7 @@ $(document).ready(function() {
                             msg = list[id].msg;
                         }
                     }
-                    console.log(msg);
-                    console.log(msg.indexOf('<img'));
-                    if((msg).indexOf('<img') == -1) { 
+                    if((msg).indexOf('chatImg') == -1) { 
                         $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
                     }
                     else {
