@@ -365,25 +365,30 @@ $(document).ready(function() {
     // rn
     $('.renamebtn').click(function () {
         var name = $("input[name='rename']").val();
-        var data = {
-            id: user.id,
-            name: name
+        if (name == 0) {
+            $('.validform').text('Tên không được để trống');
         }
-        $.ajax({
-            type: 'POST',
-            url: "/rename",
-            data: data,
-            headers: {
-                "Authorization": token
-            },
-            success: function(resultData) {
-                swal('Đổi tên thành công!').then((value) => {
-                    if (value != null) {
-                        window.location = '/';
-                    }
-                });
+        else {
+            var data = {
+                id: user.id,
+                name: name
             }
-        });
+            $.ajax({
+                type: 'POST',
+                url: "/rename",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    swal('Đổi tên thành công!').then((value) => {
+                        if (value != null) {
+                            window.location = '/';
+                        }
+                    });
+                }
+            });
+        }
     });
     //rps
     $('.repassbtn').click(function () {
