@@ -442,11 +442,16 @@ exports.repass = async function (req, res) {
                 var password = crypto.AES.decrypt(rs[key].password, 'iSilent').toString(crypto.enc.Utf8);
                 if (req.body.oldpass == password) {
                     db.ref("/accounts/" + req.body.id + "/password").set(crypto.AES.encrypt(req.body.newpass, 'iSilent').toString());
+                    res.json({
+                        code: 200,
+                        message: 'Đổi mật khẩu thành công!'
+                    });;
+                } else {
+                    res.json({
+                        code: 409,
+                        message: 'Mật khẩu cũ không chính xác!'
+                    });;
                 }
-                res.json({
-                    code: 200,
-                    message: 'Đổi mật khẩu thành công!'
-                });;
             }
         }
     } else {
