@@ -151,8 +151,12 @@ exports.getAvatar = async function (req, res) {
             resolve(snapshot.val());
         });
     });
+    var data = {
+        avatar: rs.avatar,
+        fullname: rs.fullname
+    }
     try {
-        res.send(rs.avatar);
+        res.send(data);
     } catch (error) {
         console.log('Error Avatar: ', error);
     }

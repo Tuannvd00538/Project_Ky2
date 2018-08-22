@@ -665,3 +665,8 @@ a.media:hover {
     margin: 0;
     padding: 0;
 }
+.chatgrName {
+    font-size: 12px;
+    margin-bottom: -5px;
+    margin-left: 10px;
+}
