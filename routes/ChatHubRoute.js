@@ -42,6 +42,8 @@ module.exports = function(app){
         .post(controller.loginRequired, controller.sendMsgGr);
     app.route('/rename')
         .post(controller.loginRequired, controller.rename);
+    app.route('/repass')
+        .post(controller.loginRequired, controller.repass);
     app.route('/update/:username/:id')
         .get(controller.loginRequired, controller.updateAccount);
 }

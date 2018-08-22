@@ -424,10 +424,37 @@ exports.sendMsgGr = async function (req, res) {
 
 exports.rename = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-        db.ref("/accounts/" + req.params.id + "/fullname").set(req.body.name);
+        db.ref("/accounts/" + req.body.id + "/fullname").set(req.body.name);
         resolve('Update name success!');
     });
     res.send(rs);
+}
+
+exports.repass = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts").orderByChild("id").equalTo(parseInt(req.body.id)).on("value", function (snapshot) {
+            resolve(snapshot.val());
+        });
+    });
+    if (rs != null) {
+        for (var key in rs) {
+            if (rs.hasOwnProperty(key)) {
+                var password = crypto.AES.decrypt(rs[key].password, 'iSilent').toString(crypto.enc.Utf8);
+                if (req.body.oldpass == password) {
+                    db.ref("/accounts/" + req.body.id + "/password").set(crypto.AES.encrypt(req.body.newpass, 'iSilent').toString());
+                }
+                res.json({
+                    code: 200,
+                    message: 'Đổi mật khẩu thành công!'
+                });;
+            }
+        }
+    } else {
+        res.json({
+            code: 404,
+            message: 'Không tìm thấy user!'
+        });
+    }
 }
 
 exports.updateAccount = async function (req, res) {
