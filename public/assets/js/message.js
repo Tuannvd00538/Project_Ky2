@@ -46,7 +46,7 @@ $(document).ready(function() {
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (message.id == user.id) {
                 $('#resultsChat').append(generateBlockMeChat(message.msg));
-                if((message.msg).indexOf('<img') == 0) {
+                if((message.msg).indexOf('chatImg') == 0) {
                     message.msg = 'Bạn đã gửi một ảnh !';
                     $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
                     $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
@@ -68,7 +68,7 @@ $(document).ready(function() {
                         type: "GET",
                         async: false,
                         success: function(data) {
-                            if((message.msg).indexOf('<img') == -1) { 
+                            if((message.msg).indexOf('chatImg') == -1) { 
                                 $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
                                 $('.username span').text(data.fullname);
                                 $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:bold;');

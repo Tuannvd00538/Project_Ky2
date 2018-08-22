@@ -26,10 +26,10 @@ function timeConverter(UNIX_timestamp) {
     return time;
 }
 
-function generateBlockYouChat(avatar, message, name) {
+function generateBlockYouChat(avatar, message) {
     var output = "";
     output += '<div class="linechat">';
-    output += '<div><img title="' + name + '" src="' + avatar + '"></div>';
+    output += '<div><img src="' + avatar + '"></div>';
     output += '<div class="textchat youchat">';
     output += '<span>' + message + '</span>';
     output += '</div>';
@@ -257,11 +257,13 @@ $(document).ready(function() {
                             msg = list[id].msg;
                         }
                     }
-                    if((msg).indexOf('<img') == 0) { 
-                        msg = data.fullname + ' đã gửi một ảnh';
+                    console.log(msg);
+                    console.log(msg.indexOf('<img'));
+                    if((msg).indexOf('<img') == -1) { 
                         $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
                     }
                     else {
+                        msg = data.fullname + ' đã gửi một ảnh';
                         $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
                     }
                 }
