@@ -162,7 +162,7 @@ function readImage(inputElement) {
 function uploadImg($files) {
     var res = "";
     if ($files.length) {
-        
+
         if ($files[0].size > $(this).data("max-size") * 1024) {
             console.log("Please select a smaller file");
             res = false;
@@ -208,6 +208,7 @@ $(document).ready(function() {
     });
     $('#renameModal input').attr('placeholder', user.fullname);
     $('.avtMe img').attr('src', user.avatar);
+    $('.iduser').text(user.id);
     $('.helloname').text(user.fullname);
     $('.hellouser').text(user.username);
     $('.hellomail').text(user.email);
@@ -340,7 +341,7 @@ $(document).ready(function() {
         });
         $(this).val("");
         $('.chatbox').animate({
-        scrollTop: $('.chatbox').get(0).scrollHeight},0);
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
     });
     $('.like').click(function () {
         var msg = {
@@ -359,6 +360,66 @@ $(document).ready(function() {
         });
         $(this).val("");
         $('.chatbox').animate({
-        scrollTop: $('.chatbox').get(0).scrollHeight},0);
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    });
+    // rn
+    $('.renamebtn').click(function () {
+        var name = $("input[name='rename']").val();
+        var data = {
+            id: user.id,
+            name: name
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/rename",
+            data: data,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {
+                swal('Đổi tên thành công!').then((value) => {
+                    if (value != null) {
+                        window.location = '/';
+                    }
+                });
+            }
+        });
+    });
+    //rps
+    $('.repassbtn').click(function () {
+        var oldpass = $("input[name='oldpass']").val();
+        var newpass = $("input[name='newpass']").val();
+        var confirmnewpass = $("input[name='confirmnewpass']").val();
+        if(oldpass.length == 0) {
+            $('.validform').text('Mật khẩu cũ không được để trống');
+        }
+        else if(newpass.length < 5) {
+            $('.validform').text('Mật khẩu mới phải lớn hơn 5 kí tự');
+        }
+        else if(newpass != confirmnewpass) {
+            $('.validform').text('Xác nhận mật khẩu không chính xác');
+        }
+        else {
+            var data = {
+                id: user.id,
+                oldpass: oldpass,
+                newpass: newpass
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/repass",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    swal('Đổi mật khẩu thành công').then((value) => {
+                        if (value != null) {
+                            window.location = '/';
+                        }
+                    });
+                }
+            });
+        }
     });
 });

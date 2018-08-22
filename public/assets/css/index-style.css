@@ -648,7 +648,7 @@ a.media:hover {
     font-weight: normal;
 }
 
-.infoMe .hellouser,.infoMe .hellomail {
+.infoMe .hellouser,.infoMe .hellomail,.infoMe .iduser {
     color: #90949c;
     cursor: no-drop;
 }
@@ -669,4 +669,8 @@ a.media:hover {
     font-size: 12px;
     margin-bottom: -5px;
     margin-left: 10px;
+}
+
+.validform {
+    color: red;
 }
