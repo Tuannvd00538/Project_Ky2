@@ -151,6 +151,11 @@ a, a:hover {
     flex: 1 1 0%;*/
     font-weight: 500;
 }
+
+.action-right {
+    border-bottom: 1px solid rgba(0, 0, 0, .10);
+}
+
 .actionsetting {
     color: rgba(153, 153, 153, 1);
     font-size: 20px;
@@ -174,6 +179,7 @@ a, a:hover {
     font-size: 15px;
     margin-left: 15px;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 .infochat-main {
     margin: 10px 0 10px;
@@ -673,4 +679,26 @@ a.media:hover {
 
 .validform {
     color: red;
+}
+
+.tittlemem {
+    margin: 10px 10px 0;
+}
+
+.avatar-mem {
+    border-radius: 100%;
+}
+
+.avatar-mem img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.name-mem {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.listmem {
+    margin: 10px 10px !important;
 }

@@ -382,6 +382,8 @@ $(document).ready(function() {
                 },
                 success: function(resultData) {
                     swal("Thành Công!", resultData, "success");
+                    $('#renameModal').modal('hide');
+                    $('.helloname').text(name);
                 }
             });
         }
