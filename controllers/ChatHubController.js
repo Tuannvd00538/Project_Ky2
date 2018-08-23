@@ -494,3 +494,32 @@ exports.updateAccount = async function (req, res) {
     });
     res.send(rs);
 }
+
+exports.getListUser = async function (req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser").on("value", function (listUser) {
+            var list = [];
+            var count = 0;
+            for (var key in listUser.val()) {
+                if (listUser.val().hasOwnProperty(key)) {
+                    db.ref("accounts/" + key).on("value", function (snapshot) {
+                        let data = {
+                            avatar: snapshot.val().avatar,
+                            username: snapshot.val().username,
+                            fullname: snapshot.val().fullname,
+                            gender: snapshot.val().gender,
+                            email: snapshot.val().email,
+                            birthday: snapshot.val().birthday
+                        }
+                        list.push(data);
+                        if(count == Object.keys(listUser.val()).length - 1) {
+                            resolve(list);
+                        }
+                        count++;
+                    });
+                }
+            };
+        });
+    });
+    res.send(rs);
+}

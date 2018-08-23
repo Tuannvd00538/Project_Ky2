@@ -46,4 +46,6 @@ module.exports = function(app){
         .post(controller.loginRequired, controller.repass);
     app.route('/update/:username/:id')
         .get(controller.loginRequired, controller.updateAccount);
+    app.route('/chat/:mode/:id')
+        .get(controller.loginRequired, controller.getListUser);
 }
