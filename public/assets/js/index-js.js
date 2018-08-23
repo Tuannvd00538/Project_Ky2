@@ -40,7 +40,7 @@ function generateBlockYouChat(avatar, message) {
 function generateBlockYouChatGr(avatar, message, name) {
     var output = "";
     output += '<div class="linechat">';
-    output += '<div class="nameGrChat">' + name + '</div>';
+    output += '<div class="chatgrName">' + name + '</div>';
     output += '<div><img src="' + avatar + '"></div>';
     output += '<div class="textchat youchat">';
     output += '<span>' + message + '</span>';
@@ -71,15 +71,16 @@ function generateBlockListChat(mode, id, avt, name, time, msg) {
     output += '</div>';
     output += '</div>';
     output += '<div class="col-md-9 details">';
-    output += '<span class="chatname">' + name + '</span>';
+    output += '<p class="chatname">' + name + '</p>';
     output += '<span class="datemsg">' + time + '</span>';
-    output += '<p class="msg">' + msg + '</p>';
+    output += '<p class="msg ' + id + '">' + msg + '</p>';
     output += '</div>';
     output += '</div>';
     output += '</div>';
     output += '</a>';
     return output;
 }
+
 Notification.requestPermission(function(e) {
     if (e !== 'denied') {
         console.log('Notification', 'Accept');
@@ -87,8 +88,12 @@ Notification.requestPermission(function(e) {
 });
 
 function logout() {
-    localStorage.clear();
-    window.location = '/login';
+    swal("Bạn chắc chắn muốn đăng xuất ?").then((value) => {
+        if (value != null) {
+            localStorage.clear();
+            window.location = '/login';
+        }
+    });
 }
 
 function generateBlockAddChat(id, avatar, name) {
@@ -157,7 +162,7 @@ function readImage(inputElement) {
 function uploadImg($files) {
     var res = "";
     if ($files.length) {
-        
+
         if ($files[0].size > $(this).data("max-size") * 1024) {
             console.log("Please select a smaller file");
             res = false;
@@ -191,8 +196,19 @@ function uploadImg($files) {
     return res;
 }
 $(document).ready(function() {
+    $.ajax({
+        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+        headers: {
+            "Authorization": token
+        },
+        type: "GET",
+        success: function(data) {
+            localStorage.setItem('user', JSON.stringify(data));
+        }
+    });
     $('#renameModal input').attr('placeholder', user.fullname);
     $('.avtMe img').attr('src', user.avatar);
+    $('.iduser').text(user.id);
     $('.helloname').text(user.fullname);
     $('.hellouser').text(user.username);
     $('.hellomail').text(user.email);
@@ -249,12 +265,18 @@ $(document).ready(function() {
                     for (let id in list) {
                         time = timeConverter(list[id].createdAt);
                         if (list[id].id == user.id) {
-                            msg = "You: " + list[id].msg;
+                            msg = "Bạn: " + list[id].msg;
                         } else {
                             msg = list[id].msg;
                         }
                     }
-                    $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    if((msg).indexOf('chatImg') == -1) { 
+                        $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    }
+                    else {
+                        msg = data.fullname + ' đã gửi một ảnh';
+                        $('#results').prepend(generateBlockListChat(mode, id, avt, name, time, msg));
+                    }
                 }
             });
         }
@@ -283,8 +305,125 @@ $(document).ready(function() {
                 "Authorization": token
             },
             success: function(response) {
-                console.log(response);
+                swal("Success!", "Đổi avatar thành công!", "success");
+                $('.avtMe img').attr('src', response);
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
             }
         });
+    });
+    $('.divFile i.fa-images').click(function() {
+        $('#chatImg').click();
+    });
+    $("#chatImg").change(function(e) {
+        var $files = $(this).get(0).files;
+        var msg = {
+            id: user.id,
+            msg: '<img class="chatImg" src="' + uploadImg($files) + '"/>',
+            idChat: $('.valueChat input[name=message]').attr('data')
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/sendmsg",
+            data: msg,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {}
+        });
+        $(this).val("");
+        $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    });
+    $('.like').click(function () {
+        var msg = {
+            id: user.id,
+            msg: '<i class="far fa-thumbs-up"></i>',
+            idChat: $('.valueChat input[name=message]').attr('data')
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/sendmsg",
+            data: msg,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {}
+        });
+        $(this).val("");
+        $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    });
+    // rn
+    $('.renamebtn').click(function () {
+        var name = $("input[name='rename']").val();
+        if (name == 0) {
+            $('.validform').text('Tên không được để trống');
+        }
+        else {
+            var data = {
+                id: user.id,
+                name: name
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/rename",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    swal("Thành Công!", resultData, "success");
+                    $('#renameModal').modal('hide');
+                    $('.helloname').text(name);
+                }
+            });
+        }
+    });
+    //rps
+    $('.repassbtn').click(function () {
+        var oldpass = $("input[name='oldpass']").val();
+        var newpass = $("input[name='newpass']").val();
+        var confirmnewpass = $("input[name='confirmnewpass']").val();
+        if(oldpass.length == 0) {
+            $('.validform').text('Mật khẩu cũ không được để trống');
+        }
+        else if(newpass.length < 5) {
+            $('.validform').text('Mật khẩu mới phải lớn hơn 5 kí tự');
+        }
+        else if(newpass != confirmnewpass) {
+            $('.validform').text('Xác nhận mật khẩu không chính xác');
+        }
+        else {
+            var data = {
+                id: user.id,
+                oldpass: oldpass,
+                newpass: newpass
+            }
+            $.ajax({
+                type: 'POST',
+                url: "/repass",
+                data: data,
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    if (resultData.code == 200) {
+                        swal("Thành Công!", resultData.message, "success");
+                    } else {
+                        swal("Lỗi!", resultData.message, "error");
+                        $('input[name=oldpass]').val("");
+                    }
+                }
+            });
+        }
     });
 });
