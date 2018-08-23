@@ -46,6 +46,26 @@ $(document).ready(function() {
         $.get("/avatar/" + message.id, function(info) {
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (strUrl.includes("group")) {
+                $.ajax({
+                    url: "/chat" + window.location.pathname,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        for (var i = 0; i < data.length; i++) {
+                            console.log(data[i].fullname);
+                            var content = '';
+                                    content += '<div class="col-md-2 avatar-mem nopadding">';
+                                        content += '<img src="https://baomoi-photo-1-td.zadn.vn/w1000_r1/17/09/29/200/23406050/3_118400.jpg">';
+                                    content += '</div>';
+                                    content += '<div class="col-md-10 name-mem">';
+                                        content += '' + data[i].fullname + '';
+                                    content += '</div>';
+                            $('.listmem').html(content);
+                        }
+                    }
+                });
                 if (message.id == user.id) {
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
                     if((message.msg).indexOf('chatImg') == -1) {
@@ -101,7 +121,7 @@ $(document).ready(function() {
                 }
                 $('.loading').attr('style', 'display:none;');
                 $('.chatbox').animate({
-                scrollTop: $('.chatbox').get(0).scrollHeight},0);
+                    scrollTop: $('.chatbox').get(0).scrollHeight},0);
             } else {
                 if (message.id == user.id) {
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
@@ -158,81 +178,81 @@ $(document).ready(function() {
                 }
                 $('.loading').attr('style', 'display:none;');
                 $('.chatbox').animate({
-                scrollTop: $('.chatbox').get(0).scrollHeight},0);
+                    scrollTop: $('.chatbox').get(0).scrollHeight},0);
             }
         });
-    });
-    $('input[name=message]').attr('data', window.location.pathname);
-    $('input[name=messageNew]').keyup(function(e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var data = {
-                idKey: user.id,
-                idClient: $(this).attr('data'),
-                msg: $(this).val(),
-                mode: 'single'
+});
+$('input[name=message]').attr('data', window.location.pathname);
+$('input[name=messageNew]').keyup(function(e) {
+    if (e.keyCode == 13 && $(this).val().length != 0) {
+        var data = {
+            idKey: user.id,
+            idClient: $(this).attr('data'),
+            msg: $(this).val(),
+            mode: 'single'
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/createMsg",
+            data: data,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
+                window.location.href = resultData;
             }
-            $.ajax({
-                type: 'POST',
-                url: "/createMsg",
-                data: data,
-                headers: {
-                    "Authorization": token
-                },
-                success: function(resultData) {
-                    $.ajax({
-                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
-                        headers: {
-                            "Authorization": token
-                        },
-                        type: "GET",
-                        success: function(data) {
-                            localStorage.setItem('user', JSON.stringify(data));
-                        }
-                    });
-                    window.location.href = resultData;
-                }
-            });
-            $(this).val("");
-            $('.chatbox').animate({
+        });
+        $(this).val("");
+        $('.chatbox').animate({
             scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    }
+});
+$('input[name=messageNewGr]').keyup(function(e) {
+    if (e.keyCode == 13 && $(this).val().length != 0) {
+        var listChat = [];
+        $.map($(".tagsinput span span"), function(e, i) {
+            listChat.push($(e).attr('data'));
+        });
+        var data = {
+            idKey: user.id,
+            listUser: JSON.stringify(listChat),
+            name: 'Cuộc trò chuyện của ' + user.fullname,
+            idClient: $(this).attr('data'),
+            msg: $(this).val(),
+            avt: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
+            mode: 'group'
         }
-    });
-    $('input[name=messageNewGr]').keyup(function(e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var listChat = [];
-            $.map($(".tagsinput span span"), function(e, i) {
-                listChat.push($(e).attr('data'));
-            });
-            var data = {
-                idKey: user.id,
-                listUser: JSON.stringify(listChat),
-                name: 'Cuộc trò chuyện của ' + user.fullname,
-                idClient: $(this).attr('data'),
-                msg: $(this).val(),
-                avt: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
-                mode: 'group'
+        $.ajax({
+            type: 'POST',
+            url: "/createMsgGr",
+            data: data,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
+                window.location.href = resultData;
             }
-            $.ajax({
-                type: 'POST',
-                url: "/createMsgGr",
-                data: data,
-                headers: {
-                    "Authorization": token
-                },
-                success: function(resultData) {
-                    $.ajax({
-                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
-                        headers: {
-                            "Authorization": token
-                        },
-                        type: "GET",
-                        success: function(data) {
-                            localStorage.setItem('user', JSON.stringify(data));
-                        }
-                    });
-                    window.location.href = resultData;
-                }
-            });
-        }
-    });
+        });
+    }
+});
 });
