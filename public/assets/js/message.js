@@ -54,26 +54,6 @@ $(document).ready(function() {
         $.get("/avatar/" + message.id, function(info) {
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (strUrl.includes("group")) {
-                $.ajax({
-                    url: "/chat" + window.location.pathname,
-                    headers: {
-                        "Authorization": token
-                    },
-                    type: "GET",
-                    success: function(data) {
-                        for (var i = 0; i < data.length; i++) {
-                            console.log(data[i].fullname);
-                            var content = '';
-                                    content += '<div class="col-md-2 avatar-mem nopadding">';
-                                        content += '<img src="https://baomoi-photo-1-td.zadn.vn/w1000_r1/17/09/29/200/23406050/3_118400.jpg">';
-                                    content += '</div>';
-                                    content += '<div class="col-md-10 name-mem">';
-                                        content += '' + data[i].fullname + '';
-                                    content += '</div>';
-                            $('.listmem').html(content);
-                        }
-                    }
-                });
                 if (message.id == user.id) {
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
                     if((message.msg).indexOf('chatImg') == -1) {
@@ -88,7 +68,7 @@ $(document).ready(function() {
                         $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
                     }                
                 } else {
-                    $('#resultsChat').append(generateBlockYouChatGr(info.avatar, message.msg, info.fullname));
+                    $('#resultsChat').append(generateBlockGrChat(info.avatar, message.msg, info.fullname));
                     if (!you.hasOwnProperty(message.id)) {
                         $.ajax({
                             url: "/info/" + message.id,
@@ -214,12 +194,11 @@ $(document).ready(function() {
                 msg: $(this).val(),
                 mode: 'single'
             }
-        });
+        };
         $(this).val("");
         $('.chatbox').animate({
             scrollTop: $('.chatbox').get(0).scrollHeight},0);
-    }
-});
+    });
 $('input[name=messageNewGr]').keyup(function(e) {
     if (e.keyCode == 13 && $(this).val().length != 0) {
         var listChat = [];
