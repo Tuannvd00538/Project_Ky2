@@ -37,6 +37,18 @@ function generateBlockYouChat(avatar, message) {
     return output;
 };
 
+function generateBlockYouChatGr(avatar, message, name) {
+    var output = "";
+    output += '<div class="linechat">';
+    output += '<div class="nameGrChat">' + name + '</div>';
+    output += '<div><img src="' + avatar + '"></div>';
+    output += '<div class="textchat youchat">';
+    output += '<span>' + message + '</span>';
+    output += '</div>';
+    output += '</div>';
+    return output;
+};
+
 function generateBlockMeChat(message) {
     var output = "";
     output += '<div class="linechat">';

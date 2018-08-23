@@ -702,3 +702,8 @@ a.media:hover {
 .listmem {
     margin: 10px 10px !important;
 }
+.nameGrChat {
+    font-size: 12px;
+    margin-bottom: -5px;
+    margin-left: 10px;
+}

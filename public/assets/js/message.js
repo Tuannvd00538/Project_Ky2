@@ -68,7 +68,7 @@ $(document).ready(function() {
                         $('a[href$="' + window.location.pathname + '"] .name-contact .msg').attr('style','color:none;font-weight:0;');
                     }                
                 } else {
-                    $('#resultsChat').append(generateBlockGrChat(info.avatar, message.msg, info.fullname));
+                    $('#resultsChat').append(generateBlockYouChatGr(info.avatar, message.msg, info.fullname));
                     if (!you.hasOwnProperty(message.id)) {
                         $.ajax({
                             url: "/info/" + message.id,
