@@ -265,7 +265,7 @@ $(document).ready(function() {
                     for (let id in list) {
                         time = timeConverter(list[id].createdAt);
                         if (list[id].id == user.id) {
-                            msg = "You: " + list[id].msg;
+                            msg = "Bạn: " + list[id].msg;
                         } else {
                             msg = list[id].msg;
                         }
@@ -381,11 +381,7 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
-                    swal('Đổi tên thành công!').then((value) => {
-                        if (value != null) {
-                            window.location = '/';
-                        }
-                    });
+                    swal("Thành Công!", resultData, "success");
                 }
             });
         }
@@ -418,11 +414,12 @@ $(document).ready(function() {
                     "Authorization": token
                 },
                 success: function(resultData) {
-                    swal('Đổi mật khẩu thành công').then((value) => {
-                        if (value != null) {
-                            window.location = '/';
-                        }
-                    });
+                    if (resultData.code == 200) {
+                        swal("Thành Công!", resultData.message, "success");
+                    } else {
+                        swal("Lỗi!", resultData.message, "error");
+                        $('input[name=oldpass]').val("");
+                    }
                 }
             });
         }

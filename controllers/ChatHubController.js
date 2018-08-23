@@ -425,7 +425,7 @@ exports.sendMsgGr = async function (req, res) {
 exports.rename = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         db.ref("/accounts/" + req.body.id + "/fullname").set(req.body.name);
-        resolve('Update name success!');
+        resolve('Đổi tên thành công!');
     });
     res.send(rs);
 }
