@@ -52,6 +52,8 @@ $(document).ready(function() {
         var message = snapshot.val();
         var you = {};
         $.get("/avatar/" + message.id, function(info) {
+            $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (strUrl.includes("group")) {
                 if (message.id == user.id) {
@@ -111,10 +113,10 @@ $(document).ready(function() {
                     }
                 }
                 $('.loading').attr('style', 'display:none;');
-                $('.chatbox').animate({
-                scrollTop: $('.chatbox').get(0).scrollHeight},0);
             } else {
                 if (message.id == user.id) {
+                    $('.chatbox').animate({
+                    scrollTop: $('.chatbox').get(0).scrollHeight},0);
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
                     $('.membergroup').attr('style','display: none');
                     if((message.msg).indexOf('chatImg') == -1) {
