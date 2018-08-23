@@ -55,6 +55,9 @@ $(document).ready(function() {
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (strUrl.includes("group")) {
                 if (message.id == user.id) {
+                    $('.membergroup').attr('style','display: block');
+                    $('.action-right').attr('style','border-bottom: 1px solid rgba(0, 0, 0, .10)');
+                    $('.avatar').attr('style','text-align: center');
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
                     if((message.msg).indexOf('chatImg') == -1) {
                         $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
@@ -113,6 +116,7 @@ $(document).ready(function() {
             } else {
                 if (message.id == user.id) {
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
+                    $('.membergroup').attr('style','display: none');
                     if((message.msg).indexOf('chatImg') == -1) {
                         $('#results p.' + (window.location.pathname).replace('/single/', '').replace('/group/', '')).html(message.msg);
                         $('a[href$="' + window.location.pathname + '"] .name-contact .chatname').attr('style','font-weight:0;');
