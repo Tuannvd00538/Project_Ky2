@@ -6,6 +6,14 @@ function parseJwt(token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+function generateBlockMember(name, avatar) {
+    var output = "";
+        output += '<div class="col-md-2 avatar-mem nopadding">';
+            output += '<img src="' + avatar + '">';
+        output += '</div>';
+        output += '<div class="col-md-10 name-mem">' + name + '</div>';
+    return output;
+}
 $(document).ready(function() {
     $.ajax({
         url: "/list" + window.location.pathname + "?me=" + user.id,
@@ -162,6 +170,21 @@ $(document).ready(function() {
             }
         });
     });
+    if (strUrl.includes("group")) {
+        $.ajax({
+            url: "/chat" + window.location.pathname,
+            headers: {
+                "Authorization": token
+            },
+            type: "GET",
+            async: false,
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    $('.listmem').append(generateBlockMember(data[i].fullname, data[i].avatar));
+                }
+            }
+        });
+    }
     $('input[name=message]').attr('data', window.location.pathname);
     $('input[name=messageNew]').keyup(function(e) {
         if (e.keyCode == 13 && $(this).val().length != 0) {
