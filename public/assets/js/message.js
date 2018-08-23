@@ -6,6 +6,14 @@ function parseJwt(token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+function generateBlockMember(name, avatar) {
+    var output = "";
+        output += '<div class="col-md-2 avatar-mem nopadding">';
+            output += '<img src="' + avatar + '">';
+        output += '</div>';
+        output += '<div class="col-md-10 name-mem">' + name + '</div>';
+    return output;
+}
 $(document).ready(function() {
     $.ajax({
         url: "/list" + window.location.pathname + "?me=" + user.id,
@@ -181,35 +189,30 @@ $(document).ready(function() {
                     scrollTop: $('.chatbox').get(0).scrollHeight},0);
             }
         });
-});
-$('input[name=message]').attr('data', window.location.pathname);
-$('input[name=messageNew]').keyup(function(e) {
-    if (e.keyCode == 13 && $(this).val().length != 0) {
-        var data = {
-            idKey: user.id,
-            idClient: $(this).attr('data'),
-            msg: $(this).val(),
-            mode: 'single'
-        }
+    });
+    if (strUrl.includes("group")) {
         $.ajax({
-            type: 'POST',
-            url: "/createMsg",
-            data: data,
+            url: "/chat" + window.location.pathname,
             headers: {
                 "Authorization": token
             },
-            success: function(resultData) {
-                $.ajax({
-                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
-                    headers: {
-                        "Authorization": token
-                    },
-                    type: "GET",
-                    success: function(data) {
-                        localStorage.setItem('user', JSON.stringify(data));
-                    }
-                });
-                window.location.href = resultData;
+            type: "GET",
+            async: false,
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    $('.listmem').append(generateBlockMember(data[i].fullname, data[i].avatar));
+                }
+            }
+        });
+    }
+    $('input[name=message]').attr('data', window.location.pathname);
+    $('input[name=messageNew]').keyup(function(e) {
+        if (e.keyCode == 13 && $(this).val().length != 0) {
+            var data = {
+                idKey: user.id,
+                idClient: $(this).attr('data'),
+                msg: $(this).val(),
+                mode: 'single'
             }
         });
         $(this).val("");
