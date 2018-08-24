@@ -51,5 +51,7 @@ module.exports = function(app){
     app.route('/admin/list/user')
         .get(controller.loginRequired, controller.getListUserAdmin);
     app.route('/remove/:mode/:id')
-        .post(controller.removeUserFromChatGr);
+        .post(controller.loginRequired, controller.removeUserFromChatGr);
+    app.route('/add/:mode/:id')
+        .post(controller.addUserFromChatGr);
 }

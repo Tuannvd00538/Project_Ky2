@@ -552,3 +552,16 @@ exports.removeUserFromChatGr = async function(req, res) {
     });
     res.send(rs);
 };
+
+exports.addUserFromChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser").update({
+            [req.body.idadd]: req.params.mode
+        });
+        db.ref("accounts/" + req.body.idadd + "/chatlist").update({
+            [req.params.id]: req.params.mode
+        });
+        resolve('Thêm thành công!');
+    });
+    res.send(rs);
+};
