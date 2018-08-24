@@ -543,3 +543,12 @@ exports.getListUserAdmin = async function(req, res) {
     });
     res.send(rs);
 };
+
+exports.removeUserFromChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser/" + req.body.idremove).remove();
+        db.ref("accounts/" + req.body.idremove + "/chatlist/" + req.params.id).remove();
+        resolve('Xóa thành công!');
+    });
+    res.send(rs);
+};
