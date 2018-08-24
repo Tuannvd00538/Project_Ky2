@@ -143,18 +143,18 @@ a, a:hover {
 }
 .actionname {
     vertical-align: middle;
-    /*margin-left: 10px;*/
- /*   white-space: nowrap;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     min-width: 0;
-    flex: 1 1 0%;*/
+    flex: 1 1 0%;
     font-weight: 500;
+    margin: 0 !important;
 }
 
-.action-right {
+/*.action-right {
     border-bottom: 1px solid rgba(0, 0, 0, .10);
-}
+}*/
 
 .actionsetting {
     color: rgba(153, 153, 153, 1);
@@ -692,13 +692,23 @@ a.media:hover {
 .avatar-mem img {
     width: 100%;
     border-radius: 100%;
+    margin-top: 7px;
 }
 
 .name-mem {
-    margin-top: 10px;
-    font-weight: 500;
+    margin-top: 20px;
+    font-weight: 400;
 }
 
 .listmem {
-    margin: 10px 10px !important;
+    margin: 8px 10px !important;
+}
+
+.tittlemem {
+/*    border-bottom: 1px solid rgba(0, 0, 0, .10);*/
+    font-weight: 500;
+}
+
+.tittlemem span {
+    margin-left: 15px;
 }
