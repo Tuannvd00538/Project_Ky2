@@ -56,4 +56,6 @@ module.exports = function(app){
         .post(controller.loginRequired, controller.addUserFromChatGr);
     app.route('/rename/:mode/:id')
         .post(controller.loginRequired, controller.renameChatGr);
+    app.route('/delete/:mode/:id')
+        .post(controller.loginRequired, controller.deleteChat);
 }

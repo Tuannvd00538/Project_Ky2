@@ -573,3 +573,11 @@ exports.renameChatGr = async function(req, res) {
     });
     res.send(rs);
 };
+
+exports.deleteChat = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts/" + req.body.idme + "/chatlist/" + req.params.id).remove();
+        resolve('Xóa trò chuyện thành công!');
+    });
+    res.send(rs);
+};
