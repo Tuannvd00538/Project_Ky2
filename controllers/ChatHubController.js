@@ -534,3 +534,12 @@ exports.getListUser = async function (req, res) {
     });
     res.send(rs);
 }
+
+exports.getListUserAdmin = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts").on("value", function (snapshot) {
+            resolve(snapshot.val());
+        });
+    });
+    res.send(rs);
+};

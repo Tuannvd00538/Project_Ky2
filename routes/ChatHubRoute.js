@@ -48,4 +48,6 @@ module.exports = function(app){
         .get(controller.loginRequired, controller.updateAccount);
     app.route('/chat/:mode/:id')
         .get(controller.loginRequired, controller.getListUser);
+    app.route('/admin/list/user')
+        .get(controller.loginRequired, controller.getListUserAdmin);
 }
