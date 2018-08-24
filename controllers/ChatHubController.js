@@ -565,3 +565,11 @@ exports.addUserFromChatGr = async function(req, res) {
     });
     res.send(rs);
 };
+
+exports.renameChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/name").set(req.body.name);
+        resolve('Đổi tên thành công!');
+    });
+    res.send(rs);
+};

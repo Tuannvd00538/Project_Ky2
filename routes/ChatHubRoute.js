@@ -53,5 +53,7 @@ module.exports = function(app){
     app.route('/remove/:mode/:id')
         .post(controller.loginRequired, controller.removeUserFromChatGr);
     app.route('/add/:mode/:id')
-        .post(controller.addUserFromChatGr);
+        .post(controller.loginRequired, controller.addUserFromChatGr);
+    app.route('/rename/:mode/:id')
+        .post(controller.loginRequired, controller.renameChatGr);
 }
