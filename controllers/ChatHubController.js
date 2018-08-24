@@ -497,11 +497,22 @@ exports.updateAccount = async function (req, res) {
 
 exports.getListUser = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser").on("value", function (listUser) {
-            var list = [];
-            var count = 0;
-            for (var key in listUser.val()) {
-                if (listUser.val().hasOwnProperty(key)) {
+        var list = [];
+        var count = 0;
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (listUser) {
+            db.ref("accounts/" + listUser.val().key).on("value", function (snapshot) {
+                let data = {
+                    avatar: snapshot.val().avatar,
+                    username: snapshot.val().username,
+                    fullname: snapshot.val().fullname,
+                    gender: snapshot.val().gender,
+                    email: snapshot.val().email,
+                    birthday: snapshot.val().birthday
+                }
+                list.push(data);
+            });
+            for (var key in listUser.val().listUser) {
+                if (listUser.val().listUser.hasOwnProperty(key)) {
                     db.ref("accounts/" + key).on("value", function (snapshot) {
                         let data = {
                             avatar: snapshot.val().avatar,
@@ -512,7 +523,7 @@ exports.getListUser = async function (req, res) {
                             birthday: snapshot.val().birthday
                         }
                         list.push(data);
-                        if(count == Object.keys(listUser.val()).length - 1) {
+                        if(count == Object.keys(listUser.val().listUser).length - 1) {
                             resolve(list);
                         }
                         count++;
