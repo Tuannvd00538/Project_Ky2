@@ -1,0 +1,12 @@
+.avtTable {
+	margin: -15px -5px -5px 5px;
+    border-radius: 50%;
+}
+
+.tdUsername {
+	text-transform: uppercase;
+}
+
+#rsUser td {
+    padding-top: 20px;
+}

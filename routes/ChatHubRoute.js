@@ -48,4 +48,14 @@ module.exports = function(app){
         .get(controller.loginRequired, controller.updateAccount);
     app.route('/chat/:mode/:id')
         .get(controller.loginRequired, controller.getListUser);
+    app.route('/admin/list/user')
+        .get(controller.loginRequired, controller.getListUserAdmin);
+    app.route('/remove/:mode/:id')
+        .post(controller.loginRequired, controller.removeUserFromChatGr);
+    app.route('/add/:mode/:id')
+        .post(controller.loginRequired, controller.addUserFromChatGr);
+    app.route('/rename/:mode/:id')
+        .post(controller.loginRequired, controller.renameChatGr);
+    app.route('/delete/:mode/:id')
+        .post(controller.loginRequired, controller.deleteChat);
 }

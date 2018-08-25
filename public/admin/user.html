@@ -4,12 +4,17 @@
         <meta charset="utf-8" />
         <title>ChatHub Corp ❤</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta content="ChatHub Corp ❤" />
-        <meta content="ChatHub Corp" name="author" />
+        <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="/assets/img/favicon.ico">
+
+        <!-- DataTables -->
+        <link href="../plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="../plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="../plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -33,9 +38,9 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <a href="index.html" class="logo">
-                        <span>
-                            <img src="assets/images/logo.png" alt="" height="36">
-                        </span>
+                                        <span>
+                                            <img src="assets/images/logo.png" alt="" height="36">
+                                        </span>
                         <i>
                             <img src="assets/images/logo_sm.png" alt="" height="28">
                         </i>
@@ -155,11 +160,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title float-left">Dashboard</h4>
+                                    <h4 class="page-title float-left">Quản Lý User</h4>
 
                                     <ol class="breadcrumb float-right">
                                         <li class="breadcrumb-item"><a href="javascript:void(0)">Admin</a></li>
-                                        <li class="breadcrumb-item active">Dashboard</li>
+                                        <li class="breadcrumb-item"><a href="javascript:void(0)">Manager</a></li>
+                                        <li class="breadcrumb-item active">User</li>
                                     </ol>
 
                                     <div class="clearfix"></div>
@@ -170,103 +176,31 @@
 
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-head float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Người Dùng</h6>
-                                    <h4 class="mb-3" data-plugin="counterup">1,587</h4>
-                                    <span class="badge badge-primary"> +100% </span> <span class="text-muted ml-2 vertical-middle">trong 1 tuần qua</span>
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="m-t-0 header-title"><b>Danh sách user trong hệ thống</b></h4>
+
+                                    <table id="datatable" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Avatar</th>
+                                            <th>Username</th>
+                                            <th>FullName</th>
+                                            <th>Email</th>
+                                            <th>BirthDay</th>
+                                            <th>Gender</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+
+
+                                        <tbody id="rsUser">
+                                            
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-layers float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Doanh Thu</h6>
-                                    <h4 class="mb-3">$<span data-plugin="counterup">1,351,126.72</span></h4>
-                                    <span class="badge badge-primary"> +29% </span> <span class="text-muted ml-2 vertical-middle">Từ premium services</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-tag float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Quảng Cáo</h6>
-                                    <h4 class="mb-3">$<span data-plugin="counterup">0</span></h4>
-                                    <span class="badge badge-primary"> 0% </span> <span class="text-muted ml-2 vertical-middle">trong vòng 1 tháng qua</span>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
-                                <div class="card-box tilebox-one">
-                                    <i class="fi-briefcase float-right"></i>
-                                    <h6 class="text-muted text-uppercase mb-3">Premium Services</h6>
-                                    <h4 class="mb-3" data-plugin="counterup">1,890</h4>
-                                    <span class="badge badge-primary"> +89% </span> <span class="text-muted ml-2 vertical-middle">trong tất cả thời gian</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-xl-7">
-                                <div class="card-box">
-                                    <h4 class="header-title">Lịch sử đăng ký premium services</h4>
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Tỷ lệ đăng ký</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">1.78%</span> <small></small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Giá trị dịch vụ trung bình</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">25.87</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Tổng số dư</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">1,351,126.72</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <canvas id="transactions-chart" height="350" class="mt-4"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-xl-5">
-                                <div class="card-box">
-                                    <h4 class="header-title">Lịch sử sales premium services</h4>
-
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Tỷ lệ nhận sale</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">3.94%</span> <small></small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Giá trị sale trung bình</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-down-bold-hexagon-outline text-danger"></i> <span class="text-dark">16.25</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-3">
-                                                <h6 class="font-normal text-muted font-14">Tổng chi sale</h6>
-                                                <h6 class="font-18"><i class="mdi mdi-arrow-up-bold-hexagon-outline text-success"></i> <span class="text-dark">124,858.67</span> <small>USD</small></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <canvas id="sales-history" height="350" class="mt-4"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end row -->
+                        </div> <!-- end row -->
 
                     </div> <!-- container -->
 
@@ -296,14 +230,21 @@
         <script src="assets/js/metisMenu.min.js"></script>
         <script src="assets/js/waves.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="../plugins/waypoints/lib/jquery.waypoints.min.js"></script>
-        <script src="../plugins/counterup/jquery.counterup.min.js"></script>
 
-        <!-- Chart JS -->
-        <script src="../plugins/chart.js/chart.bundle.js"></script>
-
-        <!-- init dashboard -->
-        <script src="assets/pages/jquery.dashboard.init.js"></script>
+        <!-- Required datatable js -->
+        <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="../plugins/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Buttons examples -->
+        <script src="../plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="../plugins/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="../plugins/datatables/jszip.min.js"></script>
+        <script src="../plugins/datatables/pdfmake.min.js"></script>
+        <script src="../plugins/datatables/vfs_fonts.js"></script>
+        <script src="../plugins/datatables/buttons.html5.min.js"></script>
+        <script src="../plugins/datatables/buttons.print.min.js"></script>
+        <!-- Responsive examples -->
+        <script src="../plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="../plugins/datatables/responsive.bootstrap4.min.js"></script>
 
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>

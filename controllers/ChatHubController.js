@@ -497,11 +497,22 @@ exports.updateAccount = async function (req, res) {
 
 exports.getListUser = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
-        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser").on("value", function (listUser) {
-            var list = [];
-            var count = 0;
-            for (var key in listUser.val()) {
-                if (listUser.val().hasOwnProperty(key)) {
+        var list = [];
+        var count = 0;
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info").on("value", function (listUser) {
+            db.ref("accounts/" + listUser.val().key).on("value", function (snapshot) {
+                let data = {
+                    avatar: snapshot.val().avatar,
+                    username: snapshot.val().username,
+                    fullname: snapshot.val().fullname,
+                    gender: snapshot.val().gender,
+                    email: snapshot.val().email,
+                    birthday: snapshot.val().birthday
+                }
+                list.push(data);
+            });
+            for (var key in listUser.val().listUser) {
+                if (listUser.val().listUser.hasOwnProperty(key)) {
                     db.ref("accounts/" + key).on("value", function (snapshot) {
                         let data = {
                             id: snapshot.val().id,
@@ -513,7 +524,7 @@ exports.getListUser = async function (req, res) {
                             birthday: snapshot.val().birthday
                         }
                         list.push(data);
-                        if(count == Object.keys(listUser.val()).length - 1) {
+                        if(count == Object.keys(listUser.val().listUser).length - 1) {
                             resolve(list);
                         }
                         count++;
@@ -524,3 +535,50 @@ exports.getListUser = async function (req, res) {
     });
     res.send(rs);
 }
+
+exports.getListUserAdmin = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts").on("value", function (snapshot) {
+            resolve(snapshot.val());
+        });
+    });
+    res.send(rs);
+};
+
+exports.removeUserFromChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser/" + req.body.idremove).remove();
+        db.ref("accounts/" + req.body.idremove + "/chatlist/" + req.params.id).remove();
+        resolve('Xóa thành công!');
+    });
+    res.send(rs);
+};
+
+exports.addUserFromChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/listUser").update({
+            [req.body.idadd]: req.params.mode
+        });
+        db.ref("accounts/" + req.body.idadd + "/chatlist").update({
+            [req.params.id]: req.params.mode
+        });
+        resolve('Thêm thành công!');
+    });
+    res.send(rs);
+};
+
+exports.renameChatGr = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("messages/" + req.params.mode + "/" + req.params.id + "/info/name").set(req.body.name);
+        resolve('Đổi tên thành công!');
+    });
+    res.send(rs);
+};
+
+exports.deleteChat = async function(req, res) {
+    let rs = await new Promise((resolve, reject) => {
+        db.ref("accounts/" + req.body.idme + "/chatlist/" + req.params.id).remove();
+        resolve('Xóa trò chuyện thành công!');
+    });
+    res.send(rs);
+};

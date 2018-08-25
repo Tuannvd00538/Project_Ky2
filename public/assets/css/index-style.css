@@ -704,12 +704,6 @@ a.media:hover {
     margin: 8px 10px !important;
 }
 
-.nameGrChat {
-    font-size: 12px;
-    margin-bottom: -5px;
-    margin-left: 10px;
-}
-
 .tittlemem {
 /*    border-bottom: 1px solid rgba(0, 0, 0, .10);*/
     font-weight: 500;
