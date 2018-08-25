@@ -6,12 +6,15 @@ function parseJwt(token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
-function generateBlockMember(name, avatar) {
+function generateBlockMember(name, avatar,id) {
     var output = "";
-        output += '<div class="col-md-2 avatar-mem nopadding">';
-            output += '<img src="' + avatar + '">';
-        output += '</div>';
-        output += '<div class="col-md-10 name-mem">' + name + '</div>';
+    output += '<div class="col-md-2 avatar-mem nopadding">';
+    output += '<img src="' + avatar + '">';
+    output += '</div>';
+    output += '<div class="col-md-8 name-mem">' + name + '</div>';
+    output += '<div name=" ' + name + '" dataid="' + id + '" class="col-md-2 action-mem">';
+    output += '<span>x</span>';
+    output += '</div>';
     return output;
 }
 $(document).ready(function() {
@@ -53,9 +56,41 @@ $(document).ready(function() {
         var you = {};
         $.get("/avatar/" + message.id, function(info) {
             $('.chatbox').animate({
-            scrollTop: $('.chatbox').get(0).scrollHeight},0);
+                scrollTop: $('.chatbox').get(0).scrollHeight},0);
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
             if (strUrl.includes("group")) {
+                $('.action-mem').click(function () {
+                    // alert($(this).attr('dataid'));
+                    var id =  $(this).attr('dataid');
+                    swal({
+                        title: "Bạn muốn xóa " + $(this).attr('name') + " khỏi cuộc trò chuyện ?",
+                        // text: "Once deleted, you will not be able to recover this imaginary file!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                  })
+                    .then((willDelete) => {
+                      if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "/remove" + window.location.pathname,
+                            data: {
+                                idremove: id
+                            },
+                            headers: {
+                                "Authorization": token
+                            },
+                            success: function(resultData) {
+                                swal("Xóa thành công", {
+                                icon: "success",
+                            });
+                        }
+                    });
+                    } else {
+                        // swal("Your imaginary file is safe!");
+                    }
+                });
+                });
                 if (message.id == user.id) {
                     $('.membergroup').attr('style','display: block');
                     $('.action-right').attr('style','border-bottom: 1px solid rgba(0, 0, 0, .10)');
@@ -116,7 +151,7 @@ $(document).ready(function() {
             } else {
                 if (message.id == user.id) {
                     $('.chatbox').animate({
-                    scrollTop: $('.chatbox').get(0).scrollHeight},0);
+                        scrollTop: $('.chatbox').get(0).scrollHeight},0);
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
                     $('.membergroup').attr('style','display: none');
                     if((message.msg).indexOf('chatImg') == -1) {
@@ -172,96 +207,96 @@ $(document).ready(function() {
                 }
                 $('.loading').attr('style', 'display:none;');
                 $('.chatbox').animate({
-                scrollTop: $('.chatbox').get(0).scrollHeight},0);
+                    scrollTop: $('.chatbox').get(0).scrollHeight},0);
             }
         });
+});
+if (strUrl.includes("group")) {
+    $.ajax({
+        url: "/chat" + window.location.pathname,
+        headers: {
+            "Authorization": token
+        },
+        type: "GET",
+        async: false,
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                $('.listmem').append(generateBlockMember(data[i].fullname, data[i].avatar,data[i].id));
+            }
+        }
     });
-    if (strUrl.includes("group")) {
+}
+$('input[name=message]').attr('data', window.location.pathname);
+$('input[name=messageNew]').keyup(function(e) {
+    if (e.keyCode == 13 && $(this).val().length != 0) {
+        var data = {
+            idKey: user.id,
+            idClient: $(this).attr('data'),
+            msg: $(this).val(),
+            mode: 'single'
+        }
         $.ajax({
-            url: "/chat" + window.location.pathname,
+            type: 'POST',
+            url: "/createMsg",
+            data: data,
             headers: {
                 "Authorization": token
             },
-            type: "GET",
-            async: false,
-            success: function(data) {
-                for (var i = 0; i < data.length; i++) {
-                    $('.listmem').append(generateBlockMember(data[i].fullname, data[i].avatar));
-                }
+            success: function(resultData) {
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
+                window.location.href = resultData;
+            }
+        });
+        $(this).val("");
+        $('.chatbox').animate({
+            scrollTop: $('.chatbox').get(0).scrollHeight},0);
+    }
+});
+$('input[name=messageNewGr]').keyup(function(e) {
+    if (e.keyCode == 13 && $(this).val().length != 0) {
+        var listChat = [];
+        $.map($(".tagsinput span span"), function(e, i) {
+            listChat.push($(e).attr('data'));
+        });
+        var data = {
+            idKey: user.id,
+            listUser: JSON.stringify(listChat),
+            name: 'Cuộc trò chuyện của ' + user.fullname,
+            idClient: $(this).attr('data'),
+            msg: $(this).val(),
+            avt: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
+            mode: 'group'
+        }
+        $.ajax({
+            type: 'POST',
+            url: "/createMsgGr",
+            data: data,
+            headers: {
+                "Authorization": token
+            },
+            success: function(resultData) {
+                $.ajax({
+                    url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
+                    headers: {
+                        "Authorization": token
+                    },
+                    type: "GET",
+                    success: function(data) {
+                        localStorage.setItem('user', JSON.stringify(data));
+                    }
+                });
+                window.location.href = resultData;
             }
         });
     }
-    $('input[name=message]').attr('data', window.location.pathname);
-    $('input[name=messageNew]').keyup(function(e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var data = {
-                idKey: user.id,
-                idClient: $(this).attr('data'),
-                msg: $(this).val(),
-                mode: 'single'
-            }
-            $.ajax({
-                type: 'POST',
-                url: "/createMsg",
-                data: data,
-                headers: {
-                    "Authorization": token
-                },
-                success: function(resultData) {
-                    $.ajax({
-                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
-                        headers: {
-                            "Authorization": token
-                        },
-                        type: "GET",
-                        success: function(data) {
-                            localStorage.setItem('user', JSON.stringify(data));
-                        }
-                    });
-                    window.location.href = resultData;
-                }
-            });
-            $(this).val("");
-            $('.chatbox').animate({
-            scrollTop: $('.chatbox').get(0).scrollHeight},0);
-        }
-    });
-    $('input[name=messageNewGr]').keyup(function(e) {
-        if (e.keyCode == 13 && $(this).val().length != 0) {
-            var listChat = [];
-            $.map($(".tagsinput span span"), function(e, i) {
-                listChat.push($(e).attr('data'));
-            });
-            var data = {
-                idKey: user.id,
-                listUser: JSON.stringify(listChat),
-                name: 'Cuộc trò chuyện của ' + user.fullname,
-                idClient: $(this).attr('data'),
-                msg: $(this).val(),
-                avt: 'https://cdn2.iconfinder.com/data/icons/people-groups/512/Leader_Avatar-512.png',
-                mode: 'group'
-            }
-            $.ajax({
-                type: 'POST',
-                url: "/createMsgGr",
-                data: data,
-                headers: {
-                    "Authorization": token
-                },
-                success: function(resultData) {
-                    $.ajax({
-                        url: "/update/" + parseJwt(token).username + "/" + parseJwt(token).id,
-                        headers: {
-                            "Authorization": token
-                        },
-                        type: "GET",
-                        success: function(data) {
-                            localStorage.setItem('user', JSON.stringify(data));
-                        }
-                    });
-                    window.location.href = resultData;
-                }
-            });
-        }
-    });
+});
 });

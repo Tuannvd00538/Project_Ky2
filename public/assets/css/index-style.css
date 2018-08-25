@@ -718,3 +718,9 @@ a.media:hover {
 .tittlemem span {
     margin-left: 15px;
 }
+
+.action-mem {
+    margin-top: 15px;
+    cursor: pointer;
+    color: #afaeae;
+}

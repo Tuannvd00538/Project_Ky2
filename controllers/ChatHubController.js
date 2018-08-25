@@ -504,6 +504,7 @@ exports.getListUser = async function (req, res) {
                 if (listUser.val().hasOwnProperty(key)) {
                     db.ref("accounts/" + key).on("value", function (snapshot) {
                         let data = {
+                            id: snapshot.val().id,
                             avatar: snapshot.val().avatar,
                             username: snapshot.val().username,
                             fullname: snapshot.val().fullname,
