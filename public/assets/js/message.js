@@ -91,104 +91,6 @@ $(document).ready(function() {
                 });
             });
             if (strUrl.includes("group")) {
-                $('.btnsettingrename').attr('style','display: block');
-                // XÓA MEMBER
-                $('.action-mem').click(function () {
-                    // alert($(this).attr('dataid'));
-                    var id =  $(this).attr('dataid');
-                    swal({
-                        title: "Bạn muốn xóa " + $(this).attr('name') + " khỏi cuộc trò chuyện ?",
-                        // text: "Once deleted, you will not be able to recover this imaginary file!",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                      if (willDelete) {
-                        $.ajax({
-                            type: 'POST',
-                            url: "/remove" + window.location.pathname,
-                            data: {
-                                idremove: id
-                            },
-                            headers: {
-                                "Authorization": token
-                            },
-                            success: function(resultData) {
-                                swal("Xóa thành công", {
-                                    icon: "success",
-                                });
-                            window.location.href = window.location.pathname;
-                            }
-                        });
-                    } else {
-                        // swal("Your imaginary file is safe!");
-                    }
-                });
-                });
-                // THÊM MEMBER
-                $('.btnaddmempost').click(function () {
-                    var idadd = $("input[name='inputaddmem']").val();
-                    if(idadd.length == 0) {
-                        swal("Nhập id cần thêm", {
-                        icon: "error",
-                    });
-                    }
-                    else {
-                        $.ajax({
-                            type: 'POST',
-                            url: "/add" + window.location.pathname,
-                            data: {
-                                idadd: idadd
-                            },
-                            headers: {
-                                "Authorization": token
-                            },
-                            success: function(resultData) {
-                                swal("Thêm thành công", {
-                                    icon: "success",
-                                });
-                            window.location.href = window.location.pathname;
-                            }
-                        });
-                    }
-                });
-                // ĐỔI TÊN GR
-                $('.renamegrbtn').click(function () {
-                    var namegr = $("input[name='renamegr']").val();
-                    if(namegr.length == 0) {
-                        $('.validform').text('Tên không được để trống');
-                    }
-                    else {
-                        $.ajax({
-                            type: 'POST',
-                            url: "/rename" + window.location.pathname,
-                            data: {
-                                name: namegr
-                            },
-                            headers: {
-                                "Authorization": token
-                            },
-                            success: function(resultData) {
-                                var msg = {
-                                id: user.id,
-                                msg: user.fullname + ' đã đổi tên cuộc trò chuyện thành ' + namegr,
-                                idChat: $('.valueChat input[name=message]').attr('data')
-                            }
-                            $.ajax({
-                                type: 'POST',
-                                url: "/sendmsg",
-                                data: msg,
-                                headers: {
-                                    "Authorization": token
-                                },
-                                success: function() {}
-                            });
-                            window.location.href = window.location.pathname;
-                            }
-                        });
-                    }
-                });
                 if (message.id == user.id) {
                     $('.membergroup').attr('style','display: block');
                     $('.action-right').attr('style','border-bottom: 1px solid rgba(0, 0, 0, .10)');
@@ -321,6 +223,105 @@ if (strUrl.includes("group")) {
             for (var i = 0; i < data.length; i++) {
                 $('.listmem').append(generateBlockMember(data[i].fullname, data[i].avatar,data[i].id));
             }
+        }
+    });
+    $('.btnsettingrename').attr('style','display: block');
+    // XÓA MEMBER
+    $('.action-mem').click(function () {
+        // alert($(this).attr('dataid'));
+        var id =  $(this).attr('dataid');
+        swal({
+            title: "Bạn muốn xóa " + $(this).attr('name') + " khỏi cuộc trò chuyện ?",
+            // text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+                type: 'POST',
+                url: "/remove" + window.location.pathname,
+                data: {
+                    idremove: id
+                },
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    swal("Xóa thành công", {
+                        icon: "success",
+                    });
+                window.location.href = window.location.pathname;
+                }
+            });
+        } else {
+            // swal("Your imaginary file is safe!");
+        }
+    });
+    });
+    // THÊM MEMBER
+    $('.btnaddmempost').click(function () {
+        var idadd = $("input[name='inputaddmem']").val();
+        if(idadd.length == 0) {
+            swal("Nhập id cần thêm", {
+            icon: "error",
+        });
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: "/add" + window.location.pathname,
+                data: {
+                    idadd: idadd
+                },
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    swal("Thêm thành công", {
+                        icon: "success",
+                    });
+                window.location.href = window.location.pathname;
+                }
+            });
+        }
+    });
+    // ĐỔI TÊN GR
+    $('.renamegrbtn').click(function () {
+        var namegr = $("input[name='renamegr']").val();
+        if(namegr.length == 0) {
+            $('.validform').text('Tên không được để trống');
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: "/rename" + window.location.pathname,
+                data: {
+                    name: namegr
+                },
+                headers: {
+                    "Authorization": token
+                },
+                success: function(resultData) {
+                    var msg = {
+                        id: user.id,
+                        msg: user.fullname + ' đã đổi tên cuộc trò chuyện thành ' + namegr,
+                        idChat: $('.valueChat input[name=message]').attr('data')
+                    }
+                    $.ajax({
+                        type: 'POST',
+                        url: "/sendmsg",
+                        data: msg,
+                        headers: {
+                            "Authorization": token
+                        },
+                        success: function() {
+                            window.location.href = window.location.pathname;
+                        }
+                    });
+                }
+            });
         }
     });
 }
