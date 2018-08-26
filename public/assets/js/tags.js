@@ -127,6 +127,7 @@
 											var f = tags_callbacks[id]['onChange'];
 											f.call(this, $(this), tagslist[i-1]);
 										}
+										$('.rsAddChat').attr('style', 'display:none;');
 		                                // $('.rsAddChat').html(generateBlockAddChat(data.id, data.avatar, data.fullname));
 		                            } else {
 		                                $('.rsAddChat').html('<p class="nullSearch">Không có kết quả tìm kiếm!</p>');
