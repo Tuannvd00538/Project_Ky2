@@ -702,6 +702,7 @@ a.media:hover {
 
 .listmem {
     margin: 8px 10px !important;
+    overflow: scroll;
 }
 
 .tittlemem {
@@ -709,12 +710,33 @@ a.media:hover {
     font-weight: 500;
 }
 
-.tittlemem span {
-    margin-left: 15px;
+.tittlemem .namelistmem {
+    margin-top: 10px;
 }
 
 .action-mem {
     margin-top: 15px;
     cursor: pointer;
     color: #afaeae;
+}
+
+.btnaddmem {
+    float: right;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btnaddmem i {
+    float: right;
+    margin-right: 22px;
+}
+
+#collapse1 button {
+    margin-top: 5px;
+    margin-left: 25px;
+}
+
+#collapse1 input {
+    margin-left: 25px;
+    margin-top: 10px;
 }

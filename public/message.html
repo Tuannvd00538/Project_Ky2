@@ -103,8 +103,8 @@
 							<div class="col-md-3 nopadding">
 								<div data-toggle="dropdown"><a href="javascript:void(0)"><span class="actionsetting"><i class="fas fa-cog"></i></span></a></div>
 								<ul class="dropdown-menu">
-									<a class="dropdown-item" href="javascript:alert('dit me may luon Tuan ak')">Chặn Người Này</a>
-								    <a class="dropdown-item" href="javascript:void(0)">Xoá Trò Chuyện</a>
+									<a class="dropdown-item btnsettingrename" style="display: none;" href="javascript:void(0)">Đổi Tên</a>
+								    <a class="dropdown-item btndeletechat" href="javascript:void(0)">Xoá Trò Chuyện</a>
 								</ul>
 							</div>
 						</div>
@@ -120,23 +120,41 @@
 						</div>
 						<div class="membergroup nopadding" style="display: none">
 							<div class="tittlemem nopadding">
-								<span>Mọi Người</span>
+								<div class="row nopadding">
+									<div class="col-md-6 namelistmem">Mọi Người</div>
+									<div class="col-md-6 btnaddmem" data-toggle="collapse" href="#collapse1"><i class="fas fa-plus-square"></i></div>
+									<div id="collapse1" class="panel-collapse collapse row nopadding">
+								        <input class="form-control" type="text" name="inputaddmem" placeholder="Nhập id muốn thêm">
+								        <button class="btn btn-success btnaddmempost">Thêm</button>
+								    </div>
+								</div>
+								
 							</div>
 							<div class="listmem row nopadding">
-								<!-- <div class="col-md-2 avatar-mem nopadding">
-						            <img src="https://znews-photo-td.zadn.vn/w660/Uploaded/qfssu/2018_04_29/maxresdefault.jpg">
-						        </div>
-						        <div class="col-md-8 name-mem">
-						        	Đào Tuấn Tú
-						        </div>
-						        <div class="col-md-2 action-mem">
-						        	<span dataid="" data-toggle="dropdown">...</span>
-						        	<ul class="dropdown-menu">
-									    <a href="#">Xóa</a>
-									</ul>
-						        </div> -->
+
 							</div>
 						</div>
+						<div id="renamegrModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Đổi Tên Nhóm</h4>
+								</div>
+								<div class="modal-body">
+									<div class="validform"></div>
+									<form>
+										<label>Nhập Tên Mới: </label>
+										<input class="form-control" type="text" name="renamegr" placeholder="Nhập tên mới của cuộc trò chuyện">
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-success renamegrbtn">Hoàn Tất</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
 					</div>
 				</div>
 			</div>

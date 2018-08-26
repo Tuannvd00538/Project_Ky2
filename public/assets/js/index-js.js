@@ -292,6 +292,9 @@ $(document).ready(function() {
     $('.avtMe i').click(function() {
         $('#fileSelect').click();
     });
+    $('.btnsettingrename').click(function () {
+        $('#renamegrModal').modal('show');
+    });
     $("#fileSelect").change(function(e) {
         var $files = $(this).get(0).files;
         var data = {

@@ -6,7 +6,7 @@ function parseJwt(token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
-function generateBlockMember(name, avatar,id) {
+function generateBlockMember(name, avatar, id) {
     var output = "";
     output += '<div class="col-md-2 avatar-mem nopadding">';
     output += '<img src="' + avatar + '">';
@@ -58,7 +58,40 @@ $(document).ready(function() {
             $('.chatbox').animate({
                 scrollTop: $('.chatbox').get(0).scrollHeight},0);
             $('a[href$="' + window.location.pathname  +'"] .name-contact').addClass('active');
+            // XÓA CHAT
+            $('.btndeletechat').click(function () {
+                    swal({
+                        title: "Bạn muốn xóa cuộc trò chuyện này?",
+                        // text: "Once deleted, you will not be able to recover this imaginary file!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                      if (willDelete) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "/delete" + window.location.pathname,
+                            data: {
+                                idme: user.id
+                            },
+                            headers: {
+                                "Authorization": token
+                            },
+                            success: function(resultData) {
+                                swal("Xóa thành công", {
+                                    icon: "success",
+                                });
+                            window.location.href = '/';
+                            }
+                        });
+                    } else {
+                        // swal("Your imaginary file is safe!");
+                    }
+                });
+            });
             if (strUrl.includes("group")) {
+                // XÓA MEMBER
                 $('.action-mem').click(function () {
                     // alert($(this).attr('dataid'));
                     var id =  $(this).attr('dataid');
@@ -82,17 +115,82 @@ $(document).ready(function() {
                             },
                             success: function(resultData) {
                                 swal("Xóa thành công", {
-                                icon: "success",
-                            });
-                        }
-                    });
+                                    icon: "success",
+                                });
+                            window.location.href = window.location.pathname;
+                            }
+                        });
                     } else {
                         // swal("Your imaginary file is safe!");
                     }
                 });
                 });
+                // THÊM MEMBER
+                $('.btnaddmempost').click(function () {
+                    var idadd = $("input[name='inputaddmem']").val();
+                    if(idadd.length == 0) {
+                        swal("Nhập id cần thêm", {
+                        icon: "error",
+                    });
+                    }
+                    else {
+                        $.ajax({
+                            type: 'POST',
+                            url: "/add" + window.location.pathname,
+                            data: {
+                                idadd: idadd
+                            },
+                            headers: {
+                                "Authorization": token
+                            },
+                            success: function(resultData) {
+                                swal("Thêm thành công", {
+                                    icon: "success",
+                                });
+                            window.location.href = window.location.pathname;
+                            }
+                        });
+                    }
+                });
+                // ĐỔI TÊN GR
+                $('.renamegrbtn').click(function () {
+                    var namegr = $("input[name='renamegr']").val();
+                    if(namegr.length == 0) {
+                        $('.validform').text('Tên không được để trống');
+                    }
+                    else {
+                        $.ajax({
+                            type: 'POST',
+                            url: "/rename" + window.location.pathname,
+                            data: {
+                                name: namegr
+                            },
+                            headers: {
+                                "Authorization": token
+                            },
+                            success: function(resultData) {
+                                var msg = {
+                                id: user.id,
+                                msg: user.fullname + ' đã đổi tên cuộc trò chuyện thành ' + namegr,
+                                idChat: $('.valueChat input[name=message]').attr('data')
+                            }
+                            $.ajax({
+                                type: 'POST',
+                                url: "/sendmsg",
+                                data: msg,
+                                headers: {
+                                    "Authorization": token
+                                },
+                                success: function() {}
+                            });
+                            window.location.href = window.location.pathname;
+                            }
+                        });
+                    }
+                });
                 if (message.id == user.id) {
                     $('.membergroup').attr('style','display: block');
+                    $('.btnsettingrename').attr('style','display: block');
                     $('.action-right').attr('style','border-bottom: 1px solid rgba(0, 0, 0, .10)');
                     $('.avatar').attr('style','text-align: center');
                     $('#resultsChat').append(generateBlockMeChat(message.msg));
