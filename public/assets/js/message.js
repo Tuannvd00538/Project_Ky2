@@ -91,6 +91,7 @@ $(document).ready(function() {
                 });
             });
             if (strUrl.includes("group")) {
+                $('.btnsettingrename').attr('style','display: block');
                 // XÓA MEMBER
                 $('.action-mem').click(function () {
                     // alert($(this).attr('dataid'));
@@ -190,7 +191,6 @@ $(document).ready(function() {
                 });
                 if (message.id == user.id) {
                     $('.membergroup').attr('style','display: block');
-                    $('.btnsettingrename').attr('style','display: block');
                     $('.action-right').attr('style','border-bottom: 1px solid rgba(0, 0, 0, .10)');
                     $('.avatar').attr('style','text-align: center');
                     $('#resultsChat').append(generateBlockMeChat(message.msg));

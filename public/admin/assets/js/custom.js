@@ -49,4 +49,6 @@ $(document).ready(function () {
         	}
         }
     });
+    $('.ml-1').html(user.fullname + ' <i class="mdi mdi-chevron-down"></i>');
+    $('.rounded-circle').attr('src', user.avatar);
 });

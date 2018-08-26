@@ -718,6 +718,7 @@ a.media:hover {
     margin-top: 15px;
     cursor: pointer;
     color: #afaeae;
+<<<<<<< HEAD
 }
 
 .btnaddmem {
@@ -739,4 +740,6 @@ a.media:hover {
 #collapse1 input {
     margin-left: 25px;
     margin-top: 10px;
+=======
+>>>>>>> 79a8aaa56f21d8e5b5d228a1540cf5ad2a72f255
 }

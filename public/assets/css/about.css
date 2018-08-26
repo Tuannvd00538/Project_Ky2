@@ -15,7 +15,7 @@
 
 }
 .cuoi {
-	margin-bottom: 2%;
+	margin: 1% 0;
 }
 .tieu-de div h1 {
 	padding-left: 175px;
@@ -36,14 +36,12 @@
     background-color: #cccccc78;
 }
 .download {
-    margin-top: 5%;
+    margin-top: 1%;
 }
 .noi-dung {
-    margin-left: 20%;
     max-width: 1000px;
-    margin-top: -1%;
     text-align: center;
-    margin-bottom: 7%;
+    margin-bottom: 6%;
 }
 
 .download {
@@ -79,8 +77,8 @@
 }
 .foo {
     background-color: #fff;
-    padding-top: 45px;
-    padding-bottom: 14px;
+    padding-top: 25px;
+    padding-bottom: 15px;
     margin-top: -5%;
 }
 .foo center a {
@@ -147,4 +145,20 @@
 }
 .td {
     margin: 10px 0 0 325px;
+}
+
+.about h2 {
+    font-size: 1.875em;
+    font-weight: 200;
+    letter-spacing: -1px;
+    line-height: 1.2em;
+    margin-bottom: .6em;
+}
+
+.about {
+    padding: 0 150px!important;
+}
+
+.main {
+    overflow-x: hidden;
 }
