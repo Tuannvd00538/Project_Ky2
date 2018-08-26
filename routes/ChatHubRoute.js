@@ -1,5 +1,5 @@
 var controller = require('../controllers/ChatHubController');
-
+// ChatHub with Love
 module.exports = function(app){
     app.route('/login')
         .get(controller.getLogin)

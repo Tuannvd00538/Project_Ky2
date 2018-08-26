@@ -5,7 +5,7 @@ var crypto = require('crypto-js');
 var db = admin.database();
 var uuid = require('uuid');
 var nJwt = require('njwt');
-
+// ChatHub with Love
 exports.getLogin = async function (req, res) {
     let rs = await new Promise((resolve, reject) => {
         request('http://localhost:8080/login.html', (error, response, body) => {
