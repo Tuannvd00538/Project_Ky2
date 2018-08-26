@@ -148,3 +148,19 @@
 .td {
     margin: 10px 0 0 325px;
 }
+
+.about h2 {
+    font-size: 1.875em;
+    font-weight: 200;
+    letter-spacing: -1px;
+    line-height: 1.2em;
+    margin-bottom: .6em;
+}
+
+.about {
+    padding: 0 150px!important;
+}
+
+.main {
+    overflow-x: hidden;
+}
